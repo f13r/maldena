@@ -6,9 +6,7 @@ $app['debug'] = true;
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => dirname(__DIR__) .'/views',
 ));
-$app->get('/{name}', function($name) use ($app) {
-	return $app['twig']->render('hi.twig', array(
-		'name' => $name
-	));
+$app->get('/', function($name) use ($app) {
+	return $app['twig']->render('hi.twig');
 });
 $app->run();
