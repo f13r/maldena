@@ -471,18 +471,32 @@
                         <p>Наш офис находится по адресу</p>
                         <p><img src="web/client/images/location.png" alt="icon 1" />Винница, ул. 1-мая 49, офис 216</p>
                         <p><img src="web/client/images/phone1.png"  alt="icon 2" />064 834 32 47, 098 434 23 12</p>
-                        <p><img src="web/client/images/globe.png" alt="icon 3" /><a class="link_orange" href="#"><span class="txt_orange">maldena.com.ua</span></a></p>
+                        <p>Вы можете задать нам вопрос используя форму ниже:</p>
                         <form class="form-horizontal" action="#">
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Имя" maxlength="40" />
+                                <input type="text" class="form-control js-app-feedback-name" placeholder="Имя"/>
+                                <div style="display: none;" class="help-block js-app-feedback-message-name"></div>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="E-mail" maxlength="40" />
+                              Я хочу получить ответ на:
+                            </div>
+                            <div class="form-group js-feedback-radio">
+                              <input type="radio" name="answer" data-type="phone" checked="checked"> Телефон
+                              <input type="radio" name="answer" data-type="email"> E-mail
                             </div>
                             <div class="form-group">
-                                <textarea  class="form-control" style="height: 130px;" placeholder="Ваше сообщение"></textarea>
+                                <input type="phone" class="form-control js-app-feedback-phone" placeholder="+38 ( ) - - "/>
+                                <div style="display: none;" class="help-block js-app-feedback-message-phone"></div>
                             </div>
-                            <button type="submit" class="btn btn-orange pull-right">Отправить</button>
+                            <div class="form-group" style="display: none;">
+                                <input type="email" class="form-control js-app-feedback-email" placeholder="E-mail"/>
+                                <div style="display: none;" class="help-block js-app-feedback-message-email"></div>
+                            </div>
+                            <div class="form-group">
+                                <textarea  class="form-control js-app-feedback-text" style="height: 130px;" placeholder="Ваше сообщение"></textarea>
+                                <div style="display: none;" class="help-block js-app-feedback-message-text"></div>
+                            </div>
+                            <button type="button" class="js-app-feedback-button btn btn-orange pull-right">Отправить</button>
                         </form>
                         	
                     </div>
@@ -603,12 +617,17 @@
         </div>
 
         <script src="web/client/js/jquery.min.js" type="text/javascript"></script>
+        <script src="web/client/js/underscore-min.js" type="text/javascript"></script>
         <script src="web/client/js/bootstrap.min.js"  type="text/javascript"></script>
         <script src="web/client/js/stickUp.min.js"  type="text/javascript"></script>
         <script src="web/client/js/colorbox/jquery.colorbox-min.js"  type="text/javascript"></script>
         <script src="web/client/js/templatemo_script.js"  type="text/javascript"></script>
+        <script src="web/client/js/app.js" type="text/javascript"></script>
 <!-- Start SiteHeart code -->
 <script>
+$( document ).ready(function() {
+  app.init();
+});
 (function(){
     var widget_id = 766095;
     _shcp =[{widget_id : widget_id}];
