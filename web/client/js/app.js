@@ -29,7 +29,8 @@ var app = (function(){
 					email: ['Empty', 'Email'],
 					phone: ['Empty', 'Phone']
 				},
-				prefix: '_rule'
+				prefix: '_rule',
+				phoneMask: '(XXX) XXX-XX-XX'
 			}
 		},
 
@@ -39,14 +40,22 @@ var app = (function(){
 
 		initFeedbackForm: function () {
 			var self = this;
-
+			var options = { 
+				  translation: {
+				      '0': {
+				        pattern: /[0-9]/
+				      }
+				  },
+				  placeholder: "+38 (   )    -  -  "
+				  
+			};
+			$(this.settings.feedback.phone).mask('+38 (000) 000-00-00', options);
 			$(this.settings.feedback.radio).off().on('change', 'input:radio', function(evt) {
 				var name = $(evt.target).attr('data-type');
 				if (name === 'email') {
 					$(self.settings.feedback.fields.phone).parent().hide();
 					delete self.settings.feedback.fields.phone;
 				} else if (name === 'phone') {
-					console.log($(self.settings.feedback.fields.email), 'email');
 					$(self.settings.feedback.fields.email).parent().hide();
 					delete self.settings.feedback.fields.email;
 				}
@@ -141,29 +150,5 @@ var app = (function(){
 		_rulePhone: function (value, fieldName) {
 			return false;
 		},
-
-
-		setCaretPosition: function(node, caretPos) {
-		    var el = node;
-		    el.value = el.value;
-		    if (el !== null) {
-		        if (el.createTextRange) {
-		            var range = el.createTextRange();
-		            range.move('character', caretPos);
-		            range.select();
-		            return true;
-		        } else {
-		            // (el.selectionStart === 0 added for Firefox bug)
-		            if (el.selectionStart || el.selectionStart === 0) {
-		                el.focus();
-		                el.setSelectionRange(caretPos, caretPos);
-		                return true;
-		            } else  { // fail city, fortunately this never happens (as far as I've tested) :)
-		                el.focus();
-		                return false;
-		            }
-		        }
-		    }
-		}
 	}
 })();
