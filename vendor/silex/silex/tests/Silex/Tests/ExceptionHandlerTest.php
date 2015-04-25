@@ -12,6 +12,7 @@
 namespace Silex\Tests;
 
 use Silex\Application;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -72,7 +73,7 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 
         $request = Request::create('/foo');
         $response = $app->handle($request);
-        $this->assertContains('No route found for "GET /foo"', html_entity_decode($response->getContent()));
+        $this->assertContains('No route found for "GET /foo"', $response->getContent());
         $this->assertEquals(404, $response->getStatusCode());
     }
 
@@ -99,7 +100,7 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 
         $request = Request::create('/foo', 'POST');
         $response = $app->handle($request);
-        $this->assertContains('No route found for "POST /foo": Method Not Allowed (Allow: GET)', html_entity_decode($response->getContent()));
+        $this->assertContains('No route found for "POST /foo": Method Not Allowed (Allow: GET)', $response->getContent());
         $this->assertEquals(405, $response->getStatusCode());
         $this->assertEquals('GET', $response->headers->get('Allow'));
     }

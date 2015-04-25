@@ -7,8 +7,7 @@ your applications.
 Parameters
 ----------
 
-* **security.hide_user_not_found** (optional): Defines whether to hide user not
-  found exception or not. Defaults to ``true``.
+n/a
 
 Services
 --------
@@ -55,11 +54,14 @@ Registering
 .. note::
 
     The Symfony Security Component comes with the "fat" Silex archive but not
-    with the regular one. If you are using Composer, add it as a dependency:
+    with the regular one. If you are using Composer, add it as a dependency to
+    your ``composer.json`` file:
 
-    .. code-block:: bash
+    .. code-block:: json
 
-        composer require symfony/security
+        "require": {
+            "symfony/security": "~2.1"
+        }
 
 .. caution::
 
@@ -69,17 +71,12 @@ Registering
 
         $application->boot();
 
-.. caution::
-
-    If you're using a form to authenticate users, you need to enable
-    ``SessionServiceProvider``.
-
 Usage
 -----
 
 The Symfony Security component is powerful. To learn more about it, read the
 `Symfony2 Security documentation
-<http://symfony.com/doc/2.3/book/security.html>`_.
+<http://symfony.com/doc/2.1/book/security.html>`_.
 
 .. tip::
 
@@ -154,19 +151,6 @@ generate a valid encoded password from a raw password, use the
 When the user is authenticated, the user stored in the token is an instance of
 `User
 <http://api.symfony.com/master/Symfony/Component/Security/Core/User/User.html>`_
-
-.. caution::
-
-    If you are using php-cgi under Apache, you need to add this configuration
-    to make things work correctly:
-
-    .. code-block:: apache
-
-        RewriteEngine On
-        RewriteCond %{HTTP:Authorization} ^(.+)$
-        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteRule ^(.*)$ app.php [QSA,L]
 
 Securing a Path with a Form
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

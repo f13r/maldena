@@ -19,7 +19,7 @@
         "php": ">=5.3.3"
     },
     "require-dev": {
-        "symfony/expression-language": "~2.4"
+        "symfony/phpunit-bridge": "~2.7"
     },
     "autoload": {
         "psr-0": { "Symfony\\Component\\HttpFoundation\\": "" },
@@ -29,7 +29,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "2.6-dev"
+            "dev-master": "2.3-dev"
         }
     }
 }

@@ -23,15 +23,28 @@ class KernelForTest extends Kernel
 
     public function registerBundles()
     {
-        return array();
+    }
+
+    public function registerBundleDirs()
+    {
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
     }
 
+    public function initializeBundles()
+    {
+        parent::initializeBundles();
+    }
+
     public function isBooted()
     {
         return $this->booted;
+    }
+
+    public function setIsBooted($value)
+    {
+        $this->booted = (bool) $value;
     }
 }

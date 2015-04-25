@@ -65,7 +65,6 @@ the ``Silex\Provider`` namespace:
 * :doc:`HttpCacheServiceProvider <providers/http_cache>`
 * :doc:`FormServiceProvider <providers/form>`
 * :doc:`SecurityServiceProvider <providers/security>`
-* :doc:`RememberMeServiceProvider <providers/remember_me>`
 * :doc:`ServiceControllerServiceProvider <providers/service_controller>`
 
 Third party providers
@@ -73,7 +72,7 @@ Third party providers
 
 Some service providers are developed by the community. Those third-party
 providers are listed on `Silex' repository wiki
-<https://github.com/silexphp/Silex/wiki/Third-Party-ServiceProviders>`_.
+<https://github.com/fabpot/Silex/wiki/Third-Party-ServiceProviders>`_.
 
 You are encouraged to share yours.
 
@@ -84,9 +83,9 @@ Providers must implement the ``Silex\ServiceProviderInterface``::
 
     interface ServiceProviderInterface
     {
-        public function register(Application $app);
+        function register(Application $app);
 
-        public function boot(Application $app);
+        function boot(Application $app);
     }
 
 This is very straight forward, just create a new class that implements the two
@@ -140,10 +139,8 @@ You can now use this provider as follows::
 In this example we are getting the ``name`` parameter from the query string,
 so the request path would have to be ``/hello?name=Fabien``.
 
-.. _controller-providers:
-
-Controller Providers
---------------------
+Controllers providers
+---------------------
 
 Loading providers
 ~~~~~~~~~~~~~~~~~
@@ -165,7 +162,7 @@ Providers must implement the ``Silex\ControllerProviderInterface``::
 
     interface ControllerProviderInterface
     {
-        public function connect(Application $app);
+        function connect(Application $app);
     }
 
 Here is an example of such a provider::

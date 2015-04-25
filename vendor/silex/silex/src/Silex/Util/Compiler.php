@@ -12,6 +12,7 @@
 namespace Silex\Util;
 
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Process\Process;
 
 /**
@@ -81,10 +82,13 @@ class Compiler
 
         $phar->stopBuffering();
 
+        // FIXME: phar compression feature is not yet implemented
+        //$phar->compressFiles(\Phar::GZ);
+
         unset($phar);
     }
 
-    protected function addFile(\Phar $phar, \SplFileInfo $file, $strip = true)
+    protected function addFile($phar, $file, $strip = true)
     {
         $path = str_replace(dirname(dirname(dirname(__DIR__))).DIRECTORY_SEPARATOR, '', $file->getRealPath());
 

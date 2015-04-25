@@ -34,6 +34,10 @@ trait TwigTrait
      */
     public function render($view, array $parameters = array(), Response $response = null)
     {
+        if (null === $response) {
+            $response = new Response();
+        }
+
         $twig = $this['twig'];
 
         if ($response instanceof StreamedResponse) {
@@ -41,9 +45,6 @@ trait TwigTrait
                 $twig->display($view, $parameters);
             });
         } else {
-            if (null === $response) {
-                $response = new Response();
-            }
             $response->setContent($twig->render($view, $parameters));
         }
 

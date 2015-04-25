@@ -13,6 +13,7 @@ namespace Silex;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Matcher\RedirectableUrlMatcher as BaseRedirectableUrlMatcher;
+use Symfony\Component\Routing\Matcher\RedirectableUrlMatcherInterface;
 
 /**
  * Implements the RedirectableUrlMatcherInterface for Silex.
@@ -27,7 +28,12 @@ class RedirectableUrlMatcher extends BaseRedirectableUrlMatcher
     public function redirect($path, $route, $scheme = null)
     {
         $url = $this->context->getBaseUrl().$path;
-        $query = $this->context->getQueryString() ?: '';
+
+        // Query string support was added to RequestContext in 2.3
+        // Fall back to parameter injected by url_matcher closure for earlier versions
+        $query = method_exists($this->context, 'getQueryString')
+            ? $this->context->getQueryString()
+            : $this->context->getParameter('QUERY_STRING') ?: '';
 
         if ($query !== '') {
             $url .= '?'.$query;

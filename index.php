@@ -1,33 +1,57 @@
 <?php
-require_once __DIR__.'/vendor/autoload.php';
 
-$app = new Silex\Application();
-$app['debug'] = true;
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__ . '/views',
-));
-$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
-    'db.options' => array(
-        'driver' => 'pdo_mysql',
-        'dbhost' => 'localhost',
-        'dbname' => 'maldena',
-        'user' => 'root',
-        'password' => '',
-    ),
-));
+use Silex\Application;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
-$app->before(function (Request $request) {
-    if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
-        $data = json_decode($request->getContent(), true);
-        $request->request->replace(is_array($data) ? $data : array());
-    }
-});
+$app = require __DIR__.'/bootstrap.php';
+$em = require __DIR__.'/doctrine.php';
 
 $app->get('/', function() use ($app) {
 	return $app['twig']->render('hi.twig');
+});
+$app->post('/feedback', function(Request $request) use ($app, $em) {
+
+	function findParams($feedback) {
+		$param = new stdClass();
+		if (array_key_exists('phone', $feedback)) {
+			$param->name = 'phone';
+			$param->value = $feedback['phone'];
+			$param->methodName = 'setPhone';
+		}
+		if (array_key_exists('email', $feedback)) {
+			$param->name = 'email';
+			$param->value = $feedback['email'];
+			$param->methodName = 'setEmail';
+		}
+		return $param;
+	}
+
+	$feedback = $request->request->get('feedback');
+	$param = findParams($feedback);
+
+	$user = $em->getRepository('Domain\Entity\User')
+				->findOneBy(array($param->name => $param->value));
+
+	if (empty($user)) {
+		$methodName = $param->methodName;
+		$user = new Domain\Entity\User(); 
+		$user->setName($feedback['name']);
+		$user->setCreatedAt();
+		$user->$methodName($param->value);
+	}
+
+	$feedbacks = new Domain\Entity\Feedbacks();
+	$feedbacks->setText($feedback['text']);
+	$feedbacks->setUser($user);
+	$feedbacks->setCreatedAt();
+
+	$user->getFeedback()->add($feedbacks);
+
+	$em->persist($user);
+	$em->flush();
+	return true;
 });
 $app->run();

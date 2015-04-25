@@ -67,11 +67,14 @@ Registering
 .. note::
 
     Doctrine DBAL comes with the "fat" Silex archive but not with the regular
-    one. If you are using Composer, add it as a dependency:
+    one. If you are using Composer, add it as a dependency to your
+    ``composer.json`` file:
 
-    .. code-block:: bash
+    .. code-block:: json
 
-        composer require "doctrine/dbal:~2.2"
+        "require": {
+            "doctrine/dbal": "2.2.*",
+         }
 
 Usage
 -----
@@ -120,9 +123,9 @@ The first registered connection is the default and can simply be accessed as
 you would if there was only one connection. Given the above configuration,
 these two lines are equivalent::
 
-    $app['db']->fetchAll('SELECT * FROM table');
+    $app['db']->fetchAssoc('SELECT * FROM table');
 
-    $app['dbs']['mysql_read']->fetchAll('SELECT * FROM table');
+    $app['dbs']['mysql_read']->fetchAssoc('SELECT * FROM table');
 
 Using multiple connections::
 

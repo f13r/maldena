@@ -20,39 +20,9 @@ use Symfony\Component\Routing\Route as BaseRoute;
  */
 class Route extends BaseRoute
 {
-    /**
-     * Constructor.
-     *
-     * Available options:
-     *
-     *  * compiler_class: A class name able to compile this route instance (RouteCompiler by default)
-     *
-     * @param string       $path         The path pattern to match
-     * @param array        $defaults     An array of default parameter values
-     * @param array        $requirements An array of requirements for parameters (regexes)
-     * @param array        $options      An array of options
-     * @param string       $host         The host pattern to match
-     * @param string|array $schemes      A required URI scheme or an array of restricted schemes
-     * @param string|array $methods      A required HTTP method or an array of restricted methods
-     */
-    public function __construct($path = '/', array $defaults = array(), array $requirements = array(), array $options = array(), $host = '', $schemes = array(), $methods = array())
+    public function __construct($pattern = '', array $defaults = array(), array $requirements = array(), array $options = array())
     {
-        // overridden constructor to make $path optional
-        parent::__construct($path, $defaults, $requirements, $options, $host, $schemes, $methods);
-    }
-
-    /**
-     * Sets the route code that should be executed when matched.
-     *
-     * @param callable $to PHP callback that returns the response when matched
-     *
-     * @return Route $this The current Route instance
-     */
-    public function run($to)
-    {
-        $this->setDefault('_controller', $to);
-
-        return $this;
+        parent::__construct($pattern, $defaults, $requirements, $options);
     }
 
     /**
@@ -111,13 +81,15 @@ class Route extends BaseRoute
      */
     public function method($method)
     {
-        $this->setMethods(explode('|', $method));
+        $this->setRequirement('_method', $method);
 
         return $this;
     }
 
     /**
      * Sets the requirement of host on this Route.
+     *
+     * Note that this only works with at least version 2.2 of the Symfony Routing component.
      *
      * @param string $host The host for which this route should be enabled
      *
@@ -137,7 +109,7 @@ class Route extends BaseRoute
      */
     public function requireHttp()
     {
-        $this->setSchemes('http');
+        $this->setRequirement('_scheme', 'http');
 
         return $this;
     }
@@ -149,7 +121,7 @@ class Route extends BaseRoute
      */
     public function requireHttps()
     {
-        $this->setSchemes('https');
+        $this->setRequirement('_scheme', 'https');
 
         return $this;
     }

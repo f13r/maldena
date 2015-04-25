@@ -12,18 +12,12 @@ Parameters
 ----------
 
 * **monolog.logfile**: File where logs are written to.
-* **monolog.bubble** = (optional) Whether the messages that are handled can bubble up the stack or not.
-* **monolog.permission** = (optional) File permissions default (null), nothing change.
 
 * **monolog.level** (optional): Level of logging, defaults
   to ``DEBUG``. Must be one of ``Logger::DEBUG``, ``Logger::INFO``,
   ``Logger::WARNING``, ``Logger::ERROR``. ``DEBUG`` will log
   everything, ``INFO`` will log everything except ``DEBUG``,
   etc.
-
-  In addition to the ``Logger::`` constants, it is also possible to supply the
-  level in string form, for example: ``"DEBUG"``, ``"INFO"``, ``"WARNING"``,
-  ``"ERROR"``.
 
 * **monolog.name** (optional): Name of the monolog channel,
   defaults to ``myapp``.
@@ -37,8 +31,6 @@ Services
 
     $app['monolog']->addDebug('Testing the Monolog logging.');
 
-* **monolog.listener**: An event listener to log requests, responses and errors.
-
 Registering
 -----------
 
@@ -51,11 +43,14 @@ Registering
 .. note::
 
     Monolog comes with the "fat" Silex archive but not with the regular one.
-    If you are using Composer, add it as a dependency:
+    If you are using Composer, add it as a dependency to your
+    ``composer.json`` file:
 
-    .. code-block:: bash
+    .. code-block:: json
 
-        composer require monolog/monolog
+        "require": {
+            "monolog/monolog": ">=1.0.0",
+        }
 
 Usage
 -----
@@ -85,10 +80,6 @@ it by extending the ``monolog`` service::
 
         return $monolog;
     }));
-
-By default, all requests, responses and errors are logged by an event listener
-registered as a service called `monolog.listener`. You can replace or remove
-this service if you want to modify or disable the informations logged.
 
 Traits
 ------

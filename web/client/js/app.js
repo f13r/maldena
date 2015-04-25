@@ -21,7 +21,8 @@ var app = (function(){
 					name: '.js-app-feedback-message-name',
 					text: '.js-app-feedback-message-text',
 					email: '.js-app-feedback-message-email',
-					phone: '.js-app-feedback-message-phone'
+					phone: '.js-app-feedback-message-phone',
+					response: '.js-app-feedback-message-response'
 				},
 				validate: {
 					name: ['Empty'],
@@ -71,6 +72,7 @@ var app = (function(){
 					if ($(ident).length !== undefined) {
 						$(ident).off().on('keyup', function (evt) {
 							self.clearError($(evt.target));
+							self.clearResponse();
 						});
 						if (this.fields[name] === undefined) {
 							this.fields[name] = {};
@@ -99,7 +101,13 @@ var app = (function(){
 
 		validateFeedbackForm: function (feedback) {
 			var self = this;
+			var resultValidation = true;
+			var data = {};
 			_.each(feedback.fields, function(field, name) {
+				data[name] = field.value;
+				if (name === 'phone') {
+					data[name] = $(self.settings.feedback.phone).cleanVal();
+				}
 				_.each(self.settings.feedback.validate[name], function(rule) {
 					var functionName = self.settings.feedback.prefix + rule;
 					if (typeof self[functionName] === 'function') {
@@ -109,17 +117,37 @@ var app = (function(){
 							node.html(validateResult);
 							node.show();
 							self.showError(field.node, true);
-						}
+							resultValidation = false;
+						} 
+					} 
+				});
+			});
+
+			if (resultValidation === true) {
+				$.ajax({
+					method: 'post',
+					url: "/feedback",
+					data: {
+					  feedback: data 
+					},
+					dataType: 'json'
+				}).done(function(response) {
+					if (response == true) {
+						$(self.settings.feedback.messages.response).show();
+
 					}
 				});
-
-			});
+			}
 
 		},
 
 		clearError: function (node) {
 			node.parent('.form-group').removeClass('has-error');
 			node.siblings('.help-block').hide();
+		},
+
+		clearResponse: function() {
+			$(this.settings.feedback.messages.response).hide();
 		},
 
 		showError: function (inputNode, status) {

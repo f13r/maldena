@@ -29,7 +29,6 @@
       <xsd:element name="default" nillable="true" type="element" />
       <xsd:element name="requirement" type="element" />
       <xsd:element name="option" type="element" />
-      <xsd:element name="condition" type="xsd:string" />
     </xsd:choice>
   </xsd:group>
 

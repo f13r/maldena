@@ -11,6 +11,7 @@
 
 namespace Silex\Tests\Application;
 
+use Silex\Application;
 use Silex\Provider\TranslationServiceProvider;
 
 /**

@@ -29,8 +29,8 @@ class ResponseTest extends ResponseTestCase
     {
         $response = new Response();
         $response = explode("\r\n", $response);
-        $this->assertEquals("HTTP/1.0 200 OK", $response[0]);
-        $this->assertEquals("Cache-Control: no-cache", $response[1]);
+        $this->assertEquals('HTTP/1.0 200 OK', $response[0]);
+        $this->assertEquals('Cache-Control: no-cache', $response[1]);
     }
 
     public function testClone()
@@ -76,19 +76,6 @@ class ResponseTest extends ResponseTestCase
     public function testIsCacheable()
     {
         $response = new Response();
-        $this->assertFalse($response->isCacheable());
-    }
-
-    public function testIsCacheableWithErrorCode()
-    {
-        $response = new Response('', 500);
-        $this->assertFalse($response->isCacheable());
-    }
-
-    public function testIsCacheableWithNoStoreDirective()
-    {
-        $response = new Response();
-        $response->headers->set('cache-control', 'private');
         $this->assertFalse($response->isCacheable());
     }
 
@@ -481,45 +468,10 @@ class ResponseTest extends ResponseTestCase
         $response = new Response('foo');
         $request = Request::create('/', 'HEAD');
 
-        $length = 12345;
-        $response->headers->set('Content-Length', $length);
         $response->prepare($request);
 
         $this->assertEquals('', $response->getContent());
-        $this->assertEquals($length, $response->headers->get('Content-Length'), 'Content-Length should be as if it was GET; see RFC2616 14.13');
-    }
-
-    public function testPrepareRemovesContentForInformationalResponse()
-    {
-        $response = new Response('foo');
-        $request = Request::create('/');
-
-        $response->setContent('content');
-        $response->setStatusCode(101);
-        $response->prepare($request);
-        $this->assertEquals('', $response->getContent());
-        $this->assertFalse($response->headers->has('Content-Type'));
-        $this->assertFalse($response->headers->has('Content-Type'));
-
-        $response->setContent('content');
-        $response->setStatusCode(304);
-        $response->prepare($request);
-        $this->assertEquals('', $response->getContent());
-        $this->assertFalse($response->headers->has('Content-Type'));
-        $this->assertFalse($response->headers->has('Content-Length'));
-    }
-
-    public function testPrepareRemovesContentLength()
-    {
-        $response = new Response('foo');
-        $request = Request::create('/');
-
-        $response->headers->set('Content-Length', 12345);
-        $response->prepare($request);
-        $this->assertEquals(12345, $response->headers->get('Content-Length'));
-
-        $response->headers->set('Transfer-Encoding', 'chunked');
-        $response->prepare($request);
+        $this->assertTrue($response->headers->has('Content-Type'));
         $this->assertFalse($response->headers->has('Content-Length'));
     }
 
@@ -545,7 +497,7 @@ class ResponseTest extends ResponseTestCase
         $response = new Response();
         //array('etag', 'last_modified', 'max_age', 's_maxage', 'private', 'public')
         try {
-            $response->setCache(array("wrong option" => "value"));
+            $response->setCache(array('wrong option' => 'value'));
             $this->fail('->setCache() throws an InvalidArgumentException if an option is not supported');
         } catch (\Exception $e) {
             $this->assertInstanceOf('InvalidArgumentException', $e, '->setCache() throws an InvalidArgumentException if an option is not supported');

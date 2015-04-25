@@ -37,43 +37,56 @@ Registering
 .. note::
 
     If you don't want to create your own form layout, it's fine: a default one
-    will be used. But you will have to register the :doc:`translation provider
-    <translation>` as the default form layout requires it.
+    will be used. But you will have to register the
+    :doc:`translation provider <providers/translation>` as the default form
+    layout requires it.
 
     If you want to use validation with forms, do not forget to register the
-    :doc:`Validator provider <validator>`.
+    :doc:`Validator provider <providers/validator>`.
 
 .. note::
 
     The Symfony Form Component and all its dependencies (optional or not) comes
-    with the "fat" Silex archive but not with the regular one. If you are using
-    Composer, add it as a dependency:
+    with the "fat" Silex archive but not with the regular one.
 
-    .. code-block:: bash
+    If you are using Composer, add it as a dependency to your
+    ``composer.json`` file:
 
-        composer require symfony/form
+    .. code-block:: json
+
+        "require": {
+            "symfony/form": "~2.1.4"
+        }
 
     If you are going to use the validation extension with forms, you must also
-    add a dependency to the ``symfony/config`` and ``symfony/translation``
+    add a dependency to the ``symfony/config`` and ```symfony/translation``
     components:
 
-    .. code-block:: bash
+    .. code-block:: json
 
-        composer require symfony/validator symfony/config symfony/translation
-        
-    The Symfony Security CSRF component is used to protect forms against CSRF attacks:
+        "require": {
+            "symfony/validator": "~2.1",
+            "symfony/config": "~2.1",
+            "symfony/translation": "~2.1"
+        }
 
-    .. code-block:: bash
-    
-        composer require symfony/security-csrf
+    The Symfony Form Component relies on the PHP intl extension. If you don't have
+    it, you can install the Symfony Locale Component as a replacement:
 
-    If you want to use forms in your Twig templates, you can also install the
-    Symfony Twig Bridge. Make sure to install, if you didn't do that already,
-    the Translation component in order for the bridge to work:
+    .. code-block:: json
 
-    .. code-block:: bash
+        "require": {
+            "symfony/locale": "~2.1"
+        }
 
-        composer require symfony/twig-bridge symfony/translation
+    If you want to use forms in your Twig templates, make sure to install the
+    Symfony Twig Bridge:
+
+    .. code-block:: json
+
+        "require": {
+            "symfony/twig-bridge": "~2.1"
+        }
 
 Usage
 -----
@@ -97,15 +110,17 @@ example::
             ))
             ->getForm();
 
-        $form->handleRequest($request);
+        if ('POST' == $request->getMethod()) {
+            $form->bind($request);
 
-        if ($form->isValid()) {
-            $data = $form->getData();
+            if ($form->isValid()) {
+                $data = $form->getData();
 
-            // do something with the data
+                // do something with the data
 
-            // redirect somewhere
-            return $app->redirect('...');
+                // redirect somewhere
+                return $app->redirect('...');
+            }
         }
 
         // display the form
@@ -146,14 +161,6 @@ form by adding constraints on the fields::
         ))
         ->getForm();
 
-You can register form types by extending ``form.types``::
-
-    $app['form.types'] = $app->share($app->extend('form.types', function ($types) use ($app) {
-        $types[] = new YourFormType();
-
-        return $types;
-    }));
-
 You can register form extensions by extending ``form.extensions``::
 
     $app['form.extensions'] = $app->share($app->extend('form.extensions', function ($extensions) use ($app) {
@@ -191,4 +198,4 @@ Traits
     $app->form($data);
 
 For more information, consult the `Symfony2 Forms documentation
-<http://symfony.com/doc/2.3/book/forms.html>`_.
+<http://symfony.com/doc/2.1/book/forms.html>`_.

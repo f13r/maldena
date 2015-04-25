@@ -315,33 +315,10 @@ class UrlMatcherTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \Symfony\Component\Routing\Exception\ResourceNotFoundException
      */
-    public function testSchemeRequirementBC()
-    {
-        $coll = new RouteCollection();
-        $coll->add('foo', new Route('/foo', array(), array('_scheme' => 'https')));
-        $matcher = new UrlMatcher($coll, new RequestContext());
-        $matcher->match('/foo');
-    }
-    /**
-     * @expectedException \Symfony\Component\Routing\Exception\ResourceNotFoundException
-     */
     public function testSchemeRequirement()
     {
         $coll = new RouteCollection();
-        $coll->add('foo', new Route('/foo', array(), array(), array(), '', array('https')));
-        $matcher = new UrlMatcher($coll, new RequestContext());
-        $matcher->match('/foo');
-    }
-
-    /**
-     * @expectedException \Symfony\Component\Routing\Exception\ResourceNotFoundException
-     */
-    public function testCondition()
-    {
-        $coll = new RouteCollection();
-        $route = new Route('/foo');
-        $route->setCondition('context.getMethod() == "POST"');
-        $coll->add('foo', $route);
+        $coll->add('foo', new Route('/foo', array(), array('_scheme' => 'https')));
         $matcher = new UrlMatcher($coll, new RequestContext());
         $matcher->match('/foo');
     }
@@ -404,5 +381,26 @@ class UrlMatcherTest extends \PHPUnit_Framework_TestCase
 
         $matcher = new UrlMatcher($coll, new RequestContext('', 'GET', 'example.com'));
         $matcher->match('/foo/bar');
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Routing\Exception\ResourceNotFoundException
+     */
+    public function testPathIsCaseSensitive()
+    {
+        $coll = new RouteCollection();
+        $coll->add('foo', new Route('/locale', array(), array('locale' => 'EN|FR|DE')));
+
+        $matcher = new UrlMatcher($coll, new RequestContext());
+        $matcher->match('/en');
+    }
+
+    public function testHostIsCaseInsensitive()
+    {
+        $coll = new RouteCollection();
+        $coll->add('foo', new Route('/', array(), array('locale' => 'EN|FR|DE'), array(), '{locale}.example.com'));
+
+        $matcher = new UrlMatcher($coll, new RequestContext('', 'GET', 'en.example.com'));
+        $this->assertEquals(array('_route' => 'foo', 'locale' => 'en'), $matcher->match('/'));
     }
 }

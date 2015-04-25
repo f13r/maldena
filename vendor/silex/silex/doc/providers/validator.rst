@@ -38,11 +38,14 @@ Registering
 .. note::
 
     The Symfony Validator Component comes with the "fat" Silex archive but not
-    with the regular one. If you are using Composer, add it as a dependency:
+    with the regular one. If you are using Composer, add it as a dependency to
+    your ``composer.json`` file:
 
-    .. code-block:: bash
+    .. code-block:: json
 
-        composer require symfony/validator
+        "require": {
+            "symfony/validator": "~2.1"
+        }
 
 Usage
 -----
@@ -128,12 +131,12 @@ the class properties and getters, and then call the ``validate`` method::
     $book->title = 'My Book';
     $book->author = $author;
 
-    $metadata = $app['validator.mapping.class_metadata_factory']->getMetadataFor('Author');
+    $metadata = $app['validator.mapping.class_metadata_factory']->getClassMetadata('Author');
     $metadata->addPropertyConstraint('first_name', new Assert\NotBlank());
     $metadata->addPropertyConstraint('first_name', new Assert\Length(array('min' => 10)));
     $metadata->addPropertyConstraint('last_name', new Assert\Length(array('min' => 10)));
 
-    $metadata = $app['validator.mapping.class_metadata_factory']->getMetadataFor('Book');
+    $metadata = $app['validator.mapping.class_metadata_factory']->getClassMetadata('Book');
     $metadata->addPropertyConstraint('title', new Assert\Length(array('min' => 10)));
     $metadata->addPropertyConstraint('author', new Assert\Valid());
 
@@ -146,6 +149,11 @@ the class properties and getters, and then call the ``validate`` method::
     } else {
         echo 'The author is valid';
     }
+
+.. note::
+
+    If you are using Symfony 2.2, replace the ``getClassMetadata`` calls with
+    calls to the new ``getMetadataFor`` method.
 
 You can also declare the class constraint by adding a static
 ``loadValidatorMetadata`` method to your classes::

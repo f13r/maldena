@@ -54,7 +54,7 @@ page loaded correctly and contains our form::
 
 Here you see some of the available assertions. There is a full list available
 in the `Writing Tests for PHPUnit
-<https://phpunit.de/manual/current/en/writing-tests-for-phpunit.html>`_
+<http://www.phpunit.de/manual/current/en/writing-tests-for-phpunit.html>`_
 section of the PHPUnit documentation.
 
 WebTestCase
@@ -75,15 +75,6 @@ use it by making your test extend it::
 
     To make your application testable, you need to make sure you follow "Reusing
     applications" instructions from :doc:`usage`.
-
-.. note::
-
-    If you want to use the Symfony2 ``WebTestCase`` class you will need to
-    explicitly install its dependencies for your project:
-
-    .. code-block:: bash
-
-        composer require --dev symfony/browser-kit symfony/css-selector
 
 For your WebTestCase, you will have to implement a ``createApplication``
 method, which returns your application. It will probably look like this::
