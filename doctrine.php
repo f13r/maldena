@@ -21,7 +21,7 @@ $connectionOptions = array(
      'driver' => 'pdo_mysql', 
         'dbhost' => 'localhost',
         'dbname' => 'maldena_db',
-        'user' => 'root',
+        'user' => 'maldena_db',
         'password' => 'gtnhjdbx'
 );
 
