@@ -66,7 +66,7 @@ jQuery(function($) {
 function initialize() {
     var mapOptions = {
       zoom: 15,
-      center: new google.maps.LatLng(49.236527, 28.467102)
+      center: new google.maps.LatLng(49.235639, 28.466992)
     };
 
     var map = new google.maps.Map(document.getElementById('map-canvas'),  mapOptions);
@@ -74,7 +74,7 @@ function initialize() {
 	var marker = new google.maps.Marker({
       position: mapOptions.center,
       map: map,
-      title:"Maldena Business Center"
+      title: "Maldena Enlgish Club"
   });
 }
 
