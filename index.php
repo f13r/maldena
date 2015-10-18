@@ -10,7 +10,7 @@ $app = require __DIR__.'/bootstrap.php';
 $em = require __DIR__.'/doctrine.php';
 
 $app->get('/', function() use ($app, $em) {
-	$contacts = $em->getRepository('Domain\Entity\Contact')->find(1);
+//	$contacts = $em->getRepository('Domain\Entity\Contact')->find(1);
 
 	return $app['twig']->render('hi.twig');
 });

@@ -1,4 +1,4 @@
-#!/usr/bin/env php
+#!/usr/local/php54/bin/php
 <?php
 
 include('doctrine.php');
