@@ -10,7 +10,11 @@ $app = require __DIR__.'/bootstrap.php';
 $em = require __DIR__.'/doctrine.php';
 
 $app->get('/', function() use ($app, $em) {
-//	$contacts = $em->getRepository('Domain\Entity\Contact')->find(1);
+	$contacts = $em->getRepository('Domain\Entity\Contact')->find(1);
+	print_r($contacts->getPhone());
+
+//	$phoneForView = "(".substr($data, 0, 3).") ".substr($data, 3, 3)."-".substr($data, 6, 2)."-".substr($data, 8, 2);
+
 
 	return $app['twig']->render('hi.twig');
 });
