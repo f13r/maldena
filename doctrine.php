@@ -19,7 +19,7 @@ $config->setAutoGenerateProxyClasses(true);
 
 $connectionOptions = array(
      'driver' => 'pdo_mysql', 
-        'host' => 'localhost',
+        'host' => 'maldena.mysql.ukraine.com.ua',
         'dbname' => 'maldena_db',
         'user' => 'maldena_db',
         'password' => 'gtnhjdbx',
