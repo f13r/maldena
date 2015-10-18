@@ -22,7 +22,11 @@ $connectionOptions = array(
         'dbhost' => 'localhost',
         'dbname' => 'maldena_db',
         'user' => 'maldena_db',
-        'password' => 'gtnhjdbx'
+        'password' => 'gtnhjdbx',
+		'charset' => 'utf8',
+		'driverOptions' => array(
+			1002=>'SET NAMES utf8'
+		)
 );
 
 return EntityManager::create($connectionOptions, $config);
