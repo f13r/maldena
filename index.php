@@ -10,13 +10,17 @@ $app = require __DIR__.'/bootstrap.php';
 $em = require __DIR__.'/doctrine.php';
 
 $app->get('/', function() use ($app, $em) {
-	$contacts = $em->getRepository('Domain\Entity\Contact')->find(1);
-//	print_r($contacts->getPhone());
+	$contact = $em->getRepository('Domain\Entity\Contact')->find(1);
+	$phone = $contact->getPhone();
 
-//	$phoneForView = "(".substr($data, 0, 3).") ".substr($data, 3, 3)."-".substr($data, 6, 2)."-".substr($data, 8, 2);
+	$phoneForView = "(".substr($phone, 0, 3).") ".substr($phone, 3, 3)."-".substr($phone, 6, 2)."-".substr($phone, 8, 2);
 
 
-	return $app['twig']->render('hi.twig');
+	return $app['twig']->render('main.twig', array(
+		'phone' => $phoneForView,
+		'city' => $contact->getCity(),
+		'address' => $contact->getAddress()
+	));
 });
 $app->post('/feedback', function(Request $request) use ($app, $em) {
 
