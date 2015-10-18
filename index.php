@@ -9,7 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 $app = require __DIR__.'/bootstrap.php';
 $em = require __DIR__.'/doctrine.php';
 
-$app->get('/', function() use ($app) {
+$app->get('/', function() use ($app, $em) {
+	$contacts = $em->getRepository('Domain\Entity\Contact')->find(1);
+
 	return $app['twig']->render('hi.twig');
 });
 $app->post('/feedback', function(Request $request) use ($app, $em) {

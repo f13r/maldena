@@ -49,65 +49,97 @@ class Contact
 	private $address;
 
 	/**
-	 * @OneToMany(targetEntity="Feedbacks", mappedBy="user", cascade={"persist", "remove"})
+	 * @var string
+	 * @Column(name="coordLat", type="string", length=150, nullable=false)
 	 **/
-	private $feedback;
-	// ...
+	private $coordLat;
 
-	public function __construct() {
-		$this->feedback = new ArrayCollection();
-	}
-
-	public function getFeedback() {
-		return $this->feedback;
-	}
+	/**
+	 * @var string
+	 * @Column(name="coordLng", type="string", length=150, nullable=false)
+	 **/
+	private $coordLng;
 
 
-	public function getId()
-	{
+	public function getId() {
 		return $this->id;
 	}
 
-	public function getPhone()
-	{
+	public function getPhone() {
 		return $this->phone;
 	}
 
-	public function setPhone($phone)
-	{
+	public function setPhone($phone) {
 		$this->phone = $phone;
 
 	}
 
-	public function getEmail()
-	{
+	public function getEmail() {
 		return $this->email;
 	}
 
-	public function setEmail($email)
-	{
+	public function setEmail($email) {
 		$this->email = $email;
 
 	}
 
-	public function getCreatedAt()
-	{
-		return $this->createdAt;
+	/**
+	 * @return string
+	 */
+	public function getCity() {
+		return $this->city;
 	}
 
-	public function setCreatedAt()
-	{
-		$this->createdAt = new \DateTime("now");
+	/**
+	 * @param string $city
+	 */
+	public function setCity($city) {
+		$this->city = $city;
 	}
 
-	public function getName()
-	{
-		return $this->name;
+	/**
+	 * @return string
+	 */
+	public function getAddress() {
+		return $this->address;
 	}
 
-	public function setName($name)
-	{
-		$this->name = $name;
+	/**
+	 * @param string $address
+	 */
+	public function setAddress($address) {
+		$this->address = $address;
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getCoordLat() {
+		return $this->coordLat;
+	}
+
+	/**
+	 * @param string $coordLat
+	 */
+	public function setCoordLat($coordLat) {
+		$this->coordLat = $coordLat;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCoordLng() {
+		return $this->coordLng;
+	}
+
+	/**
+	 * @param string $coordLng
+	 */
+	public function setCoordLng($coordLng) {
+		$this->coordLng = $coordLng;
+	}
+
+
+
 }
 
