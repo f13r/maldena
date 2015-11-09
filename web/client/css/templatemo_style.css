@@ -9,23 +9,81 @@ http://www.templatemo.com/preview/templatemo_395_urbanic
 
 body, html { overflow-x:hidden; }
 
+/* font-family: "FiraSansRegular"; */
+@font-face {
+    font-family: "FiraSansRegular";
+    src: url("../fonts/FiraSansRegular/FiraSansRegular.eot");
+    src: url("../fonts/FiraSansRegular/FiraSansRegular.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/FiraSansRegular/FiraSansRegular.woff") format("woff"),
+    url("../fonts/FiraSansRegular/FiraSansRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+/* font-family: "FiraSansBold"; */
+@font-face {
+    font-family: "FiraSansBold";
+    src: url("../fonts/FiraSansBold/FiraSansBold.eot");
+    src: url("../fonts/FiraSansBold/FiraSansBold.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/FiraSansBold/FiraSansBold.woff") format("woff"),
+    url("../fonts/FiraSansBold/FiraSansBold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+/* font-family: "FiraSansItalic"; */
+@font-face {
+    font-family: "FiraSansItalic";
+    src: url("../fonts/FiraSansItalic/FiraSansItalic.eot");
+    src: url("../fonts/FiraSansItalic/FiraSansItalic.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/FiraSansItalic/FiraSansItalic.woff") format("woff"),
+    url("../fonts/FiraSansItalic/FiraSansItalic.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+/* font-family: "FiraSansBoldItalic"; */
+@font-face {
+    font-family: "FiraSansBoldItalic";
+    src: url("../fonts/FiraSansBoldItalic/FiraSansBoldItalic.eot");
+    src: url("../fonts/FiraSansBoldItalic/FiraSansBoldItalic.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/FiraSansBoldItalic/FiraSansBoldItalic.woff") format("woff"),
+    url("../fonts/FiraSansBoldItalic/FiraSansBoldItalic.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
 body {
     background-color: #ffffff;
-    font-family:  'Open Sans', Arial, Helvetice Neue, sans-serif;
-    font-size: 19px;
-	
+    font-family:  'FiraSansRegular', Arial, Helvetice Neue, sans-serif;
+
+    color: #5e5e5e;
 	font-weight: 300; 
 	font-style: normal; 
 	-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
 	-webkit-text-size-adjust: 100%;
+    image-rendering: -webkit-optimize-contrast;
 }
 
-h1, h2, h3, h4, h5, h6, span, p { font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif; }
+h1, h2, h3, h4, h5, h6, span { font-family: 'FiraSansRegular'; font-size: 1.5em; margin: 0;}
 
+p {
+    font-size: 1.2em;
+    line-height: 1.5em;
+    font-family: 'FiraSansRegular';
+}
 * {
   -webkit-border-radius: 0 !important;
      -moz-border-radius: 0 !important;
           border-radius: 0 !important;
+}
+
+ul {
+    padding-left: 1.5em;
+}
+
+.mobile-view {
+    display: none;
+}
+
+.pc-view {
+    display: block;
 }
 
 .templatemo_clear {
@@ -49,7 +107,7 @@ h1, h2, h3, h4, h5, h6, span, p { font-family: 'Open Sans', Arial, Helvetice Neu
 }
 
 .templatemo-top-menu .navbar-toggle {
-    margin-top: 38px;
+    margin-top: 25px;
 }
 
 .templatemo-top-menu .navbar-brand {
@@ -89,7 +147,7 @@ h1, h2, h3, h4, h5, h6, span, p { font-family: 'Open Sans', Arial, Helvetice Neu
     #templatemo-carousel .carousel-caption p {
         margin-bottom: 20px;
         line-height: 1.4;
-        font-size: 21px;
+        /*font-size: 21px;*/
     }
 
     #templatemo-carousel .carousel-caption {
@@ -129,8 +187,7 @@ h1, h2, h3, h4, h5, h6, span, p { font-family: 'Open Sans', Arial, Helvetice Neu
 .templatemo-slogan {
     font-family:  'Open Sans', sans-serif;
     font-weight: normal;
-    font-size: 42px;
-    margin: 60px 0;
+    margin-top: 35px;
     color: #333333;
 }
 
@@ -142,7 +199,6 @@ h1, h2, h3, h4, h5, h6, span, p { font-family: 'Open Sans', Arial, Helvetice Neu
 .templatemo-service-item {
     font-family:  'Open Sans', sans-serif;
     margin-bottom: 10px;
-    font-size: 20px;
 }
 
 
@@ -150,7 +206,6 @@ h1, h2, h3, h4, h5, h6, span, p { font-family: 'Open Sans', Arial, Helvetice Neu
     font-weight: lighter; 
     text-align: justify; 
     margin-top: 25px;
-    font-size: 14px;
     color: #929292;
 }
 
@@ -158,7 +213,6 @@ h1, h2, h3, h4, h5, h6, span, p { font-family: 'Open Sans', Arial, Helvetice Neu
     font-family: 'Open Sans', sans-serif;
     font-weight: normal;
     margin-top: 12px;
-    font-size: 12px;
     color: #e67e22;
 }
 
@@ -192,7 +246,7 @@ h1, h2, h3, h4, h5, h6, span, p { font-family: 'Open Sans', Arial, Helvetice Neu
 }
 
 .nav > li > a {
-    padding: 10px 20px;
+    padding: 10px 10px;
 }
 
 .nav > li > a:hover,
@@ -269,8 +323,8 @@ h1, h2, h3, h4, h5, h6, span, p { font-family: 'Open Sans', Arial, Helvetice Neu
 
 }
 .templatemo-line-header {
-    margin-top:100px;
-    margin-bottom:80px;
+    margin-top:30px;
+    margin-bottom:30px;
 }
 
 .member-thumb:hover .thumb-overlay {
@@ -377,13 +431,11 @@ h1, h2, h3, h4, h5, h6, span, p { font-family: 'Open Sans', Arial, Helvetice Neu
 }
 
 .txt_slogan {
-    font-size:14px; 
     color:#929292;
 }
 
 .templatemo-line-header span {
-    font-size: 18px; 
-    float :left; 
+    float :left;
     margin-top: 10px;
 }
 
@@ -469,7 +521,6 @@ h1, h2, h3, h4, h5, h6, span, p { font-family: 'Open Sans', Arial, Helvetice Neu
 .footer_bottom_content {
 	margin: auto;
 	margin-bottom: 30px;
-	font-size: 14px;
 	color:#333333;
 }
 
@@ -571,7 +622,6 @@ ul.templatemo-project-gallery  li  a img:hover {
     background-color: #8996a0;
     min-height:200px;
     font-family:  'Open Sans', sans-serif;
-    font-size:20px;
     color:#ffffff;
     margin-top:100px;
 }
@@ -658,7 +708,11 @@ ul.templatemo-project-gallery  li  a img:hover {
   .navbar-nav > li > a {
     padding-top: 9px;
     padding-bottom: 9px;
-  } 
+    font-size: 1em;
+  }
+    .navbar-nav > li > a.phone {
+       font-size: 1.5em;
+    }
 }
 
 @media (max-width: 768px) {
@@ -678,8 +732,7 @@ ul.templatemo-project-gallery  li  a img:hover {
 
     }
 	.templatemo-service-item-header {
-		font-size: 16px;
-		
+
 		padding: 23px 10px 22px;
 	}
 	.templatemo-header-orange {
@@ -688,49 +741,57 @@ ul.templatemo-project-gallery  li  a img:hover {
 	
 }
 
-@media (min-width:991px) and (max-width: 1200px) {
-	 .team_hr {
-		width: 37%; 
-	}
-}
-
-@media (min-width:683px) and ( max-width: 991px) {
-	 .team_hr {
-		width: 33%;
-	}
-}
-
-@media (min-width:585px) and ( max-width: 683px) {
-        .member-thumb .thumb-overlay {
-            padding-left: 25%;
-
-        }
-	 .team_hr {
-		width: 30%;
-	}
-}
-
-@media (min-width:536px) and ( max-width: 585px) {
-	 .team_hr {
-		width: 28%;
-	}
-}
-
-@media  (min-width:410px) and  ( max-width: 536px) {
-	 .team_hr {
-		width: 21%;
-	}
-}
-
-@media  ( max-width: 410px) {
-	 .team_hr {
-		width: 11%;
-	}
-}
 .rubric {
 	margin-top: 25px; 
-	font-size: 18px;
-	line-height: 30px; 
+	line-height: 30px;
 	color: black; 
 	margin-bottom: 30px;
 }
+
+.mar-top-7 {
+    margin-top: 7px;
+}
+
+@media (max-width: 500px) {
+    body {
+        font-size: 12px;
+    }
+
+    .mobile-view {
+        display: block;
+    }
+
+}
+
+@media (max-width: 500px) {
+    .pc-view {
+        display: none;
+    }
+
+}
+
+/* Small devices (tablets,  and up) */
+@media (max-width: 768px) {
+    body {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 992px) {
+    body {
+        font-size: 12px;
+    }
+}
+
+/* Medium devices (desktops,  and up) */
+@media (min-width: 992px) {
+    body {
+        font-size: 16px;
+    }
+}
+
+.logo {
+    max-width: 200px;
+}
+
+
