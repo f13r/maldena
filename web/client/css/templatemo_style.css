@@ -118,7 +118,6 @@ ul {
 /* ------ Carousel ----- */
 
 #templatemo-carousel {
-    background: url('../images/templatemo_carousel_bg.jpg') no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -126,6 +125,21 @@ ul {
     overflow-x: hidden;
     margin-bottom:0;
     height: 500px;
+}
+
+.fightclub {
+    background:url(/web/client/images/carousel/fightclub.jpg) center center;
+    background-size: cover;
+}
+
+.godfather {
+    background: url('../images/carousel/godfather.png') center center;
+    background-size: cover;
+}
+
+.borat {
+    background: url('../images/carousel/borat.jpg') center center;
+    background-size: cover;
 }
 
 #templatemo-carousel .carousel-caption {
@@ -797,3 +811,11 @@ ul.templatemo-project-gallery  li  a img:hover {
     background-color: rgba(0, 0, 0, 0.6);
     padding: 30px 30px 0 30px;
 }
+
+.logo-text {
+    color: white;
+    letter-spacing: -1px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.7);
+}
+
