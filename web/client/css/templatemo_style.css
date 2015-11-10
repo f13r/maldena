@@ -464,11 +464,6 @@ ul {
     margin-top: 20px;
 }
 
-#templatemo-contact {
-	margin-top:100px; 
-	border-top: 1px solid #cccccc; 
-	font-size:14px;
-}
 .templatemo-contact-map {
     margin-bottom: 15px;
     height: 378px;
@@ -775,13 +770,11 @@ ul.templatemo-project-gallery  li  a img:hover {
     body {
         font-size: 12px;
     }
-}
-
-@media (max-width: 992px) {
-    body {
-        font-size: 12px;
+    .navbar-nav > li > a {
+        font-size: 1.2em;
     }
 }
+
 
 /* Medium devices (desktops,  and up) */
 @media (min-width: 992px) {
@@ -794,4 +787,13 @@ ul.templatemo-project-gallery  li  a img:hover {
     max-width: 200px;
 }
 
+.border-black {
+    text-shadow: black 1px 0px, black 1px 1px, black 0px 1px, black -1px 1px, black -1px -1px, black 2px 1px;
+}
 
+.backing {
+    border: 1px solid black;
+    border-radius: 20px !important;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px 30px 0 30px;
+}
