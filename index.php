@@ -28,6 +28,9 @@ $app->post('/feedback', function(Request $request) use ($app, $em) {
 		$param = new stdClass();
 		if (array_key_exists('phone', $feedback)) {
 			$param->name = 'phone';
+			if (!$feedback['phone']) {
+				$feedback['phone'] = '';
+			}
 			$param->value = $feedback['phone'];
 			$param->methodName = 'setPhone';
 		}
