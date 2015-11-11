@@ -24,8 +24,6 @@ use Symfony\Component\HttpFoundation\Response;
  * Cache provides HTTP caching.
  *
  * @author Fabien Potencier <fabien@symfony.com>
- *
- * @api
  */
 class HttpCache implements HttpKernelInterface, TerminableInterface
 {
@@ -164,8 +162,6 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @api
      */
     public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
     {
@@ -194,7 +190,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
 
         $this->restoreResponseBody($request, $response);
 
-        $response->setDate(new \DateTime(null, new \DateTimeZone('UTC')));
+        $response->setDate(\DateTime::createFromFormat('U', time(), new \DateTimeZone('UTC')));
 
         if (HttpKernelInterface::MASTER_REQUEST === $type && $this->options['debug']) {
             $response->headers->set('X-Symfony-Cache', $this->getLog());
@@ -217,8 +213,6 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @api
      */
     public function terminate(Request $request, Response $response)
     {
