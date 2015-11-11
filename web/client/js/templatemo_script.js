@@ -55,10 +55,9 @@ jQuery(function($) {
 
         //gallery light box setup
         $('a.colorbox').colorbox({
-                                    rel: function(){
-                                        return $(this).data('group');
-
-                                    }
+			rel: function(){
+				return $(this).data('group');
+			}
         });
     });
 });
@@ -79,11 +78,11 @@ function initialize() {
 }
 
 // scroll animation 
-function scrollTo(selectors)
-{
-
-    if(!$(selectors).size()) return;
-    var selector_top = $(selectors).offset().top - top_menu_height;
+function scrollTo(selectors) {
+    if(!$(selectors).size()) {
+		return;
+    }
+    var selector_top = $(selectors).offset().top;
     $('html,body').animate({ scrollTop: selector_top }, 'slow');
 
 }

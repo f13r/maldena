@@ -819,3 +819,13 @@ ul.templatemo-project-gallery  li  a img:hover {
     background: rgba(0, 0, 0, 0.7);
 }
 
+@media screen and (min-width: 768px) {
+    .carousel-caption {
+        right: 54%;
+        left: 20%;
+        padding-bottom: 10px;
+        bottom: 120px;
+    }
+}
+
+
