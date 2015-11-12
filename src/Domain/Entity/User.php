@@ -23,7 +23,7 @@ class User
     /**
      * @var string
      *
-     * @Column(name="phone", type="string", length=10, nullable=false)
+     * @Column(name="phone", type="string", length=10, nullable=true)
      */
     private $phone;
 
