@@ -44,6 +44,13 @@ class Contact
 	/**
 	 * @var string
 	 *
+	 * @Column(name="skype", type="string", length=150, nullable=false)
+	 */
+	private $skype;
+
+	/**
+	 * @var string
+	 *
 	 * @Column(name="address", type="string", length=150, nullable=false)
 	 */
 	private $address;
@@ -137,6 +144,20 @@ class Contact
 	 */
 	public function setCoordLng($coordLng) {
 		$this->coordLng = $coordLng;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSkype() {
+		return $this->skype;
+	}
+
+	/**
+	 * @param string $skype
+	 */
+	public function setSkype($skype) {
+		$this->skype = $skype;
 	}
 
 

@@ -9,50 +9,10 @@ http://www.templatemo.com/preview/templatemo_395_urbanic
 
 body, html { overflow-x:hidden; }
 
-/* font-family: "FiraSansRegular"; */
-@font-face {
-    font-family: "FiraSansRegular";
-    src: url("../fonts/FiraSansRegular/FiraSansRegular.eot");
-    src: url("../fonts/FiraSansRegular/FiraSansRegular.eot?#iefix")format("embedded-opentype"),
-    url("../fonts/FiraSansRegular/FiraSansRegular.woff") format("woff"),
-    url("../fonts/FiraSansRegular/FiraSansRegular.ttf") format("truetype");
-    font-style: normal;
-    font-weight: normal;
-}
-/* font-family: "FiraSansBold"; */
-@font-face {
-    font-family: "FiraSansBold";
-    src: url("../fonts/FiraSansBold/FiraSansBold.eot");
-    src: url("../fonts/FiraSansBold/FiraSansBold.eot?#iefix")format("embedded-opentype"),
-    url("../fonts/FiraSansBold/FiraSansBold.woff") format("woff"),
-    url("../fonts/FiraSansBold/FiraSansBold.ttf") format("truetype");
-    font-style: normal;
-    font-weight: normal;
-}
-/* font-family: "FiraSansItalic"; */
-@font-face {
-    font-family: "FiraSansItalic";
-    src: url("../fonts/FiraSansItalic/FiraSansItalic.eot");
-    src: url("../fonts/FiraSansItalic/FiraSansItalic.eot?#iefix")format("embedded-opentype"),
-    url("../fonts/FiraSansItalic/FiraSansItalic.woff") format("woff"),
-    url("../fonts/FiraSansItalic/FiraSansItalic.ttf") format("truetype");
-    font-style: normal;
-    font-weight: normal;
-}
-/* font-family: "FiraSansBoldItalic"; */
-@font-face {
-    font-family: "FiraSansBoldItalic";
-    src: url("../fonts/FiraSansBoldItalic/FiraSansBoldItalic.eot");
-    src: url("../fonts/FiraSansBoldItalic/FiraSansBoldItalic.eot?#iefix")format("embedded-opentype"),
-    url("../fonts/FiraSansBoldItalic/FiraSansBoldItalic.woff") format("woff"),
-    url("../fonts/FiraSansBoldItalic/FiraSansBoldItalic.ttf") format("truetype");
-    font-style: normal;
-    font-weight: normal;
-}
+
 body {
     background-color: #ffffff;
-    font-family:  'FiraSansRegular', Arial, Helvetice Neue, sans-serif;
-
+    font-family:  'Cuprum';
     color: #5e5e5e;
 	font-weight: 300; 
 	font-style: normal; 
@@ -61,12 +21,12 @@ body {
     image-rendering: -webkit-optimize-contrast;
 }
 
-h1, h2, h3, h4, h5, h6, span { font-family: 'FiraSansRegular'; font-size: 1.5em; margin: 0;}
+h1, h2, h3, h4, h5, h6, span { font-family: 'Cuprum'; font-size: 1.5em; margin: 0;}
 
 p {
     font-size: 1.2em;
     line-height: 1.5em;
-    font-family: 'FiraSansRegular';
+    font-family: 'Cuprum';
 }
 * {
   -webkit-border-radius: 0 !important;
@@ -199,7 +159,7 @@ ul {
 }
 
 .templatemo-slogan {
-    font-family:  'Open Sans', sans-serif;
+    font-family:  'Cuprum', sans-serif;
     font-weight: normal;
     margin-top: 35px;
     color: #333333;
@@ -211,7 +171,7 @@ ul {
 }
 
 .templatemo-service-item {
-    font-family:  'Open Sans', sans-serif;
+    font-family:  'Cuprum', sans-serif;
     margin-bottom: 10px;
 }
 
@@ -224,7 +184,7 @@ ul {
 }
 
 .subheader {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Cuprum', sans-serif;
     font-weight: normal;
     margin-top: 12px;
     color: #e67e22;
@@ -331,7 +291,7 @@ ul {
 
 .templatemo-team {
     background: url('../images/background.png') ; 
-    font-family:  'Open Sans', sans-serif;
+    font-family:  'Cuprum', sans-serif;
     min-height:590px;
     color:#ffffff;
 
@@ -377,7 +337,7 @@ ul {
 }
 
 .team-inner-header {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Cuprum', sans-serif;
     font-weight:600;
     font-size:16px;
 }
@@ -769,12 +729,29 @@ ul.templatemo-project-gallery  li  a img:hover {
     .mobile-view {
         display: block;
     }
+    .templatemo-top-menu {
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: rgb(255, 118, 0);
+        padding-bottom: 10px;
+    }
 
 }
 
 @media (max-width: 500px) {
     .pc-view {
         display: none;
+    }
+    .main-block {
+        margin-top: 25px;
+        font-size: 1.1em;
+        font-family: 'Cuprum';
+    }
+    p {
+        font-size: 1.1em;
+    }
+    ul {
+        font-size: 1.1em;
     }
 
 }
@@ -819,6 +796,10 @@ ul.templatemo-project-gallery  li  a img:hover {
     background: rgba(0, 0, 0, 0.7);
 }
 
+.phone-mobile {
+	text-align: center;
+	font-size: 1.5em;
+}
 @media screen and (min-width: 768px) {
     .carousel-caption {
         right: 54%;

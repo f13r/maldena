@@ -19,7 +19,9 @@ $app->get('/', function() use ($app, $em) {
 	return $app['twig']->render('main.twig', array(
 		'phone' => $phoneForView,
 		'city' => $contact->getCity(),
-		'address' => $contact->getAddress()
+		'address' => $contact->getAddress(),
+		'email' => $contact->getEmail(),
+		'skype' => $contact->getSkype()
 	));
 });
 $app->post('/feedback', function(Request $request) use ($app, $em) {
