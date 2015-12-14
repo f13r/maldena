@@ -73,15 +73,24 @@ class Sugar {
 			 //Record attributes
 			 "name_value_list" => array(
 				//to update a record, you will nee to pass in a record id as commented below
-				//array("name" => "id", "value" => "9b170af9-3080-e22b-fbc1-4fea74def88f"),
 				array("name" => "first_name", "value" => $user['name']),
-				array("name" => "phone_mobile", "value" => $user['phone']),
-				array("name" => "email", "value" => $user['email']),
+				array("name" => "description", "value" => $user['text']),
 			),
 		);
 
 		if (!empty($user['crmId'])) {
+			array_push($set_entry_parameters['name_value_list'],
+				array("name" => "id", "value" => $user['crmId']));
+		}
 
+		if (isset($user['phone']) && $user['phone'] != '') {
+			array_push($set_entry_parameters['name_value_list'],
+				array("name" => "phone_mobile", "value" => $user['phone']));
+		}
+
+		if (isset($user['email']) && $user['email'] != '') {
+			array_push($set_entry_parameters['name_value_list'],
+				array("name" => "email", "value" => $user['email']));
 		}
 
 		$result = $this->call("set_entry", $set_entry_parameters);
