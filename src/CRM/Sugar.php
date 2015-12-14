@@ -3,7 +3,7 @@
 
 namespace CRM;
 
-class SugarCRM {
+class Sugar {
 
 	private $url = "http://crm.maldena.com.ua/service/v4_1/rest.php";
 	private $username = "admin";
@@ -11,31 +11,27 @@ class SugarCRM {
 	private $sessionId = '';
 
 	public function __construct() {
-		$login_parameters = array("user_auth" => array(
+		$loginParameters = array("user_auth" => array(
 			"user_name" => $this->username,
 			"password" => md5($this->password),
 			"version" => "1"
-		),
-         "application_name" => "RestTest",
-         "name_value_list" => array(),
-    );
+			),
+			 "application_name" => "MaldenaCRM",
+			 "name_value_list" => array(),
+		);
 
-    $login_result = $this->call("login", $login_parameters, $this->url);
+		$login_result = $this->call("login", $loginParameters);
 
-    echo "<pre>";
-    print_r($login_result);
-    echo "</pre>";
-
-    //get session id
-    $this->sessionId= $login_result->id;
+		//get session id
+		$this->sessionId = $login_result->id;
 
 	}
 
-	private function call($method, $parameters, $url) {
+	private function call($method, $parameters) {
 		ob_start();
 		$curl_request = curl_init();
 
-		curl_setopt($curl_request, CURLOPT_URL, $url);
+		curl_setopt($curl_request, CURLOPT_URL, $this->url);
 		curl_setopt($curl_request, CURLOPT_POST, 1);
 		curl_setopt($curl_request, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
 		curl_setopt($curl_request, CURLOPT_HEADER, 1);
@@ -53,7 +49,7 @@ class SugarCRM {
 		);
 
 		curl_setopt($curl_request, CURLOPT_POSTFIELDS, $post);
-			$result = curl_exec($curl_request);
+		$result = curl_exec($curl_request);
 		curl_close($curl_request);
 
 		$result = explode("\r\n\r\n", $result, 2);
@@ -61,6 +57,36 @@ class SugarCRM {
 		ob_end_flush();
 
 		return $response;
+	}
+
+	/**
+	 * @param array $user
+	 */
+	public function updateContact($user) {
+		$set_entry_parameters = array(
+			//session id
+			"session" => $this->sessionId,
+
+			 //The name of the module from which to retrieve records.
+			 "module_name" => "Contacts",
+
+			 //Record attributes
+			 "name_value_list" => array(
+				//to update a record, you will nee to pass in a record id as commented below
+				//array("name" => "id", "value" => "9b170af9-3080-e22b-fbc1-4fea74def88f"),
+				array("name" => "first_name", "value" => $user['name']),
+				array("name" => "phone_mobile", "value" => $user['phone']),
+				array("name" => "email", "value" => $user['email']),
+			),
+		);
+
+		if (!empty($user['crmId'])) {
+
+		}
+
+		$result = $this->call("set_entry", $set_entry_parameters);
+
+		return $result->id;
 	}
 }
 

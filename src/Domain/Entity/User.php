@@ -54,6 +54,13 @@ class User
     private $feedback;
     // ...
 
+    /**
+     * @var string
+     *
+     * @Column(name="crmId", type="string", length=150, nullable=false)
+     */
+    private $crmId;
+
     public function __construct() {
         $this->feedback = new ArrayCollection();
     }
@@ -108,6 +115,16 @@ class User
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    public function getCrmId()
+    {
+        return $this->crmId;
+    }
+
+    public function setCrmId($crmId)
+    {
+        $this->crmId = $crmId;
     }
 }
 

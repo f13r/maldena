@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CRM\\Sugar' => $baseDir . '/src/CRM/Sugar.php',
     'Domain\\Entity\\Contact' => $baseDir . '/src/Domain/Entity/Contact.php',
     'Domain\\Entity\\Feedbacks' => $baseDir . '/src/Domain/Entity/Feedbacks.php',
     'Domain\\Entity\\User' => $baseDir . '/src/Domain/Entity/User.php',

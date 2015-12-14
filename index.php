@@ -47,6 +47,9 @@ $app->post('/feedback', function(Request $request) use ($app, $em) {
 	$feedback = $request->request->get('feedback');
 	$param = findParams($feedback);
 
+	/**
+	 * @var Domain\Entity\User $user
+	 */
 	$user = $em->getRepository('Domain\Entity\User')
 				->findOneBy(array($param->name => $param->value));
 
@@ -56,17 +59,25 @@ $app->post('/feedback', function(Request $request) use ($app, $em) {
 		$user->setName($feedback['name']);
 		$user->setCreatedAt();
 		$user->$methodName($param->value);
+	} else {
+		$feedback['crmId'] = $user->getCrmId();
 	}
+
+	$crm = new CRM\Sugar();
+	$crmUserId = $crm->updateContact($feedback);
 
 	$feedbacks = new Domain\Entity\Feedbacks();
 	$feedbacks->setText($feedback['text']);
 	$feedbacks->setUser($user);
 	$feedbacks->setCreatedAt();
 
+	$user->setCrmId($crmUserId);
 	$user->getFeedback()->add($feedbacks);
 
 	$em->persist($user);
 	$em->flush();
+
+
 	return true;
 });
 $app->run();
