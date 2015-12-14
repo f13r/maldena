@@ -90,13 +90,7 @@ class Sugar {
 
 		if (isset($user['email']) && $user['email'] != '') {
 			array_push($set_entry_parameters['name_value_list'],
-				array("name" => "email", "value" => array(
-					"email_address" => $user['email'],
-					"primary_address" => "1",
-					"invalid_email" => "0",
-					"opt_out" => "0"
-				))
-			);
+				array("name" => "email1", "value" => $user['email']));
 		}
 
 		$result = $this->call("set_entry", $set_entry_parameters);
