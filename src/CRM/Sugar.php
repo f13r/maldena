@@ -9,6 +9,7 @@ class Sugar {
 	private $username = "admin";
 	private $password = "ser21dik";
 	private $sessionId = '';
+	private $callUserId = '78d94dce-475c-f2ee-9706-566f1e8cc52e';
 
 	public function __construct() {
 		$loginParameters = array("user_auth" => array(
@@ -75,6 +76,8 @@ class Sugar {
 				//to update a record, you will nee to pass in a record id as commented below
 				array("name" => "first_name", "value" => $user['name']),
 				array("name" => "description", "value" => $user['text']),
+				array("name" => "created_by", "value" => $this->callUserId),
+				array("name" => "assigned_user_id", "value" => $this->callUserId)
 			),
 		);
 
