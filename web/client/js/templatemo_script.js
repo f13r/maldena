@@ -37,7 +37,7 @@ jQuery(function($) {
         });
 
         // to stick navbar on top
-        $('.templatemo-top-menu ').stickUp();
+        //$('.templatemo-top-menu ').stickUp();
 
         // gallery category
         $('.templatemo-gallery-category a').click(function(e){
@@ -68,13 +68,15 @@ function initialize() {
       center: new google.maps.LatLng(49.235639, 28.466992)
     };
 
-    var map = new google.maps.Map(document.getElementById('map-canvas'),  mapOptions);
-	
-	var marker = new google.maps.Marker({
-      position: mapOptions.center,
-      map: map,
-      title: "Maldena Enlgish Club"
-  });
+    if ($('map-canvas').length > 0) {
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: mapOptions.center,
+            map: map,
+            title: "Maldena Enlgish Club"
+        });
+    }
 }
 
 // scroll animation 
@@ -82,7 +84,7 @@ function scrollTo(selectors) {
     if(!$(selectors).size()) {
 		return;
     }
-    var selector_top = $(selectors).offset().top;
+    var selector_top = $(selectors).offset().top - 110;
     $('html,body').animate({ scrollTop: selector_top }, 'slow');
 
 }

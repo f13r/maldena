@@ -9,21 +9,30 @@ use Symfony\Component\HttpFoundation\Request;
 $app = require __DIR__.'/bootstrap.php';
 $em = require __DIR__.'/doctrine.php';
 
-$app->get('/', function() use ($app, $em) {
-	$contact = $em->getRepository('Domain\Entity\Contact')->find(1);
-	$phone = $contact->getPhone();
+$contact = $em->getRepository('Domain\Entity\Contact')->find(1);
+$phone = $contact->getPhone();
 
-	$phoneForView = "(".substr($phone, 0, 3).") ".substr($phone, 3, 3)."-".substr($phone, 6, 2)."-".substr($phone, 8, 2);
+$templateVariables = array(
+	'phone' => "(".substr($phone, 0, 3).") ".substr($phone, 3, 3)."-".substr($phone, 6, 2)."-".substr($phone, 8, 2),
+	'city' => $contact->getCity(),
+	'address' => $contact->getAddress(),
+	'email' => $contact->getEmail(),
+	'skype' => $contact->getSkype()
+);
 
+$render = function($template, $variables = []) use ($app, $templateVariables) {
+	$variables = array_merge($variables, $templateVariables);
+	return $app['twig']->render($template, $variables);
+};
 
-	return $app['twig']->render('main.twig', array(
-		'phone' => $phoneForView,
-		'city' => $contact->getCity(),
-		'address' => $contact->getAddress(),
-		'email' => $contact->getEmail(),
-		'skype' => $contact->getSkype()
-	));
+$app->get('/', function() use ($app, $em, $render) {
+	return $render('templates/main.twig');
 });
+
+$app->get('/test', function() use ($app, $render) {
+	return $render('templates/englishTest.twig');
+});
+
 $app->post('/feedback', function(Request $request) use ($app, $em) {
 
 	function findParams($feedback) {
@@ -66,7 +75,7 @@ $app->post('/feedback', function(Request $request) use ($app, $em) {
 	$crm = new CRM\Sugar();
 	$crmUserId = $crm->updateContact($feedback);
 
-	$feedbacks = new Domain\Entity\Feedbacks();
+	$feedbacks = new Domain\Entity\Feedback();
 	$feedbacks->setText($feedback['text']);
 	$feedbacks->setUser($user);
 	$feedbacks->setCreatedAt();
@@ -80,4 +89,23 @@ $app->post('/feedback', function(Request $request) use ($app, $em) {
 
 	return true;
 });
+
+$app->get('/login', function(Request $request) use ($app, $render) {
+	return $app['twig']->render('templates/login.twig', array(
+		'error'         => $app['security.last_error']($request),
+		'last_username' => $app['session']->get('_security.last_username'),
+	));
+});
+
+$app->get('/admin', function(Request $request) use ($app, $render) {
+	return $app['twig']->render('templates/admin.twig', array());
+});
+
+$app->post('/congratulations', function(Request $request) use ($app, $render) {
+	$answer = $request->request->get('feedback');
+	return $render('templates/saveTest.twig', array(
+			'answer' => $answer
+	));
+})->bind('saveTest');
+
 $app->run();

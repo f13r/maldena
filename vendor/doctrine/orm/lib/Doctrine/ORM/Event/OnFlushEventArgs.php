@@ -19,31 +19,33 @@
 
 namespace Doctrine\ORM\Event;
 
-use Doctrine\Common\EventArgs;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Provides event arguments for the preFlush event.
  *
- * @license     http://www.opensource.org/licenses/mit-license.php MIT
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
  * @since       2.0
  * @author      Roman Borschel <roman@code-factory.de>
  * @author      Benjamin Eberlei <kontakt@beberlei.de>
  */
-class OnFlushEventArgs extends EventArgs
+class OnFlushEventArgs extends \Doctrine\Common\EventArgs
 {
     /**
-     * @var EntityManagerInterface
+     * @var Doctirne\ORM\EntityManager
      */
     private $em;
+
+    //private $entitiesToPersist = array();
+    //private $entitiesToRemove = array();
 
     /**
      * Constructor.
      *
-     * @param EntityManagerInterface $em
+     * @param \Doctrine\ORM\EntityManager $em
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManager $em)
     {
         $this->em = $em;
     }
@@ -58,4 +60,25 @@ class OnFlushEventArgs extends EventArgs
         return $this->em;
     }
 
+    /*
+    public function addEntityToPersist($entity)
+    {
+
+    }
+
+    public function addEntityToRemove($entity)
+    {
+
+    }
+
+    public function addEntityToUpdate($entity)
+    {
+
+    }
+
+    public function getEntitiesToPersist()
+    {
+        return $this->_entitiesToPersist;
+    }
+    */
 }

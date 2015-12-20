@@ -23,7 +23,7 @@ namespace Doctrine\ORM\Query;
  * A parse tree printer for Doctrine Query Language parser.
  *
  * @author      Janne Vanhala <jpvanhal@cc.hut.fi>
- * @license     http://www.opensource.org/licenses/mit-license.php MIT
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        http://www.phpdoctrine.org
  * @since       2.0
  */
@@ -59,9 +59,7 @@ class Printer
      *
      * This method is called before executing a production.
      *
-     * @param string $name Production name.
-     *
-     * @return void
+     * @param string $name production name
      */
     public function startProduction($name)
     {
@@ -73,8 +71,6 @@ class Printer
      * Decreases indentation level by one and prints a closing parenthesis.
      *
      * This method is called after executing a production.
-     *
-     * @return void
      */
     public function endProduction()
     {
@@ -85,9 +81,7 @@ class Printer
     /**
      * Prints text indented with spaces depending on current indentation level.
      *
-     * @param string $str The text.
-     *
-     * @return void
+     * @param string $str text
      */
     public function println($str)
     {

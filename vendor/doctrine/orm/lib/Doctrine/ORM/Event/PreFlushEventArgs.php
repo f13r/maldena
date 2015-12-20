@@ -19,40 +19,32 @@
 
 namespace Doctrine\ORM\Event;
 
-use Doctrine\Common\EventArgs;
-use Doctrine\ORM\EntityManagerInterface;
-
 /**
  * Provides event arguments for the preFlush event.
  *
- * @license     http://www.opensource.org/licenses/mit-license.php MIT
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.com
  * @since       2.0
  * @author      Roman Borschel <roman@code-factory.de>
  * @author      Benjamin Eberlei <kontakt@beberlei.de>
  */
-class PreFlushEventArgs extends EventArgs
+class PreFlushEventArgs extends \Doctrine\Common\EventArgs
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var EntityManager
      */
-    private $em;
+    private $_em;
 
-    /**
-     * Constructor.
-     *
-     * @param EntityManagerInterface $em
-     */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct($em)
     {
-        $this->em = $em;
+        $this->_em = $em;
     }
 
     /**
-     * @return \Doctrine\ORM\EntityManager
+     * @return EntityManager
      */
     public function getEntityManager()
     {
-        return $this->em;
+        return $this->_em;
     }
 }

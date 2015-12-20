@@ -19,8 +19,9 @@
 
 namespace Doctrine\ORM\Internal\Hydration;
 
-use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\DBAL\Connection,
+    Doctrine\ORM\NoResultException,
+    Doctrine\ORM\NonUniqueResultException;
 
 /**
  * Hydrator that hydrates a single scalar value from the result set.
@@ -43,15 +44,12 @@ class SingleScalarHydrator extends AbstractHydrator
             throw new NoResultException();
         }
 
-        if ($numRows > 1) {
-            throw new NonUniqueResultException('The query returned multiple rows. Change the query or use a different result function like getScalarResult().');
-        }
-        
-        if (count($data[key($data)]) > 1) {
-            throw new NonUniqueResultException('The query returned a row containing multiple columns. Change the query or use a different result function like getScalarResult().');
+        if ($numRows > 1 || count($data[key($data)]) > 1) {
+            throw new NonUniqueResultException();
         }
 
-        $result = $this->gatherScalarRowData($data[key($data)]);
+        $cache  = array();
+        $result = $this->gatherScalarRowData($data[key($data)], $cache);
 
         return array_shift($result);
     }

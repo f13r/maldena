@@ -19,13 +19,13 @@
 
 namespace Doctrine\ORM\Mapping\Builder;
 
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata,
+    Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 /**
  * Builder Object for ClassMetadata
  *
- * @license     http://www.opensource.org/licenses/mit-license.php MIT
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.com
  * @since       2.2
  * @author      Benjamin Eberlei <kontakt@beberlei.de>
@@ -55,56 +55,21 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Marks the class as mapped superclass.
+     * Mark the class as mapped superclass.
      *
      * @return ClassMetadataBuilder
      */
     public function setMappedSuperClass()
     {
         $this->cm->isMappedSuperclass = true;
-        $this->cm->isEmbeddedClass = false;
 
         return $this;
     }
 
     /**
-     * Marks the class as embeddable.
-     *
-     * @return ClassMetadataBuilder
-     */
-    public function setEmbeddable()
-    {
-        $this->cm->isEmbeddedClass = true;
-        $this->cm->isMappedSuperclass = false;
-
-        return $this;
-    }
-
-    /**
-     * Adds and embedded class
-     *
-     * @param string      $fieldName
-     * @param string      $class
-     * @param string|null $columnPrefix
-     *
-     * @return $this
-     */
-    public function addEmbedded($fieldName, $class, $columnPrefix = null)
-    {
-        $this->cm->mapEmbedded(array(
-            'fieldName'    => $fieldName,
-            'class'        => $class,
-            'columnPrefix' => $columnPrefix
-        ));
-
-        return $this;
-    }
-
-    /**
-     * Sets custom Repository class name.
+     * Set custom Repository class name
      *
      * @param string $repositoryClassName
-     *
      * @return ClassMetadataBuilder
      */
     public function setCustomRepositoryClass($repositoryClassName)
@@ -115,7 +80,7 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Marks class read only.
+     * Mark class read only
      *
      * @return ClassMetadataBuilder
      */
@@ -127,10 +92,9 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Sets the table name.
+     * Set the table name
      *
      * @param string $name
-     *
      * @return ClassMetadataBuilder
      */
     public function setTable($name)
@@ -141,11 +105,10 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Adds Index.
+     * Add Index
      *
-     * @param array  $columns
+     * @param array $columns
      * @param string $name
-     *
      * @return ClassMetadataBuilder
      */
     public function addIndex(array $columns, $name)
@@ -160,11 +123,10 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Adds Unique Constraint.
+     * Add Unique Constraint
      *
-     * @param array  $columns
+     * @param array $columns
      * @param string $name
-     *
      * @return ClassMetadataBuilder
      */
     public function addUniqueConstraint(array $columns, $name)
@@ -179,11 +141,10 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Adds named query.
+     * Add named query
      *
      * @param string $name
      * @param string $dqlQuery
-     *
      * @return ClassMetadataBuilder
      */
     public function addNamedQuery($name, $dqlQuery)
@@ -197,7 +158,7 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Sets class as root of a joined table inheritance hierarchy.
+     * Set class as root of a joined table inheritance hierachy.
      *
      * @return ClassMetadataBuilder
      */
@@ -209,7 +170,7 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Sets class as root of a single table inheritance hierarchy.
+     * Set class as root of a single table inheritance hierachy.
      *
      * @return ClassMetadataBuilder
      */
@@ -221,13 +182,10 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Sets the discriminator column details.
+     * Set the discriminator column details.
      *
      * @param string $name
      * @param string $type
-     * @param int    $length
-     *
-     * @return ClassMetadataBuilder
      */
     public function setDiscriminatorColumn($name, $type = 'string', $length = 255)
     {
@@ -241,11 +199,10 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Adds a subclass to this inheritance hierarchy.
+     * Add a subclass to this inheritance hierachy.
      *
      * @param string $name
      * @param string $class
-     *
      * @return ClassMetadataBuilder
      */
     public function addDiscriminatorMapClass($name, $class)
@@ -256,7 +213,7 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Sets deferred explicit change tracking policy.
+     * Set deferred explicit change tracking policy.
      *
      * @return ClassMetadataBuilder
      */
@@ -268,7 +225,7 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Sets notify change tracking policy.
+     * Set notify change tracking policy.
      *
      * @return ClassMetadataBuilder
      */
@@ -280,11 +237,10 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Adds lifecycle event.
+     * Add lifecycle event
      *
      * @param string $methodName
      * @param string $event
-     *
      * @return ClassMetadataBuilder
      */
     public function addLifecycleEvent($methodName, $event)
@@ -295,13 +251,11 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Adds Field.
+     * Add Field
      *
      * @param string $name
      * @param string $type
-     * @param array  $mapping
-     *
-     * @return ClassMetadataBuilder
+     * @param array $mapping
      */
     public function addField($name, $type, array $mapping = array())
     {
@@ -314,11 +268,10 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Creates a field builder.
+     * Create a field builder.
      *
      * @param string $name
      * @param string $type
-     *
      * @return FieldBuilder
      */
     public function createField($name, $type)
@@ -333,32 +286,11 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Creates an embedded builder.
+     * Add a simple many to one association, optionally with the inversed by field.
      *
-     * @param string $fieldName
-     * @param string $class
-     *
-     * @return EmbeddedBuilder
-     */
-    public function createEmbedded($fieldName, $class)
-    {
-        return new EmbeddedBuilder(
-            $this,
-            array(
-                'fieldName'    => $fieldName,
-                'class'        => $class,
-                'columnPrefix' => null
-            )
-        );
-    }
-
-    /**
-     * Adds a simple many to one association, optionally with the inversed by field.
-     *
-     * @param string      $name
-     * @param string      $targetEntity
+     * @param string $name
+     * @param string $targetEntity
      * @param string|null $inversedBy
-     *
      * @return ClassMetadataBuilder
      */
     public function addManyToOne($name, $targetEntity, $inversedBy = null)
@@ -373,13 +305,12 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Creates a ManyToOne Association Builder.
+     * Create a ManyToOne Assocation Builder.
      *
      * Note: This method does not add the association, you have to call build() on the AssociationBuilder.
      *
      * @param string $name
      * @param string $targetEntity
-     *
      * @return AssociationBuilder
      */
     public function createManyToOne($name, $targetEntity)
@@ -395,11 +326,10 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Creates a OneToOne Association Builder.
+     * Create OneToOne Assocation Builder
      *
      * @param string $name
      * @param string $targetEntity
-     *
      * @return AssociationBuilder
      */
     public function createOneToOne($name, $targetEntity)
@@ -415,12 +345,11 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Adds simple inverse one-to-one association.
+     * Add simple inverse one-to-one assocation.
      *
      * @param string $name
      * @param string $targetEntity
      * @param string $mappedBy
-     *
      * @return ClassMetadataBuilder
      */
     public function addInverseOneToOne($name, $targetEntity, $mappedBy)
@@ -432,12 +361,11 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Adds simple owning one-to-one association.
+     * Add simple owning one-to-one assocation.
      *
-     * @param string      $name
-     * @param string      $targetEntity
-     * @param string|null $inversedBy
-     *
+     * @param string $name
+     * @param string $targetEntity
+     * @param string $inversedBy
      * @return ClassMetadataBuilder
      */
     public function addOwningOneToOne($name, $targetEntity, $inversedBy = null)
@@ -452,11 +380,10 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Creates a ManyToMany Association Builder.
+     * Create ManyToMany Assocation Builder
      *
      * @param string $name
      * @param string $targetEntity
-     *
      * @return ManyToManyAssociationBuilder
      */
     public function createManyToMany($name, $targetEntity)
@@ -472,12 +399,11 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Adds a simple owning many to many association.
+     * Add a simple owning many to many assocation.
      *
-     * @param string      $name
-     * @param string      $targetEntity
+     * @param string $name
+     * @param string $targetEntity
      * @param string|null $inversedBy
-     *
      * @return ClassMetadataBuilder
      */
     public function addOwningManyToMany($name, $targetEntity, $inversedBy = null)
@@ -492,12 +418,11 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Adds a simple inverse many to many association.
+     * Add a simple inverse many to many assocation.
      *
      * @param string $name
      * @param string $targetEntity
      * @param string $mappedBy
-     *
      * @return ClassMetadataBuilder
      */
     public function addInverseManyToMany($name, $targetEntity, $mappedBy)
@@ -509,11 +434,10 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Creates a one to many association builder.
+     * Create a one to many assocation builder
      *
      * @param string $name
      * @param string $targetEntity
-     *
      * @return OneToManyAssociationBuilder
      */
     public function createOneToMany($name, $targetEntity)
@@ -529,12 +453,11 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Adds simple OneToMany association.
+     * Add simple OneToMany assocation.
      *
      * @param string $name
      * @param string $targetEntity
      * @param string $mappedBy
-     *
      * @return ClassMetadataBuilder
      */
     public function addOneToMany($name, $targetEntity, $mappedBy)

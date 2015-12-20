@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include "./partials/head.twig" %}
+
+    <body id="templatemo-top">
+    {% include "./partials/topmenu.twig" %}
+
+    <section>
+        {% block content %}{% endblock %}
+    </section>
+
+
+
+    {% include "./partials/footer.twig" %}
+    {% include "./partials/scripts.twig" %}
+
+    </body>
+</html>

@@ -25,18 +25,8 @@ namespace Doctrine\ORM\Mapping;
  */
 final class UniqueConstraint implements Annotation
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $name;
-
-    /**
-     * @var array<string>
-     */
+    /** @var array<string> */
     public $columns;
-
-    /**
-     * @var array
-     */
-    public $options;
 }

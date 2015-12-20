@@ -45,17 +45,9 @@ class DefaultNamingStrategy implements NamingStrategy
     /**
      * {@inheritdoc}
      */
-    public function propertyToColumnName($propertyName, $className = null)
+    public function propertyToColumnName($propertyName)
     {
         return $propertyName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function embeddedFieldToColumnName($propertyName, $embeddedColumnName, $className = null, $embeddedClassName = null)
-    {
-        return $propertyName.'_'.$embeddedColumnName;
     }
 
     /**
@@ -69,7 +61,7 @@ class DefaultNamingStrategy implements NamingStrategy
     /**
      * {@inheritdoc}
      */
-    public function joinColumnName($propertyName, $className = null)
+    public function joinColumnName($propertyName)
     {
         return $propertyName . '_' . $this->referenceColumnName();
     }

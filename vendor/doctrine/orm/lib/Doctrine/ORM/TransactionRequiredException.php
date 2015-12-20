@@ -22,7 +22,7 @@ namespace Doctrine\ORM;
 /**
  * Is thrown when a transaction is required for the current operation, but there is none open.
  *
- * @license     http://www.opensource.org/licenses/mit-license.php MIT
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.com
  * @since       1.0
  * @author      Benjamin Eberlei <kontakt@beberlei.de>
@@ -30,9 +30,6 @@ namespace Doctrine\ORM;
  */
 class TransactionRequiredException extends ORMException
 {
-    /**
-     * @return TransactionRequiredException
-     */
     static public function transactionRequired()
     {
         return new self('An open transaction is required for this operation.');
