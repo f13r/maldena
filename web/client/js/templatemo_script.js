@@ -68,7 +68,7 @@ function initialize() {
       center: new google.maps.LatLng(49.235639, 28.466992)
     };
 
-    if ($('map-canvas').length > 0) {
+    if ($('#map-canvas').length > 0) {
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
         var marker = new google.maps.Marker({
