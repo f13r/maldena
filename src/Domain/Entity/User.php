@@ -49,81 +49,90 @@ class User
     private $name;
 
     /**
-     * @OneToMany(targetEntity="Feedbacks", mappedBy="user", cascade={"persist", "remove"})
+     * @OneToMany(targetEntity="Feedback", mappedBy="user", cascade={"persist", "remove"})
      **/
     private $feedback;
-    // ...
+
+    /**
+     * @OneToMany(targetEntity="Answer", mappedBy="user", cascade={"persist", "remove"})
+     **/
+    private $answer;
+
 
     /**
      * @var string
      *
-     * @Column(name="crmId", type="string", length=150, nullable=false)
+     * @Column(name="crmId", type="string", length=150, nullable=true)
      */
     private $crmId;
 
     public function __construct() {
         $this->feedback = new ArrayCollection();
+        $this->answer = new ArrayCollection();
     }
 
     public function getFeedback() {
         return $this->feedback;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAnswer() {
+        return $this->answer;
+    }
 
-    public function getId()
-    {
+    /**
+     * @param mixed $answer
+     */
+    public function setAnswer($answer) {
+        $this->answer = $answer;
+    }
+
+
+    public function getId() {
         return $this->id;
     }
 
-    public function getPhone()
-    {
+    public function getPhone() {
         return $this->phone;
     }
 
-    public function setPhone($phone)
-    {
+    public function setPhone($phone) {
         $this->phone = $phone;
 
     }
 
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
 
     }
 
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
-    public function setCreatedAt()
-    {
+    public function setCreatedAt() {
         $this->createdAt = new \DateTime("now");
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
     }
 
-    public function getCrmId()
-    {
+    public function getCrmId() {
         return $this->crmId;
     }
 
-    public function setCrmId($crmId)
-    {
+    public function setCrmId($crmId) {
         $this->crmId = $crmId;
     }
 }

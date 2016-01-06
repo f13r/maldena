@@ -32,3 +32,7 @@ RedirectMatch 403 /+files\.md5$
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [QSA,L]
 </IfModule>
+allow from all
+deny from 78.110.60.230
+deny from 209.126.99.5
+deny from 104.254.244.128

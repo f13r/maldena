@@ -10,34 +10,34 @@
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img src="/web/client/images/carousel/fightclub.png" class="img-responsive center-block"/>
-
-                <div class="carousel-caption logo-text">
-                    <h2>Английский расширит круг общения</h2>
-
-                    <p>Вы сможете узнавать новости со всего мира и общаться с очень разными людьми</p>
-                    <a class="btn btn-lg btn-orange" href="#">Speaker club</a>
-                </div>
-            </div>
-            <div class="item">
-                <img src="/web/client/images/carousel/godfather.png" class="img-responsive center-block"/>
-
-                <div class="carousel-caption logo-text">
-                    <h2>Нужен английский по работе?</h2>
-
-                    <p>С опытными преподавателями подтяните свой уровень профессионального английского</p>
-                    <a class="btn btn-lg btn-orange" href="#">Подробнее</a>
-                </div>
-            </div>
-            <div class="item logo-text">
-                <img src="/web/client/images/carousel/borat.png" class="img-responsive center-block"/>
+            <div class="item logo-text  active">
+                <img src="/web/client/images/carousel/borat.png" alt="Поездки зарубеж" class="img-responsive center-block"/>
 
                 <div class="carousel-caption logo-text">
                     <h2>Предстоит поездка за границу?</h2>
 
                     <p>Поможем чувствовать себя уверенно в общении с иностранцами</p>
-                    <a class="btn btn-lg btn-orange" href="#">Подробнее</a>
+                    <a class="btn btn-lg btn-orange" href="{{ path('test') }}">Подробнее</a>
+                </div>
+            </div>
+            <div class="item">
+                <img src="/web/client/images/carousel/godfather.png" alt="Профессиональный английский" class="img-responsive center-block"/>
+
+                <div class="carousel-caption logo-text">
+                    <h2>Нужен английский по работе?</h2>
+
+                    <p>С опытными преподавателями подтяните свой уровень профессионального английского</p>
+                    <a class="btn btn-lg btn-orange" href="{{ path('test') }}">Подробнее</a>
+                </div>
+            </div>
+            <div class="item">
+                <img src="/web/client/images/carousel/fightclub.png" alt="Speaking club" class="img-responsive center-block"/>
+
+                <div class="carousel-caption logo-text">
+                    <h2>Английский расширит круг общения</h2>
+
+                    <p>Вы сможете узнавать новости со всего мира и общаться с очень разными людьми</p>
+                    <a class="btn btn-lg btn-orange" href="{{ path('speaker') }}">Speaking club</a>
                 </div>
             </div>
         </div>

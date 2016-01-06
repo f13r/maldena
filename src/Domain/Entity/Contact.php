@@ -30,6 +30,13 @@ class Contact
 	/**
 	 * @var string
 	 *
+	 * @Column(name="phone2", type="string", length=10, nullable=true)
+	 */
+	private $phone2;
+
+	/**
+	 * @var string
+	 *
 	 * @Column(name="email", type="string", length=150, nullable=true)
 	 */
 	private $email;
@@ -78,6 +85,15 @@ class Contact
 
 	public function setPhone($phone) {
 		$this->phone = $phone;
+
+	}
+
+	public function getPhone2() {
+		return $this->phone2;
+	}
+
+	public function setPhone2($phone2) {
+		$this->phone2 = $phone2;
 
 	}
 

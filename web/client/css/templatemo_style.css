@@ -7,7 +7,7 @@ Urbanic Template
 http://www.templatemo.com/preview/templatemo_395_urbanic 
 */
 
-body, html { overflow-x:hidden; }
+body, html { overflow-x:hidden; height: 100%;  }
 
 
 body {
@@ -21,7 +21,11 @@ body {
     image-rendering: -webkit-optimize-contrast;
 }
 
-h1, h2, h3, h4, h5, h6, span { font-family: 'Cuprum'; font-size: 1.5em; margin: 0;}
+h1, h2, h3, h4, h5, h6 { font-family: 'Cuprum'; font-size: 1.5em; margin: 0; margin-top: 0.3em;}
+
+span {
+    font-family:'Cuprum';
+}
 
 p {
     font-size: 1.2em;
@@ -38,6 +42,15 @@ ul {
     padding-left: 1.5em;
 }
 
+.wrapper {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -100px;
+}
+
+.footer {
+    height: 50px;
+}
 .mobile-view {
     display: none;
 }
@@ -717,12 +730,12 @@ ul.templatemo-project-gallery  li  a img:hover {
 	margin-bottom: 30px;
 }
 
-.mar-top-7 {
-    margin-top: 7px;
+.mar-top-xl {
+    margin-top: 4em;
 }
 
 .main {
-    margin-top: 4em;
+    margin-bottom: 4em;
 }
 
 .questions-spaces {
@@ -775,6 +788,13 @@ ul.templatemo-project-gallery  li  a img:hover {
     line-height: 30px;
 }
 
+.questions .submit {
+    margin: 60px 0px;
+}
+
+.underline {
+    text-decoration: underline;
+}
 @media (max-width: 500px) {
     body {
         font-size: 12px;
@@ -795,6 +815,9 @@ ul.templatemo-project-gallery  li  a img:hover {
 @media (max-width: 500px) {
     .pc-view {
         display: none;
+    }
+    .contacts {
+        margin-top: 30px;
     }
     .main-block {
         margin-top: 25px;
@@ -836,6 +859,9 @@ ul.templatemo-project-gallery  li  a img:hover {
     text-shadow: black 1px 0px, black 1px 1px, black 0px 1px, black -1px 1px, black -1px -1px, black 2px 1px;
 }
 
+.red-color {
+    color: red;
+}
 .backing {
     border: 1px solid black;
     border-radius: 20px !important;
@@ -859,8 +885,31 @@ ul.templatemo-project-gallery  li  a img:hover {
         right: 54%;
         left: 20%;
         padding-bottom: 10px;
-        bottom: 120px;
+        bottom: 40px;
     }
 }
 
+.maps {
+    height: 400px;
+    width: 90%;
+    margin: 0 auto;
+}
+.street-view, .pano-view {
+    float: left;
+    height: 100%;
+    width: 50%;
+    min-height: 100%;
+}
 
+.contacts {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.caret {
+    margin-top: 0px;
+}
+
+.page-image {
+    margin: 20px 0;
+}

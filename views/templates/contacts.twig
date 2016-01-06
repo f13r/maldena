@@ -1,0 +1,97 @@
+{% extends "layouts/main.twig" %}
+
+
+{% block meta %}
+    <title>Курсы английского языка в Виннице - Контакты</title>
+    <meta name="keywords" content="контакты, курсы английского языка в Виннице, курсы английского в Виннице, школа английского языка в Виннице, школа языка в Виннице, деловой английский, курси англійської мови"/>
+    <meta name="description" content="Контакты курсов английского языка в Виннице, удобное расположение школы, профессиональные преподаватели и комфортные условия. Мы поможем вам стать лучше в вашей профессии"/>
+{% endblock %}
+
+{% block content %}
+    {% include "./partials/topmenu.twig" with {'action': 'contacts'} %}
+    <div id="templatemo-for-start">
+        <div class="container">
+            <div class="row">
+                <div class="templatemo-line-header pc-view container">
+                    <div class="text-center row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <hr class="hr_gray"/>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <h2>
+                                <strong>
+                                    График и контакты
+                                </strong>
+                            </h2>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <hr class="hr_gray"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container contacts">
+        <div class="row">
+            <div class="col-lg-6 col-sm-6">
+                <p class="text-center">
+                    <strong>Наши контакты:</strong>
+                </p>
+                <p><img src="web/client/images/location.png" alt="icon 1"/>{{ city }}, {{ address }}</p>
+                <p><img src="web/client/images/phone1.png" alt="icon 2"/>{{ phone }}</p>
+                <p><img src="web/client/images/phone1.png" alt="icon 2"/>{{ phone2 }}</p>
+                <p>skype: maldena_vn</p>
+                <p class="text-center">
+                    <strong>Время работы школы:</strong>
+                </p>
+                <p>
+                    Пн-Пт: с 9.00 до 21.00<br>
+                    Суббота: c 9.00 до 18.00<br>
+                    Воскресенье: выходной
+                </p>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                {% include "./partials/feedback.twig" %}
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div id="templatemo-main">
+        <div class="container">
+            <div class="row">
+                <div class="templatemo-line-header container">
+                    <div class="text-center row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <hr class="hr_gray"/>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <h2>
+                                <strong>
+                                    Как найти наши курсы
+                                </strong>
+                            </h2>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <hr class="hr_gray"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <p>
+            Наши курсы английского находятся в самом центре города в паре минут ходьбы от центральной башни. Более подробно вы можете увидеть на карте:
+        </p>
+        <div class="maps">
+            <div class="street-view"></div>
+            <div class="pano-view"></div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+{% endblock %}
+

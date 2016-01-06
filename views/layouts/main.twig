@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{% include "./partials/head.twig" %}
-
+<head>
+    {% block meta %}{% endblock %}
+    {% include "./partials/head.twig" %}
+</head>
     <body id="templatemo-top">
-    {% include "./partials/topmenu.twig" %}
+    <div class="wrapper">
 
-    <section>
-        {% block content %}{% endblock %}
-    </section>
-
-
-
+        <section class="main">
+            {% block content %}{% endblock %}
+        </section>
+    </div>
+    <div class="clearfix"></div>
     {% include "./partials/footer.twig" %}
     {% include "./partials/scripts.twig" %}
 

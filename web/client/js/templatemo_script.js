@@ -1,4 +1,6 @@
 var top_menu_height = 0;
+var panorama;
+var marker;
 jQuery(function($) {
 		$(window).load( function() {
 			$('.external-link').unbind('click');	
@@ -15,8 +17,8 @@ jQuery(function($) {
 
         top_menu_height = $('.templatemo-top-menu').height();
         // scroll spy to auto active the nav item
-        $('body').scrollspy({ target: '#templatemo-nav-bar', offset: top_menu_height + 10 });
-		$('.external-link').unbind('click');
+        //$('body').scrollspy({ target: '#templatemo-nav-bar', offset: top_menu_height + 10 });
+		//$('.external-link').unbind('click');
 
         // scroll to top
         $('#btn-back-to-top').click(function(e){
@@ -24,9 +26,13 @@ jQuery(function($) {
             scrollTo('#templatemo-top');
         });
 
+            if ($('.year').length > 0) {
+                $('.year').html(new Date().getFullYear());
+            }
+
         // scroll to specific id when click on menu
-        $('.templatemo-top-menu .navbar-nav a').click(function(e){
-            e.preventDefault(); 
+        $('.templatemo-top-menu .navbar-nav a.scroll').click(function(e){
+            e.preventDefault();
             var linkId = $(this).attr('href');
             scrollTo(linkId);
             if($('.navbar-toggle').is(":visible") == true){
@@ -42,8 +48,8 @@ jQuery(function($) {
         // gallery category
         $('.templatemo-gallery-category a').click(function(e){
             e.preventDefault(); 
-            $(this).parent().children('a').removeClass('active');
-            $(this).addClass('active');
+            //$(this).parent().children('a').removeClass('active');
+            //$(this).addClass('active');
             var linkClass = $(this).attr('href');
             $('.gallery').each(function(){
                 if($(this).is(":visible") == true){
@@ -52,6 +58,8 @@ jQuery(function($) {
             });
             $(linkClass).fadeIn();  
         });
+
+
 
         //gallery light box setup
         $('a.colorbox').colorbox({
@@ -69,13 +77,35 @@ function initialize() {
     };
 
     if ($('#map-canvas').length > 0) {
-        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        var map = new google.maps.Map($('#map-canvas')[0], mapOptions);
 
-        var marker = new google.maps.Marker({
+        marker = new google.maps.Marker({
             position: mapOptions.center,
             map: map,
             title: "Maldena Enlgish Club"
         });
+    }
+
+    if ($('.street-view').length > 0) {
+        var fenway = {lat: 49.235639, lng: 28.466992};
+        var map = new google.maps.Map($('.street-view')[0], {
+            center: fenway,
+            zoom: 18
+        });
+        marker = new google.maps.Marker({
+            position: mapOptions.center,
+            map: map,
+            title: "Maldena Enlgish Club"
+        });
+        var panorama = new google.maps.StreetViewPanorama(
+            $('.pano-view')[0], {
+                position: fenway,
+                pov: {
+                    heading: 100,
+                    pitch: 10
+                }
+            });
+        map.setStreetView(panorama);
     }
 }
 

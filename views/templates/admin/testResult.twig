@@ -1,0 +1,71 @@
+{% extends "layouts/admin.twig" %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="{{ path('/admin/users') }}">Клиенты</a>
+            <i class="icon-angle-right"></i>
+        </li>
+        <li>Результаты теста</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div class="priority{% if aboutUser.status == 1 %} low{% else %} high{% endif %}"><span>О клиенте</span></div>
+    <div class="task{% if aboutUser.status == 1 %} low{% else %} high{% endif %}">
+        <div class="desc">
+            <div class="title">{{ aboutUser.name }}</div>
+            <div>
+                Цель обучение - <strong>"{{ aboutUser.goals }}"</strong>
+            </div>
+        </div>
+        <div class="time">
+            <div class="date">{{ aboutUser.date }}</div>
+            <div class="desc">
+            <span class="label{% if aboutUser.status == 1 %} label-success{% else %} label-important{% endif %}">
+                {% if aboutUser.status == 1 %}
+                    Проверено
+                {% else %}
+                    Ожидает проверки
+                {% endif %}
+            </span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="user-test">
+        {% include "./partials/test.twig" with {'answer': answer} %}
+    </div>
+
+    <div class="box">
+        <div class="box-header" data-original-title="">
+            <h2><i class="halflings-icon edit"></i><span class="break"></span>Результаты теста</h2>
+        </div>
+        <div class="box-content">
+            <form class="form-horizontal" method="POST" action="{{ path('/admin/userTest/save') }}">
+                <fieldset>
+                    <label class="control-label" for="result">Уровень клиента:</label>
+                    <div class="controls">
+                        <select id="result" name="result">
+                            <option value="0" {% if aboutUser.result == 0 %}selected{% endif %}>Оценить...</option>
+                            <option value="1" {% if aboutUser.result == 1 %}selected{% endif %}>Doesn't have level</option>
+                            <option value="2" {% if aboutUser.result == 2 %}selected{% endif %}>Elementary</option>
+                            <option value="3" {% if aboutUser.result == 3 %}selected{% endif %}>Pre Intermediate</option>
+                            <option value="4" {% if aboutUser.result == 4 %}selected{% endif %}>Intermediate</option>
+                            <option value="5" {% if aboutUser.result == 5 %}selected{% endif %}>Upper Intermediate</option>
+                            <option value="6" {% if aboutUser.result == 6 %}selected{% endif %}>Advanced</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="answerId" value="{{ aboutUser.answerId }}"/>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Сохранить оценку</button>
+                        <a href="{{ path ('/admin/users') }}" class="btn">Назад</a>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}
+

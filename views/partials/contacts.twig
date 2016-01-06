@@ -1,0 +1,54 @@
+<div class="clearfix"></div>
+<div id="templatemo-contact">
+    <div class="container">
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="templatemo-line-header container pc-view">
+                        <div class="text-center row">
+                            <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <hr class="hr_gray"/>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><h2><strong>Наши контакты</strong></h2>
+                            </div>
+                            <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <hr class="hr_gray"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="templatemo-line-header container mobile-view">
+                        <div class="text-center row">
+                            <div class="col-xs-3">
+                                <hr class="hr_gray"/>
+                            </div>
+                            <div class="col-xs-6"><h2>Наши контакты</h2></div>
+                            <div class="col-xs-3">
+                                <hr class="hr_gray"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="templatemo-contact-map pc-view" id="map-canvas"></div>
+                <div class="clearfix"></div>
+                <i>{{ city }}, {{ address }}, тел. {{ phone }} или {{ phone2 }}</i>
+            </div>
+            <div class="col-md-4 contact_right">
+                <p>Наш офис находится по адресу: </p>
+
+                <p><img src="web/client/images/location.png" alt="icon 1"/>{{ city }}, {{ address }}</p>
+
+                <p><img src="web/client/images/phone1.png" alt="icon 2"/>{{ phone }}</p>
+                <p><img src="web/client/images/phone1.png" alt="icon 2"/>{{ phone2 }}</p>
+
+                {% include "./partials/feedback.twig" %}
+
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /#templatemo-contact -->

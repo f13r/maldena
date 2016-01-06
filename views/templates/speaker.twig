@@ -1,0 +1,69 @@
+{% extends "layouts/main.twig" %}
+
+{% block meta %}
+    <title>Курсы английского языка в Виннице - Speaking Club</title>
+    <meta name="keywords" content="Speaking Club Винница, курсы английского языка в Виннице, курсы английского в Виннице, школа английского языка в Виннице, школа языка в Виннице, деловой английский, курси англійської мови"/>
+    <meta name="description" content="Speaking Club при курсах английского языка в Виннице, удобное расположение школы, профессиональные преподаватели и комфортные условия. Мы поможем вам стать лучше в вашей профессии"/>
+{% endblock %}
+
+{% block content %}
+
+    {% include "./partials/topmenu.twig" with {'action': 'services'} %}
+
+    <div id="templatemo-for-start">
+        <div class="container">
+            <div class="row">
+                <div class="templatemo-line-header container pc-view">
+                    <div class="text-center row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <hr class="hr_gray"/>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <h2>
+                                <strong>
+                                    Speaking Club
+                                </strong>
+                            </h2>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <hr class="hr_gray"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container contacts">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p>
+                    Преимущества разговорного клуба (Speaking Club):
+                </p>
+                <ul>
+                    <li>
+                        <p>Занятия проходят регулярно (каждую неделю) в определенное время/дни, известные заранее, но не так часто, как курсы английского (два, три раза в неделю). Посещение Speaking Club дисциплинирует, но не утомляет!</p>
+                    </li>
+                    <li>
+                        <p>Минимум подготовки. Никаких домашних заданий!</p>
+                    </li>
+                    <li>
+                       <p>Новые люди, встреча с которыми создает нужную обстановку для общения – свободу и непредсказуемость. Новые мнения, новые друзья, объединенные одной целью – практика разговорного английского языка.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="pc-view col-lg-6 col-md-6 col-sm-0 col-xs-0">
+                <img class="img-responsive page-image" src="web/client/images/wespeak.jpg"/>
+            </div>
+        </div>
+        <p>
+            Мы проводим обучения с учетом многолетнего опыта и наблюдения по современным программам и новейшим методикам, которые при систематическом занятии помогут улучшить память, развить логическое мышление, научат фокусировать внимание.
+            Преподаватели наших курсов английского языка ориентированы на работу со слушателями с аудиальным, кинестетическим и визуальным преобладающим восприятием, что является индивидуальным подходом к способностям каждого.
+        </p>
+    </div>
+    <div class="clearfix"></div>
+
+    {% include "./partials/contacts.twig" %}
+
+{% endblock %}
+

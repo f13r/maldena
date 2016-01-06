@@ -30,5 +30,3 @@ $connectionOptions = array(
 );
 
 return EntityManager::create($connectionOptions, $config);
-
-
