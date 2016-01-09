@@ -24,19 +24,20 @@
                             <a href="{{ path('main') }}">Главная</a>
                         </li>
                         <li{% if action == 'test' %} class="active"{% endif %}>
-                            <a href="{{ path('test') }}">Online-Тест языка</a>
+                            <a href="{{ path('test') }}">Online-тест языка</a>
                         </li>
                         <li class="dropdown{% if action == 'services' %} active{% endif %}">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Виды обучения <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
+                                <li><a href="{{ path('group') }}">Групповые занятия</a></li>
                                 <li><a href="{{ path('individually') }}">Индивидуальные занятия</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{{ path('tests') }}">Подготовка к тестам</a></li>
-                                <li><a href="{{ path('zno') }}">Подготовка к ЗНО</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{{ path('business') }}">IT и Business английский</a></li>
+                                {#<li role="separator" class="divider"></li>#}
+                                {#<li><a href="{{ path('tests') }}">Подготовка к тестам</a></li>#}
+                                {#<li><a href="{{ path('zno') }}">Подготовка к ЗНО</a></li>#}
+                                {#<li role="separator" class="divider"></li>#}
+                                {#<li><a href="{{ path('business') }}">IT и Business английский</a></li>#}
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ path('speaker') }}">Speaking Club</a></li>
                             </ul>

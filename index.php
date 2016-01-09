@@ -121,6 +121,7 @@ $app->get('/admin/user_test/{answerId}', function(Request $request, $answerId) u
 	$aboutUser['status'] = $answerObj->getStatus();
 	$aboutUser['result'] = $answerObj->getResult();
 	$aboutUser['answerId'] = $answerObj->getId();
+	$aboutUser['comment'] = $answerObj->getTeacherComment();
 
 	return $app['twig']->render('templates/admin/testResult.twig', ['answer' => $answer, 'aboutUser' => $aboutUser]);
 
@@ -143,22 +144,30 @@ $app->get('/admin', function(Request $request) use ($app, $render, $em) {
 	$users = $query->execute();
 
 	foreach ($users as $user) {
-		$id = $user->getId();
-		$answers[$id]['name'] = $user->getName();
-		if ($user->getPhone() == '') {
-			$answers[$id]['contact'] = $user->getEmail();
-		} else {
-			$answers[$id]['contact'] = $user->getPhone();
-		}
 		/**
 		 * @var Domain\Entity\Answer $testResult
 		 */
 		$testResult = $user->getAnswer()->first();
-		$answers[$id]['goals'] = $testResult->getGoals();
-		$answers[$id]['date'] = $testResult->getCreatedAt()->format('F j, H:m');
-		$answers[$id]['link'] = $app['url_generator']->generate('viewUserTest', array('answerId' => $testResult->getId()));
-		$answers[$id]['status'] = $testResult->getStatus();
-		$answers[$id]['result'] = $testResult->getTextResult();
+		if ($testResult instanceof Domain\Entity\Answer) {
+
+			$isDeleted = $testResult->getDeletedAt() instanceof \DateTime;
+
+			if (!$isDeleted) {
+				$id = $user->getId();
+				$answers[$id]['name'] = $user->getName();
+				if ($user->getPhone() == '') {
+					$answers[$id]['contact'] = $user->getEmail();
+				} else {
+					$answers[$id]['contact'] = $user->getPhone();
+				}
+				$answers[$id]['goals'] = $testResult->getGoals();
+				$answers[$id]['date'] = $testResult->getCreatedAt()->format('F j, H:m');
+				$answers[$id]['link'] = $app['url_generator']->generate('viewUserTest', array('answerId' => $testResult->getId()));
+				$answers[$id]['status'] = $testResult->getStatus();
+				$answers[$id]['result'] = $testResult->getTextResult();
+				$answers[$id]['comment'] = $testResult->getTeacherComment();
+			}
+		}
 	}
 
 	$change = $request->query->get('change') ?: '';
@@ -171,6 +180,7 @@ $app->post('/admin/user_test/save', function(Request $request) use ($app, $rende
 
 	$result = $request->request->get('result');
 	$answerId = $request->request->get('answerId');
+	$comment = $request->request->get('comment');
 
 	/**
 	 * @var Domain\Entity\Answer $answerObj
@@ -185,6 +195,8 @@ $app->post('/admin/user_test/save', function(Request $request) use ($app, $rende
 		$answerObj->setStatus(1);
 	}
 
+	$answerObj->setTeacherComment($comment);
+
 	$em->persist($answerObj);
 	$em->flush();
 
@@ -195,16 +207,15 @@ $app->post('/admin/user_test/save', function(Request $request) use ($app, $rende
 $app->post('/congratulations', function(Request $request) use ($app, $render, $em) {
 
 	$answer = $request->request->get('answer');
-	$name = trim($request->request->get('name'));
-	$contact = trim($request->request->get('contact'));
-	$goals = trim($request->request->get('goals'));
+	$client = $request->request->get('user');
 
-	if (empty($name) or (empty($contact))) {
-		$response = '/test?error=1&name=' . $name . '&contact=' . $contact;
-		foreach ($answer as $value) {
-
-		}
-		return $app->redirect('/test?error=1&name=' . $name . '&contact=' . $contact);
+	if (empty($client['name']) or (empty($client['contact']))) {
+		$app['session']->set('user', $client);
+		$app['session']->set('answer', $answer);
+		return $app->redirect('/test?error=1');
+	} else {
+		$app['session']->remove('user');
+		$app['session']->remove('answer', $answer);
 	}
 
 	// try to find by phone or email
@@ -215,7 +226,7 @@ $app->post('/congratulations', function(Request $request) use ($app, $render, $e
 		->where('u.phone = ?1')
 		->orWhere('u.email = ?1')
 		->setMaxResults(1)
-		->setParameter(1, $contact);
+		->setParameter(1, $client['contact']);
 
 	$query = $qb->getQuery();
 	/**
@@ -226,12 +237,12 @@ $app->post('/congratulations', function(Request $request) use ($app, $render, $e
 
 	if (empty($user)) {
 		$user = new Domain\Entity\User();
-		$user->setName($name);
+		$user->setName($client['name']);
 		$user->setCreatedAt();
-		if (filter_var($contact, FILTER_VALIDATE_EMAIL)) {
-			$user->setEmail($contact);
+		if (filter_var($client['contact'], FILTER_VALIDATE_EMAIL)) {
+			$user->setEmail($client['contact']);
 		} else {
-			$user->setPhone($contact);
+			$user->setPhone($client['contact']);
 		}
 	}
 
@@ -239,7 +250,7 @@ $app->post('/congratulations', function(Request $request) use ($app, $render, $e
 	$answerObj->setCreatedAt();
 	$answerObj->setUser($user);
 	$answerObj->setAnswer(serialize($answer));
-	$answerObj->setGoals($goals);
+	$answerObj->setGoals($client['goals']);
 
 	$user->getAnswer()->add($answerObj);
 
@@ -247,16 +258,24 @@ $app->post('/congratulations', function(Request $request) use ($app, $render, $e
 	$em->flush();
 
 	return $render('templates/saveTest.twig', array(
-			'name' => $name
+			'name' => $client['name']
 	));
 })->bind('saveTest');
 
 $app->get('/test', function(Request $request) use ($app, $render) {
 
-	$answer = $request->query->get('answer') ?: [];
-	$user = $request->query->get('user') ?: [];
+	$answer = $user = [];
+
+	if ($app['session']->get('answer') != '') {
+		$answer = $app['session']->get('answer');
+	}
+
+	if ($app['session']->get('user') != '') {
+		$user = $app['session']->get('user');
+	}
 
 	return $render('templates/englishTest.twig', ['answer' => $answer, 'user' => $user]);
+
 })->bind('test');
 
 $app->get('/services', function(Request $request) use ($app, $render) {

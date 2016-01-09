@@ -45,17 +45,25 @@
         <div class="box-content">
             <form class="form-horizontal" method="POST" action="{{ path('/admin/userTest/save') }}">
                 <fieldset>
-                    <label class="control-label" for="result">Уровень клиента:</label>
-                    <div class="controls">
-                        <select id="result" name="result">
-                            <option value="0" {% if aboutUser.result == 0 %}selected{% endif %}>Оценить...</option>
-                            <option value="1" {% if aboutUser.result == 1 %}selected{% endif %}>Doesn't have level</option>
-                            <option value="2" {% if aboutUser.result == 2 %}selected{% endif %}>Elementary</option>
-                            <option value="3" {% if aboutUser.result == 3 %}selected{% endif %}>Pre Intermediate</option>
-                            <option value="4" {% if aboutUser.result == 4 %}selected{% endif %}>Intermediate</option>
-                            <option value="5" {% if aboutUser.result == 5 %}selected{% endif %}>Upper Intermediate</option>
-                            <option value="6" {% if aboutUser.result == 6 %}selected{% endif %}>Advanced</option>
-                        </select>
+                    <div class="control-group">
+                        <label class="control-label" for="result">Уровень клиента:</label>
+                        <div class="controls">
+                            <select id="result" name="result">
+                                <option value="0" {% if aboutUser.result == 0 %}selected{% endif %}>Оценить...</option>
+                                <option value="1" {% if aboutUser.result == 1 %}selected{% endif %}>Doesn't have level</option>
+                                <option value="2" {% if aboutUser.result == 2 %}selected{% endif %}>Elementary</option>
+                                <option value="3" {% if aboutUser.result == 3 %}selected{% endif %}>Pre Intermediate</option>
+                                <option value="4" {% if aboutUser.result == 4 %}selected{% endif %}>Intermediate</option>
+                                <option value="5" {% if aboutUser.result == 5 %}selected{% endif %}>Upper Intermediate</option>
+                                <option value="6" {% if aboutUser.result == 6 %}selected{% endif %}>Advanced</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="comment">Комментарий преподавателя:</label>
+                        <div class="controls">
+                            <textarea rows="5" name="comment">{% if aboutUser.comment == 0 %}{{ aboutUser.comment }}{% endif %}</textarea>
+                        </div>
                     </div>
                     <input type="hidden" name="answerId" value="{{ aboutUser.answerId }}"/>
                     <div class="form-actions">

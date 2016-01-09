@@ -38,9 +38,9 @@ class Answer
 	/**
 	 * @var string
 	 *
-	 * @Column(name="status", type="smallint", options={"default":0})
+	 * @Column(name="status", type="smallint", options={"default":0}, nullable=true)
 	 */
-	private $status;
+	private $status = 0;
 
 
 	/**
@@ -48,7 +48,14 @@ class Answer
 	 *
 	 * @Column(name="result", type="smallint", options={"default":0})
 	 */
-	private $result;
+	private $result = 0;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="teacherComment", type="string", length=1500, nullable=true)
+	 */
+	private $teacherComment;
 
 	/**
 	 * @var \DateTime
@@ -56,6 +63,13 @@ class Answer
 	 * @Column(name="created_at", type="datetime", nullable=false)
 	 */
 	private $createdAt = NULL;
+
+	/**
+	 * @var \DateTime
+	 *
+	 * @Column(name="deleted_at", type="datetime", nullable=true)
+	 */
+	private $deletedAt = NULL;
 
 	/**
 	 * @var string
@@ -79,6 +93,21 @@ class Answer
 		5 => 'Upper Intermediate',
 		6 => 'Advanced'
 	];
+
+	/**
+	 * @return string
+	 */
+	public function getTeacherComment() {
+		return $this->teacherComment;
+	}
+
+	/**
+	 * @param string $teacherComment
+	 */
+	public function setTeacherComment($teacherComment) {
+		$this->teacherComment = $teacherComment;
+	}
+
 	/**
 	 * @return string
 	 */
@@ -177,6 +206,22 @@ class Answer
 	public function setCreatedAt() {
 		$this->createdAt = new \DateTime("now");
 	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getDeletedAt() {
+		return $this->deletedAt;
+	}
+
+	/**
+	 * @param \DateTime $deletedAt
+	 */
+	public function setDeletedAt($deletedAt) {
+		$this->deletedAt = $deletedAt;
+	}
+
+
 
 	public function getId() {
 		return $this->id;
