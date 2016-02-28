@@ -37,20 +37,6 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 ));
 
 
-$app->register(new \CHH\Silex\CacheServiceProvider, array(
-	'cache.options' => [
-		"default" => [
-			"driver" => function() {
-				$memcached = new Memcached();
-				$memcached->addServer('/home/maldena/.system/memcache/socket', 0);
-				$cacheDriver = new MemcachedCache();
-				$cacheDriver->setMemcached($memcached);
-
-				return $cacheDriver;
-			}
-		]
-	]
-));
 
 $app->register(new Silex\Provider\TranslationServiceProvider(), array(
 	'locale_fallback' => 'ru'

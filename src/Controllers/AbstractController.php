@@ -25,10 +25,6 @@ abstract class AbstractController implements ControllerProviderInterface {
 	 */
 	protected $em;
 
-	/**
-	 * @var ApcuCache $cache
-	 */
-	protected $cache;
 
 	/**
 	 * @var TwigEngine $twig
@@ -64,7 +60,6 @@ abstract class AbstractController implements ControllerProviderInterface {
 		$this->em = $app['em'];
 		$this->controller = $app['controllers_factory'];
 		$this->twig = $app['twig'];
-		$this->cache = $app['cache'];
 		$this->session = $app['session'];
 		$this->validator = $app['validator'];
 		$this->translator = $app['translator'];

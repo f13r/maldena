@@ -17,19 +17,10 @@ class IndexController extends AbstractController {
 
 	private function fetchSchoolContactsById($id) {
 
-		if (!$this->cache->contains($this->schoolContactCacheKey)) {
-			/**
-			 * @var Contact $contact
-			 */
 			$contact = $this->em->getRepository('Domain\Entity\Contact')->find($id);
 			$schoolContacts = $contact->getSchoolContacts();
-			$this->cache->save($this->schoolContactCacheKey, $schoolContacts);
 
 			return $schoolContacts;
-		}
-
-		return $this->cache->fetch($this->schoolContactCacheKey);
-
 
 	}
 
