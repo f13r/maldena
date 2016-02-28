@@ -67,6 +67,12 @@ jQuery(function($) {
 				return $(this).data('group');
 			}
         });
+
+		if ($('#phone').length > 0) {
+			$('#userForm').submit(function(evt) {
+				$('#phone').prop('value', $('.js-app-feedback-phone').cleanVal());
+			})
+		}
     });
 });
 

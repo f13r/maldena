@@ -176,7 +176,21 @@ class Contact
 		$this->skype = $skype;
 	}
 
+	public function formatPhone($phone) {
+       return "(".substr($phone, 0, 3).") ".substr($phone, 3, 3)."-".substr($phone, 6, 2)."-".substr($phone, 8, 2);
+	}
 
+	public function getSchoolContacts() {
+
+		return [
+			'phone' => $this->formatPhone($this->getPhone()),
+			'phone2' => $this->formatPhone($this->getPhone2()),
+			'city' => $this->getCity(),
+			'address' => $this->getAddress(),
+			'email' => $this->getEmail(),
+			'skype' => $this->getSkype()
+		];
+	}
 
 }
 

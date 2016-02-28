@@ -6,12 +6,20 @@
         "twig/twig": "~1.18",
         "symfony/security": "~2.3",
         "doctrine/dbal": ">=2.2.0,<2.4.0-dev",
-        "symfony/twig-bridge": "~2.3"
+        "symfony/twig-bridge": "~2.3",
+        "chh/cache-service-provider": "~1.0",
+        "symfony/validator": "~3.0",
+        "symfony/translation": "~3.0",
+        "symfony/config": "~3.0",
+        "symfony/yaml": "~3.0"
     },
     "autoload": {
         "classmap": [
             "src/Domain/Entity",
-            "src/CRM"
+            "src/Domain/Repository",
+            "src/Controllers",
+            "src/CRM",
+            "src/Services"
         ]
     }
 }

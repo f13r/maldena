@@ -1,0 +1,48 @@
+{% extends "layouts/main.twig" %}
+
+{% block meta %}
+    <title>Курсы английского языка в Виннице - Запись на пробный урок</title>
+    <meta name="keywords" content="Бесплатный пробный урок, курсы английского языка в Виннице, курсы английского в Виннице, школа английского языка в Виннице, школа языка в Виннице, деловой английский, курси англійської мови"/>
+    <meta name="description" content="Бесплатный пробный урок! Курсы английского языка в Виннице, удобное расположение школы, профессиональные преподаватели и комфортные условия. Мы поможем вам стать лучше в вашей профессии"/>
+{% endblock %}
+
+{% block content %}
+
+{% include "./partials/topmenu.twig" with {'action': 'test'} %}
+
+<div id="templatemo-for-start">
+    <div class="container">
+        <div class="row">
+            <div class="templatemo-line-header container pc-view">
+                <div class="text-center row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <hr class="hr_gray"/>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <h2>
+                            <strong>
+                                Thank you!
+                            </strong>
+                        </h2>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <hr class="hr_gray"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <p>
+       {% if user.name != '' %}
+            {{ user.name }}, поздравляем!
+       {% else %}
+           Поздравляем!
+       {% endif %}
+         Вы успешно записались на пробный урок. Мы с Вами свяжемся, чтобы договориться когда Вам будет удобно прийти на урок.
+    </p>
+</div>
+
+
+{% endblock %}

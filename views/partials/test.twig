@@ -3,8 +3,8 @@
                 {% if user is defined %}
                     <li class="list-group-item">
                         <div class="description">Перед тем как начать, пожалуйста, заполните Ваши контакты, чтобы мы могли с Вами связаться</div>
-                        {% if error is defined %}
-                            <div class="red-color">Пожалуйста, заполните поля отмеченые звездочками (имя и контакт)</div>
+                        {% if app.session.getFlashBag.get('wrongEnglishTestForm') %}
+                            <div class="red-color">Пожалуйста, заполните поля отмеченые звездочками (имя и телефон)</div>
                         {% endif %}
                         <ul>
                             <li>
@@ -14,9 +14,9 @@
                                 </div>
                             </li>
                             <li>
-                                <div class="list-question">E-mail или Телефон <strong class="red-color">*</strong></div>
+                                <div class="list-question">Телефон <strong class="red-color">*</strong></div>
                                 <div class="list-answer">
-                                    <input type="text" name="user[contact]" value="{% if user['contact'] is defined %}{{ user['contact'] }}{% endif %}" placeholder="Мы можем Вам перезвонить или написать"/>
+                                    <input type="text" class="js-app-feedback-phone" name="user[phone]" id="phone" value="{% if user['phone'] is defined %}{{ user['phone'] }}{% endif %}"/>
                                 </div>
                             </li>
                             <li>
@@ -32,13 +32,13 @@
                     <div class="description">А теперь сам тест. Составьте диалог, расположив слова в правильном порядке.</div>
                     <ul>
                         <li>
-                            <div class="list-question">Where / Excuse / ATM / is / me / the / nearest</div>
+                            <div class="list-question">Where / Excuse / ATM. / is / me. / the / nearest</div>
                             <div class="list-answer">
                                 <input type="text" name="answer[0][]" value="{% if answer[0][0] is defined %}{{ answer[0][0] }}{% endif %}"/>
                             </div>
                         </li>
                         <li>
-                            <div class="list-question">down / the / Go / street / two / left / blocks / and / turn</div>
+                            <div class="list-question">down / the / Go / street / two / left / blocks / and / turn.</div>
                             <div class="list-answer">
                                 <input type="text" name="answer[0][]" value="{% if answer[0][1] is defined  %}{{ answer[0][1] }}{% endif %}"/>
                             </div>
@@ -50,7 +50,7 @@
                             </div>
                         </li>
                         <li>
-                            <div class="list-question">too / Not / far</div>
+                            <div class="list-question">too / Not / far.</div>
                             <div class="list-answer">
                                 <input type="text" name="answer[0][]" value="{% if answer[0][3] is defined  %}{{ answer[0][3] }}{% endif %}"/>
                             </div>
@@ -234,7 +234,7 @@
                 </li>
                 <li class="list-group-item">
                     <div class="description">Complete the following sentences with a word from the box.</div>
-                    <div class="choose-box">accomplish, pointer, get, mentor, clicked, get out of, appreciative, get(2), in no time flat, hush out, out of the blue</div>
+                    <div class="choose-box">accomplish, on, pointer, get, mentor, clicked, get out of, appreciative, get(2), in no time flat, hash out, out of the blue</div>
                     <div class="text">
                         <div class="text-center title"><strong>Having a Business Mentor</strong></div>
                         <div class="list-question"><i>Alex</i> : Where are you going?</div>

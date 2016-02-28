@@ -3,14 +3,20 @@
 namespace Domain\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Acl\Exception\Exception;
+
 /**
  * Users
  *
+ * @Entity(repositoryClass="Domain\Repository\UserRepository")
  * @Table(name="users")
- * @Entity
+ * @HasLifecycleCallbacks
  */
-class User
-{
+class User {
+
+    CONST CONTACT_TYPE_PHONE = 'phone';
+    CONST CONTACT_TYPE_EMAIL = 'email';
+
     /**
      * @var integer
      *
@@ -49,46 +55,15 @@ class User
     private $name;
 
     /**
-     * @OneToMany(targetEntity="Feedback", mappedBy="user", cascade={"persist", "remove"})
-     **/
-    private $feedback;
-
-    /**
-     * @OneToMany(targetEntity="Answer", mappedBy="user", cascade={"persist", "remove"})
-     **/
-    private $answer;
-
-
-    /**
      * @var string
      *
-     * @Column(name="crmId", type="string", length=150, nullable=true)
+     * @Column(name="userCrmId", type="string", length=150, nullable=true)
      */
-    private $crmId;
+    private $userCrmId;
 
     public function __construct() {
-        $this->feedback = new ArrayCollection();
-        $this->answer = new ArrayCollection();
-    }
 
-    public function getFeedback() {
-        return $this->feedback;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getAnswer() {
-        return $this->answer;
-    }
-
-    /**
-     * @param mixed $answer
-     */
-    public function setAnswer($answer) {
-        $this->answer = $answer;
-    }
-
 
     public function getId() {
         return $this->id;
@@ -128,12 +103,41 @@ class User
         $this->name = $name;
     }
 
-    public function getCrmId() {
-        return $this->crmId;
+    /**
+     * @return mixed
+     */
+    public function getActivity() {
+        return $this->activity;
     }
 
-    public function setCrmId($crmId) {
-        $this->crmId = $crmId;
+    /**
+     * @param mixed $activity
+     */
+    public function setActivity($activity) {
+        $this->activity = $activity;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUserCrmId() {
+        return $this->userCrmId;
+    }
+
+    /**
+     * @param mixed $userCrmId
+     */
+    public function setUserCrmId($userCrmId) {
+        $this->userCrmId = $userCrmId;
+    }
+
+    /**
+     * @PrePersist
+     */
+    public function onPrePersist() {
+        $this->setCreatedAt(new \DateTime("now"));
+    }
+
+
 }
 

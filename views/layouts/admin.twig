@@ -15,10 +15,10 @@
     <!-- end: Mobile Specific -->
 
     <!-- start: CSS -->
-    <link id="bootstrap-style" href="../../web/client/css/bootstrap.css" rel="stylesheet">
-    <link href="../../web/client/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link id="base-style" href="../../web/client/css/style.css" rel="stylesheet">
-    <link id="base-style-responsive" href="../../web/client/css/style-responsive.css" rel="stylesheet">
+    <link id="bootstrap-style" href="{{ app.request.basepath }}/web/client/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ app.request.basepath }}/web/client/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link id="base-style" href="{{ app.request.basepath }}/web/client/css/style.css" rel="stylesheet">
+    <link id="base-style-responsive" href="{{ app.request.basepath }}/web/client/css/style-responsive.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
     <!-- end: CSS -->
 
@@ -52,7 +52,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="index.html"><span>Maldena English Club</span></a>
+            <a class="brand" href="{{ path('/admin/user/test') }}"><span>Maldena English Club</span></a>
 
             <!-- start: Header Menu -->
             <div class="nav-no-collapse header-nav">
@@ -87,10 +87,24 @@
             <div class="nav-collapse sidebar-nav">
                 <ul class="nav nav-tabs nav-stacked main-menu">
                     <li>
-                        <a href="{{ path('/admin/users') }}">
+                        <a class="dropmenu" href="#">
                             <i class="icon-home"></i>
                             <span class="hidden-tablet"> Клиенты</span>
                         </a>
+                        <ul style="display: block;">
+                            <li{% if selected == 'test' %} class="active"{% endif %}>
+                                <a class="submenu" href="{{ path('/admin/user/test') }}">
+                                    <i class="icon-file-alt"></i>
+                                    <span class="hidden-tablet"> Тесты</span>
+                                </a>
+                            </li>
+                            <li{% if selected == 'demo' %} class="active"{% endif %}>
+                                <a class="submenu" href="{{ path('/admin/user/demo') }}">
+                                    <i class="icon-file-alt"></i>
+                                    <span class="hidden-tablet"> Пробный урок</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -141,60 +155,60 @@
 
 <!-- start: JavaScript-->
 
-<script src="../../web/client/js/admin/jquery-1.9.1.min.js"></script>
-<script src="../../web/client/js/admin/jquery-migrate-1.0.0.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery-1.9.1.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery-migrate-1.0.0.min.js"></script>
 
-<script src="../../web/client/js/admin/jquery-ui-1.10.0.custom.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery-ui-1.10.0.custom.min.js"></script>
 
-<script src="../../web/client/js/admin/jquery.ui.touch-punch.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.ui.touch-punch.js"></script>
 
-<script src="../../web/client/js/admin/modernizr.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/modernizr.js"></script>
 
-<script src="../../web/client/js/admin/bootstrap.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/bootstrap.min.js"></script>
 
-<script src="../../web/client/js/admin/jquery.cookie.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.cookie.js"></script>
 
-<script src='../../web/client/js/admin/fullcalendar.min.js'></script>
+<script src='{{ app.request.basepath }}/web/client/js/admin/fullcalendar.min.js'></script>
 
-<script src='../../web/client/js/admin/jquery.dataTables.min.js'></script>
+<script src='{{ app.request.basepath }}/web/client/js/admin/jquery.dataTables.min.js'></script>
 
-<script src="../../web/client/js/admin/excanvas.js"></script>
-<script src="../../web/client/js/admin/jquery.flot.js"></script>
-<script src="../../web/client/js/admin/jquery.flot.pie.js"></script>
-<script src="../../web/client/js/admin/jquery.flot.stack.js"></script>
-<script src="../../web/client/js/admin/jquery.flot.resize.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/excanvas.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.flot.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.flot.pie.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.flot.stack.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.flot.resize.min.js"></script>
 
-<script src="../../web/client/js/admin/jquery.chosen.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.chosen.min.js"></script>
 
-<script src="../../web/client/js/admin/jquery.uniform.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.uniform.min.js"></script>
 
-<script src="../../web/client/js/admin/jquery.cleditor.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.cleditor.min.js"></script>
 
-<script src="../../web/client/js/admin/jquery.noty.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.noty.js"></script>
 
-<script src="../../web/client/js/admin/jquery.elfinder.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.elfinder.min.js"></script>
 
-<script src="../../web/client/js/admin/jquery.raty.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.raty.min.js"></script>
 
-<script src="../../web/client/js/admin/jquery.iphone.toggle.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.iphone.toggle.js"></script>
 
-<script src="../../web/client/js/admin/jquery.uploadify-3.1.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.uploadify-3.1.min.js"></script>
 
-<script src="../../web/client/js/admin/jquery.gritter.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.gritter.min.js"></script>
 
-<script src="../../web/client/js/admin/jquery.imagesloaded.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.imagesloaded.js"></script>
 
-<script src="../../web/client/js/admin/jquery.masonry.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.masonry.min.js"></script>
 
-<script src="../../web/client/js/admin/jquery.knob.modified.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.knob.modified.js"></script>
 
-<script src="../../web/client/js/admin/jquery.sparkline.min.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/jquery.sparkline.min.js"></script>
 
-<script src="../../web/client/js/admin/counter.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/counter.js"></script>
 
-<script src="../../web/client/js/admin/retina.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/retina.js"></script>
 
-<script src="../../web/client/js/admin/custom.js"></script>
+<script src="{{ app.request.basepath }}/web/client/js/admin/custom.js"></script>
 <!-- end: JavaScript-->
 
 </body>

@@ -1,0 +1,87 @@
+{% extends "layouts/main.twig" %}
+
+{% block meta %}
+    <title>Курсы английского языка в Виннице - демо урок</title>
+    <meta name="keywords" content="Бесплатный демо урок, Винница, курсы английского языка в Виннице, курсы английского в Виннице, школа английского языка в Виннице, школа языка в Виннице, деловой английский, курси англійської мови"/>
+    <meta name="description" content="Бесплатный демо урок на наших курсах английского языка в Виннице, удобное расположение школы, профессиональные преподаватели и комфортные условия. Мы поможем вам стать лучше в вашей профессии"/>
+{% endblock %}
+
+{% block content %}
+
+    {% include "./partials/topmenu.twig" with {'action': 'demo'} %}
+
+    <div id="templatemo-for-start">
+        <div class="container">
+            <div class="row">
+                <div class="templatemo-line-header container pc-view">
+                    <div class="text-center row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <hr class="hr_gray"/>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <h1>
+                                <strong>
+                                    Бесплатный пробный урок
+                                </strong>
+                            </h1>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <hr class="hr_gray"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container contacts">
+        <div class="row">
+            <div>
+                <p>
+                    Перед тем как доверить нашим курсам английского языка ваше обучение - запишитесь к нам на <strong>бесплатный пробный урок</strong>. Убедитесь в профессионализме наших преподавателей и уютности нашей школы.
+                </p>
+                <p>
+                    <i>Даже если по каким-то причинам вам не подойдет наше обучение, вы хорошо проведете время за чашечкой свежесваренного кофе и узнаете что-то новое :)</i>
+                </p>
+            </div>
+        </div>
+    </div>
+
+<div class="container contacts mar-top-0 demo-lesson">
+    <form method="POST" action="{{ path('saveDemo') }}" id="userForm">
+        <div class="row questions mar-top-0">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="description">
+                        Оставьте нам свой номер телефона, мы вам перезвоним и договоримся об уроке на то время когда будет удобно вам:
+                    </div>
+                    {% if app.session.getFlashBag.get('wrongDemoForm') %}
+                        <div class="red-color">Пожалуйста, заполните поля отмеченые звездочками (имя и телефон)</div>
+                    {% endif %}
+                    <ul class="list-unstyled">
+                        <li>
+                            <div class="list-question"><strong class="red-color">*</strong>Имя:</div>
+                            <div class="list-answer">
+                                <input type="text" name="user[name]" value="{% if user['name'] is defined %}{{ user['name'] }}{% endif %}" placeholder=" Как к Вам обращаться"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="list-question"><strong class="red-color">*</strong>Телефон:</div>
+                            <div class="list-answer">
+                                <input type="tel" id="phone" name="user[phone]" class="js-app-feedback-phone" value="{% if user['phone'] is defined %}{{ user['phone'] }}{% endif %}"/>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="submit text-center">
+            <button class="btn btn-lg btn-orange" type="submit">Записаться на пробный урок</button>
+        </div>
+    </form>
+</div>
+    <div class="clearfix"></div>
+
+
+{% endblock %}
+

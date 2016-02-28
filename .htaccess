@@ -31,8 +31,14 @@ RedirectMatch 403 /+files\.md5$
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [QSA,L]
+
+     RewriteCond %{HTTP_REFERER} traffic2cash\.xyz [NC,OR]
+     RewriteCond %{HTTP_REFERER} с\.новым\.годом\.рф [NC,OR]
+     RewriteCond %{HTTP_REFERER} site\-68983739\-1\.snip\.tw [NC,OR]
+     RewriteCond %{HTTP_REFERER} website\-stealer\.nufaq\.com [NC,OR]
+     RewriteCond %{HTTP_REFERER} build\-a\-better\-business\.2your\.site [NC,OR]
+     RewriteCond %{HTTP_REFERER} santasgift\.ml [NC,OR]
+     RewriteCond %{HTTP_REFERER} topseoservices\.co [NC,OR]
+     RewriteCond %{HTTP_REFERER} xn\-\-q1a\.xn\-\-b1aube0e\.xn\-\-c1acygb\.xn\-\-p1ai [NC]
+    RewriteRule .* - [F]
 </IfModule>
-allow from all
-deny from 78.110.60.230
-deny from 209.126.99.5
-deny from 104.254.244.128

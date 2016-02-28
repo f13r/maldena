@@ -734,6 +734,11 @@ ul.templatemo-project-gallery  li  a img:hover {
     margin-top: 4em;
 }
 
+
+.mar-top-0 {
+    margin-top: 0 !important;
+}
+
 .main {
     margin-bottom: 4em;
 }
@@ -750,6 +755,10 @@ ul.templatemo-project-gallery  li  a img:hover {
 .questions ul li {
     padding: 20px 25px;
     list-style-type: disc;
+}
+
+.questions ul.list-unstyled li {
+    list-style-type: none;
 }
 
 .questions .list-question {
@@ -808,6 +817,13 @@ ul.templatemo-project-gallery  li  a img:hover {
         border-bottom-style: solid;
         border-bottom-color: rgb(255, 118, 0);
         padding-bottom: 10px;
+    }
+
+    .demo-lesson {
+        font-size: 0.7em;
+    }
+    .demo-lesson .questions .list-answer input {
+        width: 100%;
     }
 
 }
@@ -913,3 +929,4 @@ ul.templatemo-project-gallery  li  a img:hover {
 .page-image {
     margin: 20px 0;
 }
+

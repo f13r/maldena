@@ -1,43 +1,27 @@
 <?php
 require_once __DIR__.'/vendor/autoload.php';
 
+use Doctrine\Common\Cache\MemcachedCache;
+use Services\User;
 use Symfony\Component\HttpKernel\Debug\ExceptionHandler;
-use Doctrine\Common\Cache\ApcCache;
-use Doctrine\Common\Cache\ArrayCache;
-use Silex\Provider\DoctrineServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
+use CRM\Sugar;
+use Symfony\Component\Translation\Loader\YamlFileLoader;
 
 
-// set the error handling
 error_reporting(E_ALL);
 error_reporting(-1);
 
 $app = new Silex\Application();
+
 $app['debug'] = true;
+
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__ . '/views',
 	'twig.options'    => array(
 		'cache' => __DIR__ . '/views/cache',
 	)
 ));
-
-$app->register(new Silex\Provider\DoctrineServiceProvider(), 
-	array('db.options' 
-		=> array(
-			'driver' => 'pdo_mysql', 
-			'dbhost' => 'localhost',
-	        'dbname' => 'maldena',
-	        'user' => 'root',
-	        'password' => '',
-    ),
-));
-
-$app->before(function (Request $request) {
-    if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
-        $data = json_decode($request->getContent(), true);
-        $request->request->replace(is_array($data) ? $data : array());
-    }
-});
 
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 	'security.firewalls' => array(
@@ -51,7 +35,57 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 		)
 	)
 ));
+
+
+$app->register(new \CHH\Silex\CacheServiceProvider, array(
+	'cache.options' => [
+		"default" => [
+			"driver" => function() {
+				$memcached = new Memcached();
+				$memcached->addServer('/home/maldena/.system/memcache/socket', 0);
+				$cacheDriver = new MemcachedCache();
+				$cacheDriver->setMemcached($memcached);
+
+				return $cacheDriver;
+			}
+		]
+	]
+));
+
+$app->register(new Silex\Provider\TranslationServiceProvider(), array(
+	'locale_fallback' => 'ru'
+));
+$app->register(new Silex\Provider\ValidatorServiceProvider());
+//$app['locale'] = 'ru';
+
+$app['translator'] = $app->share($app->extend('translator', function($translator, $app) {
+	$translator->addLoader('yaml', new YamlFileLoader());
+	$translator->addResource('yaml', __DIR__.'/src/Locales/ru.yml', 'ru');
+	$translator->addResource('yaml', __DIR__.'/src/Locales/validators.ru.yml', 'ru', 'validators');
+	return $translator;
+}));
+
+$app->before(function (Request $request) {
+    if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+        $data = json_decode($request->getContent(), true);
+        $request->request->replace(is_array($data) ? $data : array());
+    }
+});
+
+$app['crm'] = $app->share(function() use ($app) {
+	return new Sugar();
+});
+
+$app['em'] = $app->share(function() {
+	return require __DIR__.'/doctrine.php';
+});
+
+$app['userServices'] = $app->share(function() use ($app) {
+	return new User($app);
+});
+
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
+$app->boot();
 return $app;

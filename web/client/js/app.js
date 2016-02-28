@@ -22,7 +22,8 @@ var app = (function(){
 					text: '.js-app-feedback-message-text',
 					email: '.js-app-feedback-message-email',
 					phone: '.js-app-feedback-message-phone',
-					response: '.js-app-feedback-message-response'
+					response: '.js-app-feedback-message-response',
+					error: '.js-app-feedback-message-error'
 				},
 				validate: {
 					name: ['Empty'],
@@ -47,7 +48,7 @@ var app = (function(){
 				        pattern: /[0-9]/
 				      }
 				  },
-				  placeholder: "+38 (   )    -  -  "
+				  placeholder: " +38 (   )    -  -  "
 				  
 			};
 			$(this.settings.feedback.phone).mask('+38 (000) 000-00-00', options);
@@ -106,8 +107,9 @@ var app = (function(){
 			_.each(feedback.fields, function(field, name) {
 				data[name] = field.value;
 				if (name === 'phone') {
-					data[name] = $(self.settings.feedback.phone).cleanVal();
+					data['phone'] = $(self.settings.feedback.phone).cleanVal();
 				}
+
 				_.each(self.settings.feedback.validate[name], function(rule) {
 					var functionName = self.settings.feedback.prefix + rule;
 					if (typeof self[functionName] === 'function') {
@@ -132,9 +134,15 @@ var app = (function(){
 					},
 					dataType: 'json'
 				}).done(function(response) {
-					if (response == true) {
-						$(self.settings.feedback.messages.response).show();
-
+					if (typeof response.error != undefined) {
+						if (response.error == 1) {
+							$(self.settings.feedback.messages.error).show();
+							_.each(response.messages, function(message) {
+								$(self.settings.feedback.messages.error).html(message + '<br>');
+							});
+						} else {
+							$(self.settings.feedback.messages.response).show();
+						}
 					}
 				});
 			}
@@ -159,24 +167,5 @@ var app = (function(){
 			}
 		},
 
-
-		_ruleEmpty: function (value, fieldName) {
-			if (value === ''){
-				return 'Пожалуйста, заполните поле ' + fieldName;
-			}
-			return false;
-		},
-
-		_ruleEmail: function (value, fieldName) {
-			var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-		    if (!re.test(value)) {
-				return 'Пожалуйста, введите правильный ' + fieldName;
-		    }
-			return false;
-		},
-
-		_rulePhone: function (value, fieldName) {
-			return false;
-		},
 	}
 })();
