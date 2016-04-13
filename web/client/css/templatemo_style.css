@@ -990,3 +990,24 @@ ul.templatemo-project-gallery  li  a img:hover {
         margin-top: 1em;
     }
 }
+
+@media (max-width: 500px) {
+    .pc-view {
+        display: none;
+    }
+    .contacts {
+        margin-top: 30px;
+    }
+    .main-block {
+        margin-top: 25px;
+        font-size: 1.1em;
+        font-family: 'Cuprum';
+    }
+    p {
+        font-size: 1.1em;
+    }
+    ul {
+        font-size: 1.1em;
+    }
+
+}

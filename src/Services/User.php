@@ -18,15 +18,9 @@ class User {
 	 */
 	protected $em;
 
-	/**
-	 * @var ApcuCache $cache
-	 */
-	protected $cache;
-
 	public function __construct(Application $app) {
 		$this->app = $app;
 		$this->em = $app['em'];
-		$this->cache = $app['cache'];
 	}
 
 	public function createUser(array $user) {
