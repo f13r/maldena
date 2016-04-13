@@ -148,6 +148,14 @@ ul {
     #templatemo-carousel .carousel-caption {
         padding-bottom: 120px;
     }
+
+    .mobile-mar-top-0 {
+        margin-top: 0px;
+    }
+
+    .mobile-mar-top-l {
+        margin-top: 1em;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -734,6 +742,13 @@ ul.templatemo-project-gallery  li  a img:hover {
     margin-top: 4em;
 }
 
+.mar-top-l {
+    margin-top: 2em;
+}
+
+.font-style-italic {
+    font-style: italic;
+}
 
 .mar-top-0 {
     margin-top: 0 !important;
@@ -930,3 +945,48 @@ ul.templatemo-project-gallery  li  a img:hover {
     margin: 20px 0;
 }
 
+.try-it-out {
+    text-align: center;
+}
+
+.try-it-out .row {
+    display: table;
+}
+
+.try-it-out .row div:first-child {
+    vertical-align: middle;
+}
+
+.try-it-out .try-it-out-button {
+    padding-top: 15px;
+}
+
+.try-it-out .column {
+    display: table-cell;
+    float: none;
+}
+
+.try-it-out .try-it-out-button button {
+    font-size: 1.8em;
+}
+
+.try-it-out .try-it-out-button span {
+    vertical-align: text-top;
+}
+
+.try-it-out .try-it-out-text {
+    font-size: 1.6em;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+
+    .mobile-mar-top-0 {
+        margin-top: 0px;
+    }
+
+    .mobile-mar-top-l {
+        margin-top: 1em;
+    }
+}

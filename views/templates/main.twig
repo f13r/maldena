@@ -50,19 +50,6 @@
     <div class="clearfix"></div>
     <div class="container pc-view">
         <div>
-            <p>
-                Сейчас наши курсы английского проводят в Виннице набор в группы и обучение начнется по мере наполнения групп.
-                Спешите быть одним из первых кто поступит в школу английского и получить скидку <strong>10%</strong>!
-            </p>
-            <p class="text-center">
-                <strong>Попробуйте наше обучение бесплатно</strong>
-            </p>
-            <p>
-                Попробуйте наш бесплатный <a href="{{ path('demo') }}" target="_blank">пробный урок</a>, а после этого решайте хотите ли вы продолжить обучение:
-            </p>
-            <p class="text-center underline">
-                <a href="{{ path('demo') }}" target="_blank">Записаться на бесплатный пробный урок>></a>
-            </p>
             <p class="text-center">
                 <strong>В наших группах обучаются максимум 5 человек, включая вас!</strong>
             </p>
@@ -93,6 +80,10 @@
         </div>
     </div>
     <div class="clearfix"></div>
+
+    <div class="pc-view">
+        {% include "./partials/tryitout.twig" %}
+    </div>
 
     <div id="templatemo-for-start" class="pc-view">
         <div class="container">
@@ -388,7 +379,6 @@
     {% include "./partials/contacts.twig" %}
     <div class="clearfix"></div>
     <br>
-    {% include "./partials/footer.twig" %}
 
 {% endblock %}
 
