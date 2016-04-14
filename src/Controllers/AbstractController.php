@@ -2,13 +2,13 @@
 
 namespace Controllers;
 
-use Doctrine\Common\Cache\ApcuCache;
 use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
 use Silex\Application;
 use Symfony\Bridge\Twig\TwigEngine;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Translation\Translator;
+use Doctrine\ORM\EntityManager;
 
 abstract class AbstractController implements ControllerProviderInterface {
 

@@ -251,9 +251,8 @@ class IndexController extends AbstractController {
 		})->bind('business');
 
 		$this->controller->get('/speaker', function() {
-			$this->setTemplate();
+			$this->setTemplate('templates/speaker.twig');
 			return $this->render();
-			return $render('templates/speaker.twig');
 		})->bind('speaker');
 
 

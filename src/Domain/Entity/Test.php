@@ -41,7 +41,7 @@ class Test extends Activity {
 	 * Human represents of levels
 	 * @var array $textResults
 	 */
-	private $textResults = [
+	private $textLevels = [
 		0 => 'Не оценивался',
 		1 => 'Doesn\'t have level',
 		2 => 'Elementary',
@@ -112,9 +112,13 @@ class Test extends Activity {
 
 
 	public function getTextResult() {
-		if (isset($this->textResults)) {
-			return $this->textResults[$this->getResult()];
+		$textLevel = reset($this->textLevels);
+
+		if (isset($this->textLevels[$this->getLevel()])) {
+			$textLevel = $this->textLevels[$this->getLevel()];
 		}
+
+		return $textLevel;
 	}
 
 	/** @PostLoad */

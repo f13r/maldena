@@ -30,7 +30,7 @@ class User {
 		$userObj->setName($user['name']);
 
 		if (isset($user['phone'])) {
-			$userObj->setPhone($user['name']);
+			$userObj->setPhone($user['phone']);
 		}
 
 		if (isset($user['email'])) {
@@ -46,8 +46,8 @@ class User {
 		$testObj->setUser($user);
 		$testObj->setAnswer(serialize($test['answer']));
 
-		if (isset($test['goals'])) {
-			$testObj->setGoals($test['goals']);
+		if (isset($test['user']['goals'])) {
+			$testObj->setGoals($test['user']['goals']);
 		}
 
 		return $testObj;

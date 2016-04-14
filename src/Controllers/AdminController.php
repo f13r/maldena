@@ -13,7 +13,11 @@ class AdminController extends AbstractController {
 
 		$this->controller->get('/user/test', function() {
 
-			$tests = $this->em->getRepository('\Domain\Entity\Test')->findBy(array('deletedAt' => null));
+			$tests = $this->em->getRepository('\Domain\Entity\Test')
+				->findBy(
+					array('deletedAt' => null),
+					array('id' => 'DESC')
+				);
 
 			$this->setTemplate('templates/admin/user/test.twig');
 			$this->viewAssigns(['tests' => $tests]);
@@ -43,6 +47,7 @@ class AdminController extends AbstractController {
 			 */
 			$test = $this->em->getRepository('Domain\Entity\Test')
 				->findOneBy(array('id' => (int) $answerId));
+
 			$test->setComment($comment);
 			$test->setLevel($level);
 
@@ -55,7 +60,7 @@ class AdminController extends AbstractController {
 			$this->em->persist($test);
 			$this->em->flush();
 
-			$this->session->getFlashBag->add('testListChangeSuccessful', true);
+			$this->session->getFlashBag()->add('testListChangeSuccessful', true);
 
 			return $this->app->redirect($this->app['url_generator']->generate('/admin/user/test'));
 
@@ -63,7 +68,11 @@ class AdminController extends AbstractController {
 
 		$this->controller->get('/user/demo', function() {
 
-			$demos = $this->em->getRepository('\Domain\Entity\Demo')->findBy(array('deletedAt' => null));
+			$demos = $this->em->getRepository('\Domain\Entity\Demo')
+				->findBy(
+					array('deletedAt' => null),
+					array('id' => 'DESC')
+				);
 
 			$change = false;
 			if ($this->session->has('/user/demo/change')) {
@@ -83,7 +92,7 @@ class AdminController extends AbstractController {
 				->findOneBy(array('id' => (int) $demoId));
 
 			$this->setTemplate('templates/admin/user/demoResult.twig');
-			$this->viewAssigns(['demos' => $demo]);
+			$this->viewAssigns(['demo' => $demo]);
 			return $this->render();
 
 		})->bind('/admin/user/demo/result');
@@ -106,11 +115,64 @@ class AdminController extends AbstractController {
 			$this->em->persist($demo);
 			$this->em->flush();
 
-			$app['session']->set('/user/demo/change', 1);
+			$this->session->getFlashBag()->add('demoListChangeSuccessful', true);
 
 			return $this->app->redirect($this->app['url_generator']->generate('/admin/user/demo'));
 
 		})->bind('/admin/user/demo/save');
+
+		$this->controller->get('/user/feedback', function() {
+
+			$feedbacks = $this->em->getRepository('\Domain\Entity\Feedback')
+				->findBy(
+					array('deletedAt' => null),
+					array('id' => 'DESC')
+				);
+
+			$this->setTemplate('templates/admin/user/feedback.twig');
+			$this->viewAssigns(['feedbacks' => $feedbacks]);
+			return $this->render();
+
+		})->bind('/admin/user/feedback');
+
+		$this->controller->get('/user/feedback/{feedback}', function($feedback) {
+
+			$feedback = $this->em->getRepository('Domain\Entity\Feedback')
+				->findOneBy(array('id' => (int) $feedback));
+
+			$this->setTemplate('templates/admin/user/feedbackResult.twig');
+			$this->viewAssigns(['feedback' => $feedback]);
+			return $this->render();
+
+		})->bind('/admin/user/feedback/result');
+
+		$this->controller->post('/user/feedback/save', function() {
+
+			$feedbackId = $this->app['request']->request->get('feedbackId');
+			$comment = $this->app['request']->request->get('comment');
+
+			/**
+			 * @var Domain\Entity\Test $test
+			 */
+			$test = $this->em->getRepository('Domain\Entity\Feedback')
+				->findOneBy(array('id' => (int) $feedbackId));
+
+			$test->setComment($comment);
+
+			if ($comment == '') {
+				$test->setStatus(0);
+			} else {
+				$test->setStatus(1);
+			}
+
+			$this->em->persist($test);
+			$this->em->flush();
+
+			$this->session->getFlashBag()->add('feedbackListChangeSuccessful', true);
+
+			return $this->app->redirect($this->app['url_generator']->generate('/admin/user/feedback'));
+
+		})->bind('/admin/user/feedback/save');
 
 		return $this->controller;
 	}

@@ -104,6 +104,12 @@
                                     <span class="hidden-tablet"> Пробный урок</span>
                                 </a>
                             </li>
+                            <li{% if selected == 'feedback' %} class="active"{% endif %}>
+                                <a class="submenu" href="{{ path('/admin/user/feedback') }}">
+                                    <i class="icon-file-alt"></i>
+                                    <span class="hidden-tablet"> Обратная связь</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

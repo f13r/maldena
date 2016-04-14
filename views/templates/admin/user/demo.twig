@@ -17,7 +17,7 @@
 
 {% block content %}
 
-    {% if change == 1 %}
+    {% if app.session.getFlashBag.get('demoListChangeSuccessful') %}
         <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong>Well done!</strong> Статус успешно изменён.

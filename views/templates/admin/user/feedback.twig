@@ -1,21 +1,21 @@
 {% extends "layouts/admin.twig" %}
 
-{% set selected = 'test' %}
+{% set selected = 'feedback' %}
 
 {% block breadcrumb %}
     <ul class="breadcrumb">
         <li>
             <i class="icon-home"></i>
-            <a href="{{ path('/admin/user/test') }}">Клиенты</a>
+            <a href="{{ path('/admin/user/feedback') }}">Клиенты</a>
             <i class="icon-angle-right"></i>
-            <a href="{{ path('/admin/user/test') }}">Тесты</a>
+            <a href="{{ path('/admin/user/feedback') }}">Обратная связь</a>
         </li>
     </ul>
 {% endblock %}
 
 {% block content %}
 
-{% if app.session.getFlashBag.get('testListChangeSuccessful') %}
+{% if app.session.getFlashBag.get('feedbackListChangeSuccessful') %}
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert">×</button>
         <strong>Well done!</strong> Статус успешно изменён.
@@ -24,14 +24,14 @@
 <div class="row-fluid">
     <div class="box span12">
         <div class="box-header" data-original-title="">
-            <h2><i class="halflings-icon user"></i><span class="break"></span>Прошедшие тест на сайте</h2>
+            <h2><i class="halflings-icon user"></i><span class="break"></span>Оставившее отзыв на сайте</h2>
             <div class="box-icon">
                 <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
             </div>
         </div>
         <div class="box-content" style="display: block;">
             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
-                {% if tests %}
+                {% if feedbacks %}
                 <table class="table table-striped table-bordered bootstrap-datatable datatable dataTable"
                        id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
                     <thead>
@@ -43,54 +43,50 @@
                             Контакт
                         </th>
                         <th>
-                            Цели обучения
-                        </th>
-                        <th>
                             Статуc
                         </th>
                         <th>
-                            Уровень
+                            Текст отзыва
                         </th>
                         <th>
-                            Комментарий преподавателя
+                            Ответ
                         </th>
                         <th>
                             Дата прохождения
                         </th>
                         <th>
-                            Ссылка на тест
+                            Ссылка на отзыв
                         </th>
                     </tr>
                     </thead>
 
                     <tbody role="alert" aria-live="polite" aria-relevant="all">
-                    {% for test in tests %}
+                    {% for feedback in feedbacks %}
                         <tr class="odd">
-                            <td class=" sorting_1">{{ test.user.name }}</td>
+                            <td class=" sorting_1">{{ feedback.user.name }}</td>
                             <td class="center ">
-                                {{ test.user.phone ? test.user.phone  : test.user.email }}
+                                {{ feedback.user.phone ? feedback.user.phone  : feedback.user.email }}
                             </td>
-                            <td class="center ">{{ test.goals }}</td>
                             <td class="center ">
-                                <span class="label{% if test.status == 1 %} label-success{% else %} label-important{% endif %}">
-                                    {% if test.status == 1 %}
-                                        Проверено
+                                <span class="label{% if feedback.status == 1 %} label-success{% else %} label-important{% endif %}">
+                                    {% if feedback.status == 1 %}
+                                        Обработано
                                     {% else %}
-                                        Ожидает проверки
+                                        Ожидает обработки
                                     {% endif %}
                                 </span>
                             </td>
                             <td class="center ">
-                                {{ test.textResult }}
+                                {{ feedback.text }}
                             </td>
                             <td class="center ">
-                                {{ test.comment }}
+                                {{ feedback.comment }}
                             </td>
                             <td class="center">
-                                {{ test.createdAt|date("F j, H:m") }}
+                                {{ feedback.createdAt|date("F j, H:m") }}
                             </td>
                             <td class="center ">
-                               <a href="{{ path('/admin/user/test/result', {testId: test.id}) }}">Перейти</a>
+                               <a href="{{ path('/admin/user/feedback/result', {feedback: feedback.id}) }}">Перейти</a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -100,9 +96,8 @@
                 </div>
                 {%  else %}
                     <div class="priority high">
-                        <span>Пока нет клиентов которые прошли тест</span>
+                        <span>Пока нет клиентов оставивших отзыв</span>
                     </div>
-
                 {% endif %}
             </div>
         </div>

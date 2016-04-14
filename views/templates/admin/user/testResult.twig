@@ -53,13 +53,13 @@
                         <label class="control-label" for="level">Уровень клиента:</label>
                         <div class="controls">
                             <select id="level" name="level">
-                                <option value="0" {% if answer.result == 0 %}selected{% endif %}>Оценить...</option>
-                                <option value="1" {% if answer.result == 1 %}selected{% endif %}>Doesn't have level</option>
-                                <option value="2" {% if answer.result == 2 %}selected{% endif %}>Elementary</option>
-                                <option value="3" {% if answer.result == 3 %}selected{% endif %}>Pre Intermediate</option>
-                                <option value="4" {% if answer.result == 4 %}selected{% endif %}>Intermediate</option>
-                                <option value="5" {% if answer.result == 5 %}selected{% endif %}>Upper Intermediate</option>
-                                <option value="6" {% if answer.result == 6 %}selected{% endif %}>Advanced</option>
+                                <option value="0" {% if answer.level == 0 %}selected{% endif %}>Оценить...</option>
+                                <option value="1" {% if answer.level == 1 %}selected{% endif %}>Doesn't have level</option>
+                                <option value="2" {% if answer.level == 2 %}selected{% endif %}>Elementary</option>
+                                <option value="3" {% if answer.level == 3 %}selected{% endif %}>Pre Intermediate</option>
+                                <option value="4" {% if answer.level == 4 %}selected{% endif %}>Intermediate</option>
+                                <option value="5" {% if answer.level == 5 %}selected{% endif %}>Upper Intermediate</option>
+                                <option value="6" {% if answer.level == 6 %}selected{% endif %}>Advanced</option>
                             </select>
                         </div>
                     </div>

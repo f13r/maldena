@@ -23,7 +23,8 @@ var app = (function(){
 					email: '.js-app-feedback-message-email',
 					phone: '.js-app-feedback-message-phone',
 					response: '.js-app-feedback-message-response',
-					error: '.js-app-feedback-message-error'
+					error: '.js-app-feedback-message-error',
+					success: '.js-app-feedback-message-response-success'
 				},
 				validate: {
 					name: ['Empty'],
@@ -141,7 +142,7 @@ var app = (function(){
 								$(self.settings.feedback.messages.error).html(message + '<br>');
 							});
 						} else {
-							$(self.settings.feedback.messages.response).show();
+							$(self.settings.feedback.messages.success).show();
 						}
 					}
 				});
