@@ -85,34 +85,7 @@
         <!-- start: Main Menu -->
         <div id="sidebar-left" class="span2">
             <div class="nav-collapse sidebar-nav">
-                <ul class="nav nav-tabs nav-stacked main-menu">
-                    <li>
-                        <a class="dropmenu" href="#">
-                            <i class="icon-home"></i>
-                            <span class="hidden-tablet"> Клиенты</span>
-                        </a>
-                        <ul style="display: block;">
-                            <li{% if selected == 'test' %} class="active"{% endif %}>
-                                <a class="submenu" href="{{ path('/admin/user/test') }}">
-                                    <i class="icon-file-alt"></i>
-                                    <span class="hidden-tablet"> Тесты</span>
-                                </a>
-                            </li>
-                            <li{% if selected == 'demo' %} class="active"{% endif %}>
-                                <a class="submenu" href="{{ path('/admin/user/demo') }}">
-                                    <i class="icon-file-alt"></i>
-                                    <span class="hidden-tablet"> Пробный урок</span>
-                                </a>
-                            </li>
-                            <li{% if selected == 'feedback' %} class="active"{% endif %}>
-                                <a class="submenu" href="{{ path('/admin/user/feedback') }}">
-                                    <i class="icon-file-alt"></i>
-                                    <span class="hidden-tablet"> Обратная связь</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                {{ render(url('/admin/menu'), {'selected': selected}) }}
             </div>
         </div>
         <!-- end: Main Menu -->

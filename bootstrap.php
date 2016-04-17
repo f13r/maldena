@@ -36,6 +36,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 	)
 ));
 
+$app->register(new Silex\Provider\HttpFragmentServiceProvider());
 
 
 $app->register(new Silex\Provider\TranslationServiceProvider(), array(

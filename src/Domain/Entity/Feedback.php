@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Feedbacks
  *
- * @Entity
+ * @Entity(repositoryClass="Domain\Repository\FeedbackRepository")
  * @Table(name="feedback")
  */
 class Feedback extends Activity {

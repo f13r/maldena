@@ -3,10 +3,10 @@
 namespace Domain\Entity;
 use Doctrine\ORM\Mapping as ORM;
 /**
- * Users
- *
- * @Table(name="answer")
- * @Entity @HasLifecycleCallbacks
+ * Test
+ * @Entity(repositoryClass="Domain\Repository\TestRepository")
+ * @Table(name="test")
+ * @HasLifecycleCallbacks
  */
 class Test extends Activity {
 
@@ -111,7 +111,7 @@ class Test extends Activity {
 
 
 
-	public function getTextResult() {
+	public function getTextLevel() {
 		$textLevel = reset($this->textLevels);
 
 		if (isset($this->textLevels[$this->getLevel()])) {

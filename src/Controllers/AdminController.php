@@ -1,29 +1,34 @@
 <?php
 namespace Controllers;
 
+use Domain\Repository\DemoRepository;
+use Domain\Repository\FeedbackRepository;
+use Domain\Repository\TestRepository;
 use Silex\Application;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class AdminController extends AbstractController {
 
 	protected function actionsHandler() {
 
+
 		$this->controller->get('/', function() {
 			return $this->app->redirect($this->app['url_generator']->generate('/admin/user/test'));
 		});
 
-		$this->controller->get('/user/test', function() {
+		$this->controller->get('/user/test/page/{page}', function($page = 1) {
 
-			$tests = $this->em->getRepository('\Domain\Entity\Test')
-				->findBy(
-					array('deletedAt' => null),
-					array('id' => 'DESC')
-				);
+			$paginator = $this->em->getRepository('\Domain\Entity\Test')->getAllPaginatedPosts($page);
 
 			$this->setTemplate('templates/admin/user/test.twig');
-			$this->viewAssigns(['tests' => $tests]);
+			$this->viewAssigns([
+				'tests' => $paginator,
+				'maxPages' => ceil($paginator->count() / TestRepository::SHOW_ROWS_IN_LIST),
+				'thisPage' => $page
+			]);
 			return $this->render();
 
-		})->bind('/admin/user/test');
+		})->bind('/admin/user/test')->value('page', 1);
 
 		$this->controller->get('/user/test/{testId}', function($testId) {
 
@@ -66,25 +71,19 @@ class AdminController extends AbstractController {
 
 		})->bind('/admin/user/test/save');
 
-		$this->controller->get('/user/demo', function() {
+		$this->controller->get('/user/demo/page/{page}', function($page) {
 
-			$demos = $this->em->getRepository('\Domain\Entity\Demo')
-				->findBy(
-					array('deletedAt' => null),
-					array('id' => 'DESC')
-				);
-
-			$change = false;
-			if ($this->session->has('/user/demo/change')) {
-				$change = true;
-				$this->session->remove('/user/demo/change');
-			}
+			$paginator = $this->em->getRepository('\Domain\Entity\Demo')->getAllPaginatedPosts($page);
 
 			$this->setTemplate('templates/admin/user/demo.twig');
-			$this->viewAssigns(['demos' => $demos, 'change' => $change]);
+			$this->viewAssigns([
+				'demos' => $paginator,
+				'maxPages' => ceil($paginator->count() / DemoRepository::SHOW_ROWS_IN_LIST),
+				'thisPage' => $page
+			]);
 			return $this->render();
 
-		})->bind('/admin/user/demo');
+		})->bind('/admin/user/demo')->value('page', 1);
 
 		$this->controller->get('/user/demo/{demoId}', function($demoId) {
 
@@ -121,19 +120,19 @@ class AdminController extends AbstractController {
 
 		})->bind('/admin/user/demo/save');
 
-		$this->controller->get('/user/feedback', function() {
+		$this->controller->get('/user/feedback/page/{page}', function($page) {
 
-			$feedbacks = $this->em->getRepository('\Domain\Entity\Feedback')
-				->findBy(
-					array('deletedAt' => null),
-					array('id' => 'DESC')
-				);
+			$paginator = $this->em->getRepository('\Domain\Entity\Feedback')->getAllPaginatedPosts($page);
 
 			$this->setTemplate('templates/admin/user/feedback.twig');
-			$this->viewAssigns(['feedbacks' => $feedbacks]);
+			$this->viewAssigns([
+				'feedbacks' => $paginator,
+				'maxPages' => ceil($paginator->count() / FeedbackRepository::SHOW_ROWS_IN_LIST),
+				'thisPage' => $page
+			]);
 			return $this->render();
 
-		})->bind('/admin/user/feedback');
+		})->bind('/admin/user/feedback')->value('page', 1);
 
 		$this->controller->get('/user/feedback/{feedback}', function($feedback) {
 
@@ -173,6 +172,22 @@ class AdminController extends AbstractController {
 			return $this->app->redirect($this->app['url_generator']->generate('/admin/user/feedback'));
 
 		})->bind('/admin/user/feedback/save');
+
+		$this->controller->get('/menu', function() {
+
+			$selected = $this->app['request']->request->get('selected');
+
+			$counters = [
+				'test' => $this->em->getRepository('Domain\Entity\Test')->getQuantityOfUncheckedRows(),
+				'demo' => $this->em->getRepository('Domain\Entity\Demo')->getQuantityOfUncheckedRows(),
+				'feedback' => $this->em->getRepository('Domain\Entity\Feedback')->getQuantityOfUncheckedRows(),
+			];
+
+			$this->setTemplate('partials/admin/menu.twig');
+			$this->viewAssigns(compact('selected', 'counters'));
+			return $this->render();
+
+		})->bind('/admin/menu');
 
 		return $this->controller;
 	}

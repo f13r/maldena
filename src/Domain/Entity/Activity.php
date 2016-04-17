@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Users
  *
- * @Entity
+ * @Entity(repositoryClass="Domain\Repository\ActivityRepository")
  * @Table(name="activities")
  * @InheritanceType("SINGLE_TABLE")
  * @DiscriminatorColumn(name="type", type="string")

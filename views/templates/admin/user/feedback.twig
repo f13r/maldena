@@ -99,6 +99,8 @@
                         <span>Пока нет клиентов оставивших отзыв</span>
                     </div>
                 {% endif %}
+
+                {% include "./partials/admin/paginator.twig" with {'path': '/admin/user/feedback'} %}
             </div>
         </div>
     </div>

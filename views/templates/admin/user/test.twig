@@ -81,7 +81,7 @@
                                 </span>
                             </td>
                             <td class="center ">
-                                {{ test.textResult }}
+                                {{ test.textLevel }}
                             </td>
                             <td class="center ">
                                 {{ test.comment }}
@@ -104,6 +104,8 @@
                     </div>
 
                 {% endif %}
+
+                {% include "./partials/admin/paginator.twig" with {'path': '/admin/user/test'} %}
             </div>
         </div>
     </div>
