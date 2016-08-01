@@ -2,6 +2,7 @@
 require_once __DIR__.'/vendor/autoload.php';
 
 use Doctrine\Common\Cache\MemcachedCache;
+use Gedmo\Sortable\SortableListener;
 use Services\User;
 use Symfony\Component\HttpKernel\Debug\ExceptionHandler;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,6 +67,7 @@ $app['crm'] = $app->share(function() use ($app) {
 $app['em'] = $app->share(function() {
 	return require __DIR__.'/doctrine.php';
 });
+
 
 $app['userServices'] = $app->share(function() use ($app) {
 	return new User($app);

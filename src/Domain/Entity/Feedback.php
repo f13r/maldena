@@ -6,14 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Feedbacks
  *
- * @Entity(repositoryClass="Domain\Repository\FeedbackRepository")
- * @Table(name="feedback")
+ * @ORM\Entity(repositoryClass="Domain\Repository\FeedbackRepository")
+ * @ORM\Table(name="feedback")
  */
 class Feedback extends Activity {
 
     /**
      * @var string
-     * @Column(name="text", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="text", type="text", length=65535, nullable=true)
      */
     private $text;
 

@@ -6,71 +6,71 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Users
  *
- * @Table(name="contact")
- * @Entity
+ * @ORM\Table(name="contact")
+ * @ORM\Entity
  */
 class Contact
 {
 	/**
 	 * @var integer
 	 *
-	 * @Column(name="id", type="integer", nullable=false)
-	 * @Id
-	 * @GeneratedValue(strategy="IDENTITY")
+	 * @ORM\Column(name="id", type="integer", nullable=false)
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
 	private $id;
 
 	/**
 	 * @var string
 	 *
-	 * @Column(name="phone", type="string", length=10, nullable=true)
+	 * @ORM\Column(name="phone", type="string", length=10, nullable=true)
 	 */
 	private $phone;
 
 	/**
 	 * @var string
 	 *
-	 * @Column(name="phone2", type="string", length=10, nullable=true)
+	 * @ORM\Column(name="phone2", type="string", length=10, nullable=true)
 	 */
 	private $phone2;
 
 	/**
 	 * @var string
 	 *
-	 * @Column(name="email", type="string", length=150, nullable=true)
+	 * @ORM\Column(name="email", type="string", length=150, nullable=true)
 	 */
 	private $email;
 
 	/**
 	 * @var string
 	 *
-	 * @Column(name="city", type="string", length=150, nullable=false)
+	 * @ORM\Column(name="city", type="string", length=150, nullable=false)
 	 */
 	private $city;
 
 	/**
 	 * @var string
 	 *
-	 * @Column(name="skype", type="string", length=150, nullable=false)
+	 * @ORM\Column(name="skype", type="string", length=150, nullable=false)
 	 */
 	private $skype;
 
 	/**
 	 * @var string
 	 *
-	 * @Column(name="address", type="string", length=150, nullable=false)
+	 * @ORM\Column(name="address", type="string", length=150, nullable=false)
 	 */
 	private $address;
 
 	/**
 	 * @var string
-	 * @Column(name="coordLat", type="string", length=150, nullable=false)
+	 * @ORM\Column(name="coordLat", type="string", length=150, nullable=false)
 	 **/
 	private $coordLat;
 
 	/**
 	 * @var string
-	 * @Column(name="coordLng", type="string", length=150, nullable=false)
+	 * @ORM\Column(name="coordLng", type="string", length=150, nullable=false)
 	 **/
 	private $coordLng;
 

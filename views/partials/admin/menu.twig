@@ -5,22 +5,36 @@
             <span class="hidden-tablet"> Клиенты</span>
         </a>
         <ul style="display: block;">
-            <li{% if selected == 'test' %} class="active"{% endif %}>
+            <li>
                 <a class="submenu" href="{{ path('/admin/user/test') }}">
                     <i class="icon-file-alt"></i>
                     <span class="hidden-tablet"> Тесты{% if counters.test > 0 %} <strong>({{ counters.test }})</strong>{% endif %}</span>
                 </a>
             </li>
-            <li{% if selected == 'demo' %} class="active"{% endif %}>
+            <li>
                 <a class="submenu" href="{{ path('/admin/user/demo') }}">
                     <i class="icon-file-alt"></i>
                     <span class="hidden-tablet"> Пробный урок{% if counters.demo > 0 %} <strong>({{ counters.demo }})</strong>{% endif %}</span>
                 </a>
             </li>
-            <li{% if selected == 'feedback' %} class="active"{% endif %}>
+            <li>
                 <a class="submenu" href="{{ path('/admin/user/feedback') }}">
                     <i class="icon-file-alt"></i>
                     <span class="hidden-tablet"> Обратная связь{% if counters.feedback > 0 %} <strong>({{ counters.feedback }})</strong>{% endif %}</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a class="dropmenu" href="#">
+            <i class="icon-home"></i>
+            <span class="hidden-tablet"> Школа</span>
+        </a>
+        <ul style="display: block;">
+            <li>
+                <a class="submenu" href="{{ path('/admin/teachers') }}">
+                    <i class="icon-file-alt"></i>
+                    <span class="hidden-tablet"> Преподаватели</span>
                 </a>
             </li>
         </ul>

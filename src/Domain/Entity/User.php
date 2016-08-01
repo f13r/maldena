@@ -8,9 +8,9 @@ use Symfony\Component\Security\Acl\Exception\Exception;
 /**
  * Users
  *
- * @Entity(repositoryClass="Domain\Repository\UserRepository")
- * @Table(name="users")
- * @HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="Domain\Repository\UserRepository")
+ * @ORM\Table(name="users")
+ * @ORM\HasLifecycleCallbacks
  */
 class User {
 
@@ -20,44 +20,44 @@ class User {
     /**
      * @var integer
      *
-     * @Column(name="id", type="integer", nullable=false)
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @Column(name="phone", type="string", length=10, nullable=true)
+     * @ORM\Column(name="phone", type="string", length=10, nullable=true)
      */
     private $phone;
 
     /**
      * @var string
      *
-     * @Column(name="email", type="string", length=150, nullable=true)
+     * @ORM\Column(name="email", type="string", length=150, nullable=true)
      */
     private $email;
 
     /**
      * @var \DateTime
      *
-     * @Column(name="created_at", type="datetime", nullable=false)
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
     private $createdAt = NULL;
 
     /**
      * @var string
      *
-     * @Column(name="name", type="string", length=150, nullable=false)
+     * @ORM\Column(name="name", type="string", length=150, nullable=false)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @Column(name="userCrmId", type="string", length=150, nullable=true)
+     * @ORM\Column(name="userCrmId", type="string", length=150, nullable=true)
      */
     private $userCrmId;
 
@@ -132,7 +132,7 @@ class User {
     }
 
     /**
-     * @PrePersist
+     * @ORM\PrePersist
      */
     public function onPrePersist() {
         $this->setCreatedAt(new \DateTime("now"));

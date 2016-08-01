@@ -5,8 +5,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Demo
  *
- * @Entity(repositoryClass="Domain\Repository\DemoRepository")
- * @Table(name="demo")
+ * @ORM\Entity(repositoryClass="Domain\Repository\DemoRepository")
+ * @ORM\Table(name="demo")
  */
 class Demo extends Activity {
 
