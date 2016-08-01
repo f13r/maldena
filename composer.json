@@ -12,7 +12,11 @@
         "symfony/translation": "~3.0",
         "symfony/config": "~3.0",
         "symfony/yaml": "~3.0",
+<<<<<<< HEAD
         "gedmo/doctrine-extensions": "~2.4"
+=======
+        "gedmo/doctrine-extensions": "dev-master"
+>>>>>>> 5c0075b4ee35624a7de3904b7938e93267ba02ea
     },
     "autoload": {
         "classmap": [

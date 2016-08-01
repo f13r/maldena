@@ -17,10 +17,10 @@ class IndexController extends AbstractController {
 
 	private function fetchSchoolContactsById($id) {
 
-			$contact = $this->em->getRepository('Domain\Entity\Contact')->find($id);
-			$schoolContacts = $contact->getSchoolContacts();
+		$contact = $this->em->getRepository('Domain\Entity\Contact')->find($id);
+		$schoolContacts = $contact->getSchoolContacts();
 
-			return $schoolContacts;
+		return $schoolContacts;
 
 	}
 
@@ -32,6 +32,7 @@ class IndexController extends AbstractController {
 			$this->setTemplate('templates/main.twig');
 			return $this->render();
 		})->bind('main');
+
 
 		$this->controller->post('/feedback', function() {
 
@@ -239,6 +240,11 @@ class IndexController extends AbstractController {
 			$this->setTemplate('templates/tests.twig');
 			return $this->render();
 		})->bind('tests');
+
+		$this->controller->get('/it', function() {
+			$this->setTemplate('templates/it.twig');
+			return $this->render();
+		})->bind('it');
 
 		$this->controller->get('/zno', function() {
 			$this->setTemplate('templates/zno.twig');

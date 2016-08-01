@@ -2,79 +2,93 @@
 
 namespace Domain\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Users
  *
- * @Entity(repositoryClass="Domain\Repository\ActivityRepository")
- * @Table(name="activities")
- * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="type", type="string")
- * @HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="Domain\Repository\ActivityRepository")
+ * @ORM\Table(name="activities")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\HasLifecycleCallbacks
  */
 class Activity {
 
     /**
      * @var integer
      *
-     * @Column(name="id", type="integer", nullable=false)
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var \DateTime
      *
-     * @Column(name="deleted_at", type="datetime", nullable=true)
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
     private $deletedAt = NULL;
 
     /**
      * @var \DateTime
      *
-     * @Column(name="created_at", type="datetime", nullable=true)
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $createdAt = NULL;
+
+    /**
+     * @Gedmo\Sortable(groups={"orderType"})
+     * @ORM\Column(name="position", type="integer", nullable=true)
+     */
+    private $position;
 
 
     /**
      * @var string
      *
-     * @Column(name="crmId", type="string", length=150, nullable=true)
+     * @ORM\Column(name="orderType", type="string")
+     */
+    private $orderType = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="crmId", type="string", length=150, nullable=true)
      */
     private $crmId;
 
     /**
      * @var string
      *
-     * @Column(name="status", type="smallint", options={"default":0}, nullable=true)
+     * @ORM\Column(name="status", type="smallint", options={"default":0}, nullable=true)
      */
     private $status = 0;
 
     /**
      * @var int
      *
-     * @Column(name="result", type="smallint", options={"default":0}, nullable=true)
+     * @ORM\Column(name="result", type="smallint", options={"default":0}, nullable=true)
      */
     private $result = 0;
 
     /**
      * @var string
      *
-     * @Column(name="comment", type="string", length=1500, nullable=true)
+     * @ORM\Column(name="comment", type="string", length=1500, nullable=true)
      */
     private $comment;
 
     /**
      * @var string
      *
-     * @Column(name="user_id", type="integer", length=45, nullable=false)
+     * @ORM\Column(name="user_id", type="integer", length=45, nullable=false)
      */
     private $userId;
 
     /**
-     * @ManyToOne(targetEntity="User", cascade={"persist"})
-     * @JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      **/
     private $user;
 
@@ -102,6 +116,34 @@ class Activity {
      */
     public function getCreatedAt() {
         return $this->createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrdering() {
+        return $this->ordering;
+    }
+
+    /**
+     * @param mixed $ordering
+     */
+    public function setOrdering($ordering) {
+        $this->ordering = $ordering;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrderType() {
+        return $this->orderType;
+    }
+
+    /**
+     * @param string $orderType
+     */
+    public function setOrderType($orderType) {
+        $this->orderType = $orderType;
     }
 
     /**
@@ -144,6 +186,20 @@ class Activity {
      */
     public function getResult() {
         return $this->result;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosition() {
+        return $this->position;
+    }
+
+    /**
+     * @param mixed $position
+     */
+    public function setPosition($position) {
+        $this->position = $position;
     }
 
     /**
@@ -211,7 +267,7 @@ class Activity {
 
 
     /**
-     * @PrePersist
+     * @ORM\PrePersist
      */
     public function onPrePersist() {
         $this->setCreatedAt(new \DateTime("now"));
