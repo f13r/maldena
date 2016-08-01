@@ -173,9 +173,27 @@ class AdminController extends AbstractController {
 
 		})->bind('/admin/user/feedback/save');
 
-		$this->controller->get('/menu', function() {
+		$this->controller->get('/teachers', function() {
+			$this->setTemplate('partials/admin/menu.twig');
+			return $this->render();
 
-			$selected = $this->app['request']->request->get('selected');
+		})->bind('/admin/teachers');
+
+		$this->controller->get('/user/teachers/page/{page}', function($page = 1) {
+
+			$paginator = $this->em->getRepository('\Domain\Entity\Test')->getAllPaginatedPosts($page);
+
+			$this->setTemplate('templates/admin/user/test.twig');
+			$this->viewAssigns([
+				'tests' => $paginator,
+				'maxPages' => ceil($paginator->count() / TestRepository::SHOW_ROWS_IN_LIST),
+				'thisPage' => $page
+			]);
+			return $this->render();
+
+		})->bind('/admin/teachers')->value('page', 1);
+
+		$this->controller->get('/menu', function() {
 
 			$counters = [
 				'test' => $this->em->getRepository('Domain\Entity\Test')->getQuantityOfUncheckedRows(),
@@ -184,7 +202,7 @@ class AdminController extends AbstractController {
 			];
 
 			$this->setTemplate('partials/admin/menu.twig');
-			$this->viewAssigns(compact('selected', 'counters'));
+			$this->viewAssigns(compact('counters'));
 			return $this->render();
 
 		})->bind('/admin/menu');
