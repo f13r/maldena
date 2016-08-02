@@ -32,7 +32,4 @@ $connectionOptions = array(
 
 $em = EntityManager::create($connectionOptions, $config);
 
-$sortableListener = new SortableListener();
-$em->getEventManager()->addEventSubscriber($sortableListener);
-
 return $em;
