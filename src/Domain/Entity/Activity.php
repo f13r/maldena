@@ -2,7 +2,6 @@
 
 namespace Domain\Entity;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Users
  *
@@ -36,13 +35,6 @@ class Activity {
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $createdAt = NULL;
-
-    /**
-     * @Gedmo\Sortable(groups={"orderType"})
-     * @ORM\Column(name="position", type="integer", nullable=true)
-     */
-    private $position;
-
 
     /**
      * @var string
@@ -186,20 +178,6 @@ class Activity {
      */
     public function getResult() {
         return $this->result;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPosition() {
-        return $this->position;
-    }
-
-    /**
-     * @param mixed $position
-     */
-    public function setPosition($position) {
-        $this->position = $position;
     }
 
     /**

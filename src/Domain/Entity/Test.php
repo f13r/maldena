@@ -4,9 +4,9 @@ namespace Domain\Entity;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * Test
- * @Entity(repositoryClass="Domain\Repository\TestRepository")
- * @Table(name="test")
- * @HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="Domain\Repository\TestRepository")
+ * @ORM\Table(name="test")
+ * @ORM\HasLifecycleCallbacks
  */
 class Test extends Activity {
 
@@ -14,20 +14,20 @@ class Test extends Activity {
 	 *
 	 * @var string
 	 *
-	 * @Column(name="answer", type="string", length=10000, nullable=true)
+	 * @ORM\Column(name="answer", type="string", length=10000, nullable=true)
 	 */
 	private $answer;
 
 	/**
 	 * @var string
 	 *
-	 * @Column(name="goals", type="string", length=1000, nullable=true)
+	 * @ORM\Column(name="goals", type="string", length=1000, nullable=true)
 	 */
 	private $goals;
 
 	/**
 	 * @var int
-	 * @Column(name="level", type="smallint", options={"default":0})
+	 * @ORM\Column(name="level", type="smallint", options={"default":0})
 	 *
 	 */
 	private $level;
@@ -121,7 +121,7 @@ class Test extends Activity {
 		return $textLevel;
 	}
 
-	/** @PostLoad */
+	/** @ORM\PostLoad */
 	public function onPostLoad() {
 		$this->setUnserializedAnswer(unserialize($this->getAnswer()));
 	}
