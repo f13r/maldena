@@ -61,6 +61,14 @@ class User {
      */
     private $userCrmId;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="role", type="string", length=150, nullable=true)
+     */
+    private $role;
+
+
     public function __construct() {
 
     }
@@ -137,6 +145,22 @@ class User {
     public function onPrePersist() {
         $this->setCreatedAt(new \DateTime("now"));
     }
+
+    /**
+     * @return string
+     */
+    public function getRole() {
+        return $this->role;
+    }
+
+    /**
+     * @param string $role
+     */
+    public function setRole($role) {
+        $this->role = $role;
+    }
+
+
 
 
 }

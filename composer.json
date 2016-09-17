@@ -11,7 +11,9 @@
         "symfony/validator": "~3.0",
         "symfony/translation": "~3.0",
         "symfony/config": "~3.0",
-        "symfony/yaml": "~3.0"
+        "symfony/yaml": "~3.0",
+        "gedmo/doctrine-extensions": "dev-master",
+        "swiftmailer/swiftmailer": "~5.4"
     },
     "autoload": {
         "classmap": [
@@ -19,7 +21,8 @@
             "src/Domain/Repository",
             "src/Controllers",
             "src/CRM",
-            "src/Services"
+            "src/Services",
+            "src/Common"
         ]
     }
 }

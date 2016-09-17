@@ -1,9 +1,12 @@
 <?php
 namespace Controllers;
 
-use Domain\Entity\Contact;
+use Common\Notify\Manager;
+use Common\Notify\NotifierDemo;
+use Common\Notify\NotifierTest;
 use Domain\Entity\User;
 use Domain\Entity\Feedback;
+use Services\Mailer;
 use Silex\Application;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ConstraintViolation;
@@ -208,6 +211,9 @@ class IndexController extends AbstractController {
 
 			$this->em->persist($demo);
 			$this->em->flush();
+
+			$manager = new Manager($this->app);
+			$manager->addTask(NotifierDemo::class, $demo);
 
 			$this->setTemplate('templates/saveDemo.twig');
 			$this->viewAssigns(['user' => $user]);
