@@ -103,18 +103,18 @@ class __TwigTemplate_e66d6e33880fba720ce9f340b558ebd13df9d9ea01e60a9d58bdb9295b4
         // line 61
         echo "                    <ul class=\"list-unstyled\">
                         <li>
-                            <div class=\"list-question\"><strong class=\"red-color\">*</strong>Имя:</div>
+                            <div class=\"list-question\">Имя:</div>
                             <div class=\"list-answer\">
                                 <input type=\"text\" name=\"user[name]\" value=\"";
         // line 65
         if ($this->getAttribute((isset($context["user"]) ? $context["user"] : null), "name", array(), "array", true, true)) {
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["user"]) ? $context["user"] : $this->getContext($context, "user")), "name", array(), "array"), "html", null, true);
         }
-        echo "\" placeholder=\" Как к Вам обращаться\"/>
+        echo "\" />
                             </div>
                         </li>
                         <li>
-                            <div class=\"list-question\"><strong class=\"red-color\">*</strong>Телефон:</div>
+                            <div class=\"list-question\">Телефон:</div>
                             <div class=\"list-answer\">
                                 <input type=\"tel\" id=\"phone\" name=\"user[phone]\" class=\"js-app-feedback-phone\" value=\"";
         // line 71
@@ -216,13 +216,13 @@ class __TwigTemplate_e66d6e33880fba720ce9f340b558ebd13df9d9ea01e60a9d58bdb9295b4
 /*                     {% endif %}*/
 /*                     <ul class="list-unstyled">*/
 /*                         <li>*/
-/*                             <div class="list-question"><strong class="red-color">*</strong>Имя:</div>*/
+/*                             <div class="list-question">Имя:</div>*/
 /*                             <div class="list-answer">*/
-/*                                 <input type="text" name="user[name]" value="{% if user['name'] is defined %}{{ user['name'] }}{% endif %}" placeholder=" Как к Вам обращаться"/>*/
+/*                                 <input type="text" name="user[name]" value="{% if user['name'] is defined %}{{ user['name'] }}{% endif %}" />*/
 /*                             </div>*/
 /*                         </li>*/
 /*                         <li>*/
-/*                             <div class="list-question"><strong class="red-color">*</strong>Телефон:</div>*/
+/*                             <div class="list-question">Телефон:</div>*/
 /*                             <div class="list-answer">*/
 /*                                 <input type="tel" id="phone" name="user[phone]" class="js-app-feedback-phone" value="{% if user['phone'] is defined %}{{ user['phone'] }}{% endif %}"/>*/
 /*                             </div>*/
