@@ -11,8 +11,7 @@
         "symfony/validator": "~3.0",
         "symfony/translation": "~3.0",
         "symfony/config": "~3.0",
-        "symfony/yaml": "~3.0",
-        "gedmo/doctrine-extensions": "dev-master"
+        "symfony/yaml": "~3.0"
     },
     "autoload": {
         "classmap": [
