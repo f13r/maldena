@@ -15,17 +15,17 @@ class MailerSender implements SenderInterface {
 	/**
 	 * @var string
 	 */
-	private $from = 'fler.victor@gmail.com';
+	private $from = 'admin@maldena.com.ua';
 
 	/**
 	 * @var string
 	 */
-	private $password = 'r[dugengv20014';
+	private $password = 'Ser21dik';
 
 	/**
 	 * @var string
 	 */
-	private $host = 'smtp.gmail.com';
+	private $host = 'mail.ukraine.com.ua';
 
 	/**
 	 * @var int
