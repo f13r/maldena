@@ -112,7 +112,7 @@ class IndexController extends AbstractController {
 
 			$constraint = [
 				'name' => new Assert\NotBlank(),
-				'phone' => new Assert\Length(10),
+				'phone' => [new Assert\Length(10), new Assert\NotBlank()],
 				'goals' => new Assert\Optional()
 			];
 
@@ -191,7 +191,7 @@ class IndexController extends AbstractController {
 			$userResponse = $this->app['request']->request->get('user');
 			$constraint = [
 				'name' => new Assert\NotBlank(),
-				'phone' => new Assert\Length(10)
+			    'phone' => [new Assert\Length(10), new Assert\NotBlank()]
 			];
 
 			/**
