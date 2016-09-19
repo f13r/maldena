@@ -17,8 +17,8 @@ class MailSubscribers implements SubscriberInterface {
 	 * MailSubscribers constructor
 	 * @param $em
 	 */
-	public function __construct($em) {
-		$this->em = $em;
+	public function __construct() {
+		$this->em = \Doctrine::getEntityManager();
 	}
 
 	/**
@@ -26,7 +26,7 @@ class MailSubscribers implements SubscriberInterface {
 	 */
 	public function getSubscribers() {
 
-		$subscriberEmails = [];
+		$subscriberEmails = ['inna.rudova@gmail.com'];
 
 		$subscribers = $this->em->getRepository('Domain\Entity\User')->findBy(['role' => 'admin']);
 

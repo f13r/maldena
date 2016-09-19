@@ -1,10 +1,7 @@
 <?php
 
 namespace Domain\Entity;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Acl\Exception\Exception;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Users
@@ -13,6 +10,8 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ORM\Table(name="queue")
  */
 class Queue {
+
+    const NOTIFIER_TYPE = 0;
 
     /**
      * @var integer
@@ -47,9 +46,17 @@ class Queue {
     /**
      * @var string
      *
-     * @ORM\Column(name="notifier_class", type="string", length=150, nullable=true)
+     * @ORM\Column(name="task", type="string", length=150, nullable=true)
      */
-    private $notifierClass;
+    private $task;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="smallint", nullable=false)
+     */
+    private $type;
+
 
 
     public function __construct() {
@@ -79,15 +86,15 @@ class Queue {
     /**
      * @return string
      */
-    public function getNotifierClass() {
-        return $this->notifierClass;
+    public function getTask() {
+        return $this->task;
     }
 
     /**
-     * @param string $notifierClass
+     * @param string $task
      */
-    public function setNotifierClass($notifierClass) {
-        $this->notifierClass = $notifierClass;
+    public function setTask($task) {
+        $this->task = $task;
     }
 
     /**
@@ -116,6 +123,20 @@ class Queue {
      */
     public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType() {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type) {
+        $this->type = $type;
     }
 
 

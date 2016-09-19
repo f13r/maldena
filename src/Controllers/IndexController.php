@@ -1,12 +1,11 @@
 <?php
 namespace Controllers;
 
-use Common\Notify\Manager;
-use Common\Notify\NotifierDemo;
-use Common\Notify\NotifierTest;
+use Common\Notifier\DemoNotifier;
+use Common\Notifier\TestNotifier;
+use Common\Notify\FeedbackNotifier;
 use Domain\Entity\User;
 use Domain\Entity\Feedback;
-use Services\Mailer;
 use Silex\Application;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ConstraintViolation;
@@ -91,6 +90,9 @@ class IndexController extends AbstractController {
 			$this->em->persist($feedback);
 			$this->em->flush();
 
+			$manager = $this->app['notifierManager'];
+			$manager->addTask(FeedbackNotifier::class, $feedback);
+
 			return true;
 		});
 
@@ -137,6 +139,10 @@ class IndexController extends AbstractController {
 
 			$this->em->persist($test);
 			$this->em->flush();
+
+
+			$manager = $this->app['notifierManager'];
+			$manager->addTask(TestNotifier::class, $test);
 
 			$this->setTemplate('templates/saveTest.twig');
 			$this->viewAssigns(['name' => $userResponse['user']['name']]);
@@ -212,8 +218,8 @@ class IndexController extends AbstractController {
 			$this->em->persist($demo);
 			$this->em->flush();
 
-			$manager = new Manager($this->app);
-			$manager->addTask(NotifierDemo::class, $demo);
+			$manager = $this->app['notifierManager'];
+			$manager->addTask(DemoNotifier::class, $demo);
 
 			$this->setTemplate('templates/saveDemo.twig');
 			$this->viewAssigns(['user' => $user]);

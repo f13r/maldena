@@ -59,7 +59,7 @@ class MailerSender implements SenderInterface {
 			->setSubject('Maldena has new user!')
 			->setFrom($this->from)
 			->setTo($subscribers)
-			->setBody($emailTemplate);
+			->setBody($emailTemplate, 'text/html');
 
 		$this->mailer->send($message);
 	}

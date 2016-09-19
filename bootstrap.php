@@ -1,7 +1,9 @@
 <?php
 require_once __DIR__.'/vendor/autoload.php';
 
-use Services\Mailer;
+use Common\Manager\NotifyManager;
+use Common\Sender\MailSubscribers;
+use Services\MailerSender;
 use Services\User;
 use Symfony\Component\HttpKernel\Debug\ExceptionHandler;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,7 +47,6 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 //$app['locale'] = 'ru';
 
-$app->register(new Silex\Provider\SwiftmailerServiceProvider());
 
 $app['translator'] = $app->share($app->extend('translator', function($translator, $app) {
 	$translator->addLoader('yaml', new YamlFileLoader());
@@ -69,22 +70,21 @@ $app['em'] = $app->share(function() {
 	return require __DIR__.'/doctrine.php';
 });
 
-$app['swiftmailer.options'] = array(
-	'host' => 'smtp.gmail.com',
-	'port' => '465',
-	'username' => 'fler.victor@gmail.com',
-	'password' => 'r[dugengv20014',
-	'encryption' => 'ssl',
-	'auth_mode' => 'login'
-);
+
+Class Doctrine {
+	static function getEntityManager() {
+		return require __DIR__.'/doctrine.php';
+	}
+}
+
+$app['notifierManager'] = $app->share(function() {
+	return new NotifyManager(new MailerSender, new MailSubscribers);
+});
 
 $app['userServices'] = $app->share(function() use ($app) {
 	return new User($app);
 });
 
-$app['mailerService'] = $app->share(function() use ($app) {
-	return new Mailer($app);
-});
 
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());

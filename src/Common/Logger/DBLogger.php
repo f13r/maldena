@@ -20,8 +20,8 @@ class DBLogger implements LoggerInterface {
 	 * DBLogger constructor.
 	 * @param EntityManager $em
 	 */
-	public function __construct(EntityManager $em) {
-		$this->em = $em;
+	public function __construct() {
+		$this->em = \Doctrine::getEntityManager();
 	}
 
 	/**

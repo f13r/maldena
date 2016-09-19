@@ -4,6 +4,6 @@ namespace Common\Sender;
 
 interface SenderInterface {
 
-	public function send($emailTemplate, $subscribers);
+	public function send($email, $subscribers);
 
 }
