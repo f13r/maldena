@@ -25,16 +25,24 @@
             </li>
         </ul>
     </li>
-    <li class="hide">
+    <li >
         <a class="dropmenu" href="#">
             <i class="icon-home"></i>
             <span class="hidden-tablet"> Школа</span>
         </a>
-        <ul style="display: block;">
+        {#<ul class="hide">#}
+            {#<li>#}
+                {#<a class="submenu" href="{{ path('/admin/teachers') }}">#}
+                    {#<i class="icon-file-alt"></i>#}
+                    {#<span class="hidden-tablet"> Преподаватели</span>#}
+                {#</a>#}
+            {#</li>#}
+        {#</ul>#}
+        <ul>
             <li>
-                <a class="submenu" href="{{ path('/admin/teachers') }}">
+                <a class="submenu" href="{{ path('/admin/subscribers') }}">
                     <i class="icon-file-alt"></i>
-                    <span class="hidden-tablet"> Преподаватели</span>
+                    <span class="hidden-tablet"> Уведомления</span>
                 </a>
             </li>
         </ul>

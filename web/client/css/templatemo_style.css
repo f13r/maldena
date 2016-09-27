@@ -848,7 +848,7 @@ ul.templatemo-project-gallery  li  a img:hover {
         display: none;
     }
     .contacts {
-        margin-top: 30px;
+        margin-top: 0;
     }
     .main-block {
         margin-top: 25px;
@@ -996,7 +996,7 @@ ul.templatemo-project-gallery  li  a img:hover {
         display: none;
     }
     .contacts {
-        margin-top: 30px;
+        margin-top: 0;
     }
     .main-block {
         margin-top: 25px;

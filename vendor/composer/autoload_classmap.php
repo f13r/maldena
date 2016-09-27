@@ -31,6 +31,7 @@ return array(
     'Domain\\Entity\\Feedback' => $baseDir . '/src/Domain/Entity/Feedback.php',
     'Domain\\Entity\\Log' => $baseDir . '/src/Domain/Entity/Log.php',
     'Domain\\Entity\\Queue' => $baseDir . '/src/Domain/Entity/Queue.php',
+    'Domain\\Entity\\Subscriber' => $baseDir . '/src/Domain/Entity/Subscriber.php',
     'Domain\\Entity\\Test' => $baseDir . '/src/Domain/Entity/Test.php',
     'Domain\\Entity\\User' => $baseDir . '/src/Domain/Entity/User.php',
     'Domain\\Repository\\ActivityRepository' => $baseDir . '/src/Domain/Repository/ActivityRepository.php',

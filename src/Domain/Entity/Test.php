@@ -30,7 +30,7 @@ class Test extends Activity {
 	 * @ORM\Column(name="level", type="smallint", options={"default":0})
 	 *
 	 */
-	private $level;
+	private $level = 0;
 
 	/**
 	 * @var array

@@ -1,6 +1,9 @@
 <?php
 namespace Controllers;
 
+use Domain\Entity\Activity;
+use Domain\Entity\Demo;
+use Domain\Entity\Test;
 use Domain\Repository\DemoRepository;
 use Domain\Repository\FeedbackRepository;
 use Domain\Repository\TestRepository;
@@ -48,19 +51,20 @@ class AdminController extends AbstractController {
 			$comment = $this->app['request']->request->get('comment');
 
 			/**
-			 * @var Domain\Entity\Test $test
+			 * @var Test $test
 			 */
 			$test = $this->em->getRepository('Domain\Entity\Test')
 				->findOneBy(array('id' => (int) $answerId));
 
-			$test->setComment($comment);
-			$test->setLevel($level);
-
-			if ($level == 0) {
-				$test->setStatus(0);
-			} else {
-				$test->setStatus(1);
+			if ($comment != '') {
+				$test->setComment($comment);
 			}
+
+			if ($level != 0) {
+				$test->setStatus(Activity::STATUS_ACTIVE);
+				$test->setLevel($level);
+			}
+
 
 			$this->em->persist($test);
 			$this->em->flush();
@@ -103,7 +107,7 @@ class AdminController extends AbstractController {
 			$comment = $this->app['request']->request->get('comment');
 
 			/**
-			 * @var Domain\Entity\Demo $demoObj
+			 * @var Demo $demoObj
 			 */
 			$demo = $this->em->getRepository('Domain\Entity\Demo')
 				->findOneBy(array('id' => (int) $demoId));
@@ -151,17 +155,14 @@ class AdminController extends AbstractController {
 			$comment = $this->app['request']->request->get('comment');
 
 			/**
-			 * @var Domain\Entity\Test $test
+			 * @var Test $test
 			 */
 			$test = $this->em->getRepository('Domain\Entity\Feedback')
 				->findOneBy(array('id' => (int) $feedbackId));
 
-			$test->setComment($comment);
-
-			if ($comment == '') {
-				$test->setStatus(0);
-			} else {
-				$test->setStatus(1);
+			if ($comment != '') {
+				$test->setStatus(Activity::STATUS_ACTIVE);
+				$test->setComment($comment);
 			}
 
 			$this->em->persist($test);
@@ -206,6 +207,17 @@ class AdminController extends AbstractController {
 			return $this->render();
 
 		})->bind('/admin/menu');
+
+
+		$this->controller->get('/subscribers', function() {
+
+			$subscribers = $this->em->getRepository('\Domain\Entity\Subscriber')->findAll();
+
+			$this->setTemplate('templates/admin/subscribers.twig');
+			$this->viewAssigns(compact('subscribers'));
+			return $this->render();
+
+		})->bind('/admin/subscribers')->value('page', 1);
 
 		return $this->controller;
 	}
