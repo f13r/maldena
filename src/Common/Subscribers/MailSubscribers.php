@@ -4,6 +4,7 @@ namespace Common\Sender;
 
 
 use Doctrine\ORM\EntityManager;
+use Domain\Entity\Subscriber;
 
 class MailSubscribers implements SubscriberInterface {
 
@@ -26,9 +27,9 @@ class MailSubscribers implements SubscriberInterface {
 	 */
 	public function getSubscribers() {
 
-		$subscriberEmails = ['inna.rudova@gmail.com'];
+		$subscriberEmails = [];
 
-		$subscribers = $this->em->getRepository('Domain\Entity\User')->findBy(['role' => 'admin']);
+		$subscribers = $this->em->getRepository('Domain\Entity\Subscriber')->findBy(['sendingStatus' => Subscriber::STATUS_SEND_EMAIL]);
 
 		/* @var User $subscriber */
 		foreach ($subscribers as $subscriber) {
