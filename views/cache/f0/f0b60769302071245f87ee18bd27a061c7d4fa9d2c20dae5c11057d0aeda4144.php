@@ -65,18 +65,18 @@ class __TwigTemplate_23a525e50919367da9790421e9338eb2be003369cdf9591132c55fe4b27
             <div class=\"col-md-4 contact_right\">
                 <p>Нашы <strong>курсы английского языка</strong> находятся по адресу: </p>
 
-                <p><img src=\"web/client/images/location.png\" alt=\"icon 1\"/>";
+                <p><img src=\"/web/client/images/location.png\" alt=\"icon 1\"/>";
         // line 41
         echo twig_escape_filter($this->env, (isset($context["city"]) ? $context["city"] : $this->getContext($context, "city")), "html", null, true);
         echo ", ";
         echo twig_escape_filter($this->env, (isset($context["address"]) ? $context["address"] : $this->getContext($context, "address")), "html", null, true);
         echo "</p>
 
-                <p><img src=\"web/client/images/phone1.png\" alt=\"icon 2\"/>";
+                <p><img src=\"/web/client/images/phone1.png\" alt=\"icon 2\"/>";
         // line 43
         echo twig_escape_filter($this->env, (isset($context["phone"]) ? $context["phone"] : $this->getContext($context, "phone")), "html", null, true);
         echo "</p>
-                <p><img src=\"web/client/images/phone1.png\" alt=\"icon 2\"/>";
+                <p><img src=\"/web/client/images/phone1.png\" alt=\"icon 2\"/>";
         // line 44
         echo twig_escape_filter($this->env, (isset($context["phone2"]) ? $context["phone2"] : $this->getContext($context, "phone2")), "html", null, true);
         echo "</p>
@@ -151,10 +151,10 @@ class __TwigTemplate_23a525e50919367da9790421e9338eb2be003369cdf9591132c55fe4b27
 /*             <div class="col-md-4 contact_right">*/
 /*                 <p>Нашы <strong>курсы английского языка</strong> находятся по адресу: </p>*/
 /* */
-/*                 <p><img src="web/client/images/location.png" alt="icon 1"/>{{ city }}, {{ address }}</p>*/
+/*                 <p><img src="/web/client/images/location.png" alt="icon 1"/>{{ city }}, {{ address }}</p>*/
 /* */
-/*                 <p><img src="web/client/images/phone1.png" alt="icon 2"/>{{ phone }}</p>*/
-/*                 <p><img src="web/client/images/phone1.png" alt="icon 2"/>{{ phone2 }}</p>*/
+/*                 <p><img src="/web/client/images/phone1.png" alt="icon 2"/>{{ phone }}</p>*/
+/*                 <p><img src="/web/client/images/phone1.png" alt="icon 2"/>{{ phone2 }}</p>*/
 /* */
 /*                 {% include "./partials/feedback.twig" %}*/
 /* */

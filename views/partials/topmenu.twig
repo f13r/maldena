@@ -13,7 +13,7 @@
                     </button>
                     <div class="logo">
                         <a href="/">
-                            <img class="img-responsive" src="web/client/images/logo.png" alt="Maldena English Club">
+                            <img class="img-responsive" src="/web/client/images/logo.png" alt="Maldena English Club">
                         </a>
                         <div class="phone-mobile">{{ phone2 }}</div>
                     </div>
@@ -29,6 +29,9 @@
                         <li{% if action == 'demo' %} class="active"{% endif %}>
                             <a href="{{ path('demo') }}">Пробный урок</a>
                         </li>
+                        <li{% if action == 'teachers' %} class="active"{% endif %}>
+                            <a href="{{ path('teachers') }}">Преподаватели</a>
+                        </li>
                         <li class="dropdown{% if action == 'services' %} active{% endif %}">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Виды обучения <span class="caret"></span>
@@ -37,7 +40,6 @@
                                 <li><a href="{{ path('group') }}">Групповые занятия</a></li>
                                 <li><a href="{{ path('individually') }}">Индивидуальные занятия</a></li>
                                 <li role="separator" class="divider"></li>
-                                {#<li><a href="{{ path('tests') }}">Международные тесты</a></li>#}
                                 <li><a href="{{ path('it') }}">Английский для ІТ</a></li>
                                 <li><a href="{{ path('zno') }}">Подготовка к ВНО (ЗНО)</a></li>
                                 {#<li role="separator" class="divider"></li>#}

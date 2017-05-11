@@ -1,0 +1,149 @@
+{% extends "layouts/admin.twig" %}
+
+{% set selected = 'teacher' %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="{{ path('/admin/teachers') }}">Преподаватели</a>
+            <i class="icon-angle-right"></i>
+        </li>
+        <li>
+            Редактирование
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    {% if app.session.getFlashBag.get('demoListChangeSuccessful') %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Well done!</strong> Статус успешно изменён.
+        </div>
+    {% endif %}
+
+    <div class="row-fluid sortable ui-sortable">
+        <div class="box span12">
+            <div class="box-header" data-original-title="">
+                <h2><i class="halflings-icon edit"></i><span class="break"></span>Редактирование страницы {% if teacher.user.name is defined %}"{{ teacher.user.name }}"{% else %}преподавателя{% endif %}</h2>
+                <div class="box-icon">
+                    <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ path('/admin/teacher/add') }}">
+                    <fieldset>
+                        <input type="hidden" value="{% if teacher.id is defined %}{{ teacher.id }}{% endif %}" name="teacher[id]">
+                        <div class="control-group">
+                            <label class="control-label" for="teacherTitle">Имя</label>
+                            <div class="controls">
+                                <input type="text" value="{% if teacher.user.name is defined %}{{ teacher.user.name }}{% endif %}" class="span6" id="teacherTitle" name="teacher[user][name]">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="teacherEmail">E-mail</label>
+                            <div class="controls">
+                                <input type="text" value="{% if teacher.user.email is defined %}{{ teacher.user.email }}{% endif %}" class="span6" id="teacherEmail" name="teacher[user][email]">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="teacherPhone">Phone</label>
+                            <div class="controls">
+                                <input type="text" value="{% if teacher.user.phone is defined %}{{ teacher.user.phone }}{% endif %}" class="span6" id="teacherPhone" name="teacher[user][phone]">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="teacherPhone">Текущее фото - {{ teacher.photo}}</label>
+                            <div class="controls">
+                                {% if teacher.photo is defined %}
+                                    {% if teacher.photo %}
+
+                                        <img src="{{ teacher.photo}}" style="height: 100px;"/>
+                                    {% endif %}
+                                {% else %}
+                                    Фото не добавлено
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="fileInput">Изменить фото</label>
+                            <div class="controls">
+                                <div class="uploader" id="uniform-fileInput">
+                                    <input class="input-file uniform_on" id="fileInput" name="photo" type="file">
+                                    <span class="filename" style="user-select: none;">
+                                        No file selected
+                                    </span>
+                                    <span class="action" style="user-select: none;">
+                                        Choose File
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="control-group">
+                            <label class="control-label" for="teacherTitle">Заглавие статьи</label>
+                            <div class="controls">
+                                <input type="text" value="{% if teacher.title is defined %}{{ teacher.title }}{% endif %}" class="span6" id="teacherTitle" name="teacher[title]">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="teacherSpecialization">Специализация</label>
+                            <div class="controls">
+                                <input type="text" value="{% if teacher.specialization is defined %}{{ teacher.specialization }}{% endif %}" class="span6" id="teacherSpecialization" name="teacher[specialization]">
+                            </div>
+                        </div>
+                        <div class="control-group hidden-phone">
+                            <label class="control-label" for="teacherDescription">Описание</label>
+                            <div class="controls">
+                                <textarea rows="17" cols="20" name="teacher[description]" style="width: 460px;">
+                                    {% if teacher.description is defined %}{{ teacher.description }}{% endif %}
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="teacherStatus">Статус</label>
+                            <div class="controls">
+                                <select id="teacherStatus" name="teacher[status]">
+                                    <option value="0" {% if teacher.status is defined %}{% if teacher.status == 0 %}selected{% endif %}{% endif %} >Не работает</option>
+                                    <option value="1" {% if teacher.status is defined %}{% if teacher.status == 1 %}selected{% endif %}{% endif %} >Работает</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="teacherPageName">Имя страницы</label>
+                            <div class="controls">
+                                http://maldena.com.ua/ <input type="text" value="{% if teacher.pageName is defined %}{{ teacher.pageName }}{% endif %}" class="span4" id="teacherPageName" name="teacher[pageName]">
+                            </div>
+                        </div>
+                        {#<div class="control-group">#}
+                            {#<label class="control-label" for="date01">Date input</label>#}
+                            {#<div class="controls">#}
+                                {#<input type="text" id="datepicker">#}
+                            {#</div>#}
+                        {#</div>#}
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                            <button type="reset" class="btn">Вернуться</button>
+                        </div>
+                    </fieldset>
+                </form>
+
+            </div>
+        </div><!--/span-->
+
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $( document ).ready(function() {
+            $( "#datepicker" ).datepicker();
+            $('.cleditor').cleditor();
+        });
+    </script>
+{% endblock %}

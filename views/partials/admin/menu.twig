@@ -1,19 +1,19 @@
 <ul class="nav nav-tabs nav-stacked main-menu">
     <li>
         <a class="dropmenu" href="#">
-            <i class="icon-home"></i>
+            <i class="icon-user"></i>
             <span class="hidden-tablet"> Клиенты</span>
         </a>
         <ul style="display: block;">
             <li>
                 <a class="submenu" href="{{ path('/admin/user/test') }}">
-                    <i class="icon-file-alt"></i>
+                    <i class="icon-edit"></i>
                     <span class="hidden-tablet"> Тесты{% if counters.test > 0 %} <strong>({{ counters.test }})</strong>{% endif %}</span>
                 </a>
             </li>
             <li>
                 <a class="submenu" href="{{ path('/admin/user/demo') }}">
-                    <i class="icon-file-alt"></i>
+                    <i class="icon-money"></i>
                     <span class="hidden-tablet"> Пробный урок{% if counters.demo > 0 %} <strong>({{ counters.demo }})</strong>{% endif %}</span>
                 </a>
             </li>
@@ -30,21 +30,31 @@
             <i class="icon-home"></i>
             <span class="hidden-tablet"> Школа</span>
         </a>
-        {#<ul class="hide">#}
+        <ul style="display: block">
+            <li>
+                <a class="submenu" href="{{ path('/admin/teachers') }}">
+                    <i class="icon-group"></i>
+                    <span class="hidden-tablet"> Преподаватели</span>
+                </a>
+            </li>
             {#<li>#}
-                {#<a class="submenu" href="{{ path('/admin/teachers') }}">#}
-                    {#<i class="icon-file-alt"></i>#}
-                    {#<span class="hidden-tablet"> Преподаватели</span>#}
+                {#<a class="submenu" href="{{ path('/admin/events') }}">#}
+                    {#<i class="icon-calendar"></i>#}
+                    {#<span class="hidden-tablet"> События</span>#}
                 {#</a>#}
             {#</li>#}
-        {#</ul>#}
-        <ul>
             <li>
                 <a class="submenu" href="{{ path('/admin/subscribers') }}">
-                    <i class="icon-file-alt"></i>
+                    <i class="icon-envelope"></i>
                     <span class="hidden-tablet"> Уведомления</span>
                 </a>
             </li>
+            {#<li>#}
+                {#<a class="submenu" href="{{ path('/admin/feedback') }}">#}
+                    {#<i class="icon-envelope"></i>#}
+                    {#<span class="hidden-tablet"> Отзывы</span>#}
+                {#</a>#}
+            {#</li>#}
         </ul>
     </li>
 </ul>

@@ -18,17 +18,17 @@ class __TwigTemplate_140abb9eb6084da4dd86cb9d99277551baeb8878cb81be82cba8df1c11f
         // line 1
         echo "
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-        <link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"web/client/images/favicon.ico\">
+        <link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"/web/client/images/favicon.ico\">
         <meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\"/>
         <!-- Google Web Font Embed -->
           <link href='https://fonts.googleapis.com/css?family=Cuprum&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
         <!-- Bootstrap core CSS -->
-        <link href=\"web/client/css/bootstrap3.5.css\" rel='stylesheet' type='text/css'>
+        <link href=\"/web/client/css/bootstrap3.5.css\" rel='stylesheet' type='text/css'>
 
         <!-- Custom styles for this template -->
-        <link href=\"web/client/js/colorbox/colorbox.css\"  rel='stylesheet' type='text/css'>
-        <link href=\"web/client/css/templatemo_style.css\"  rel='stylesheet' type='text/css'>
+        <link href=\"/web/client/js/colorbox/colorbox.css\"  rel='stylesheet' type='text/css'>
+        <link href=\"/web/client/css/templatemo_style.css\"  rel='stylesheet' type='text/css'>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -50,17 +50,17 @@ class __TwigTemplate_140abb9eb6084da4dd86cb9d99277551baeb8878cb81be82cba8df1c11f
 }
 /* */
 /*         <meta name="viewport" content="width=device-width, initial-scale=1.0">*/
-/*         <link rel="shortcut icon" type="image/x-icon" href="web/client/images/favicon.ico">*/
+/*         <link rel="shortcut icon" type="image/x-icon" href="/web/client/images/favicon.ico">*/
 /*         <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>*/
 /*         <!-- Google Web Font Embed -->*/
 /*           <link href='https://fonts.googleapis.com/css?family=Cuprum&subset=latin,cyrillic' rel='stylesheet' type='text/css'>*/
 /* */
 /*         <!-- Bootstrap core CSS -->*/
-/*         <link href="web/client/css/bootstrap3.5.css" rel='stylesheet' type='text/css'>*/
+/*         <link href="/web/client/css/bootstrap3.5.css" rel='stylesheet' type='text/css'>*/
 /* */
 /*         <!-- Custom styles for this template -->*/
-/*         <link href="web/client/js/colorbox/colorbox.css"  rel='stylesheet' type='text/css'>*/
-/*         <link href="web/client/css/templatemo_style.css"  rel='stylesheet' type='text/css'>*/
+/*         <link href="/web/client/js/colorbox/colorbox.css"  rel='stylesheet' type='text/css'>*/
+/*         <link href="/web/client/css/templatemo_style.css"  rel='stylesheet' type='text/css'>*/
 /* */
 /*         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->*/
 /*         <!--[if lt IE 9]>*/

@@ -3,6 +3,7 @@
 namespace Common\Notifier;
 
 use Domain\Entity\Feedback;
+use Services\Utils;
 
 class FeedbackNotifier implements NotifyInterface {
 
@@ -17,7 +18,7 @@ class FeedbackNotifier implements NotifyInterface {
 
 		$template = \Twig::getTwig()->render('/partials/admin/tableRow.twig', [
 			'name' => $feedback->getUser()->getName(),
-			'date' => $feedback->getCreatedAt()->format(self::FORMAT),
+			'date' => $feedback->getCreatedAt()->format(Utils::dateTimeFormat()),
 			'type' => 'Feedback',
 			'text' => $feedback->getText()
 		]);

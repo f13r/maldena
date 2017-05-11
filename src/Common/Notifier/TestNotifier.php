@@ -3,6 +3,7 @@
 namespace Common\Notifier;
 
 use Domain\Entity\Test;
+use Services\Utils;
 
 class TestNotifier implements NotifyInterface {
 
@@ -17,7 +18,7 @@ class TestNotifier implements NotifyInterface {
 
 		$template = \Twig::getTwig()->render('/partials/admin/tableRow.twig', [
 			'name' => $test->getUser()->getName(),
-			'date' => $test->getCreatedAt()->format(self::FORMAT),
+			'date' => $test->getCreatedAt()->format(Utils::dateTimeFormat()),
 			'type' => 'Test',
 			'text' => $test->getGoals()
 		]);

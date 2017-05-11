@@ -1,0 +1,24 @@
+<div class="container teacher mobile-mar-top-0">
+    <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 teacher-img">
+                <img src="{{ teacher.photo }}">
+            </div>
+            <div class="teacher-block col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="teacher-title">
+                       <strong>{{ teacher.user.name }}</strong>
+                </div>
+                <div class="teacher-info">
+                        <div><strong>Cпециализация:</strong> {{ teacher.specialization }}</div>
+                        <div><strong>E-mail:</strong> {{ teacher.user.email }}</div>
+                        <div><strong>Phone:</strong> {{ teacher.user.phone }}</div>
+                </div>
+                <div class="teacher-description">
+                        <blockquote class="font-style-italic text-justify">
+                            {{ teacher.description|raw }}
+                        </blockquote>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="clearfix"></div>

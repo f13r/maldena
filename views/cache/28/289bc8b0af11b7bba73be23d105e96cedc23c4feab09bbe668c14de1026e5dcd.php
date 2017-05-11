@@ -31,7 +31,7 @@ class __TwigTemplate_271503868f7e0cd2042d4e570db7e9bdb7305a5b68759aded3a644759b2
                     </button>
                     <div class=\"logo\">
                         <a href=\"/\">
-                            <img class=\"img-responsive\" src=\"web/client/images/logo.png\" alt=\"Maldena English Club\">
+                            <img class=\"img-responsive\" src=\"/web/client/images/logo.png\" alt=\"Maldena English Club\">
                         </a>
                         <div class=\"phone-mobile\">";
         // line 18
@@ -68,8 +68,19 @@ class __TwigTemplate_271503868f7e0cd2042d4e570db7e9bdb7305a5b68759aded3a644759b2
         echo $this->env->getExtension('routing')->getPath("demo");
         echo "\">Пробный урок</a>
                         </li>
-                        <li class=\"dropdown";
+                        <li";
         // line 32
+        if (((isset($context["action"]) ? $context["action"] : $this->getContext($context, "action")) == "teachers")) {
+            echo " class=\"active\"";
+        }
+        echo ">
+                            <a href=\"";
+        // line 33
+        echo $this->env->getExtension('routing')->getPath("teachers");
+        echo "\">Преподаватели</a>
+                        </li>
+                        <li class=\"dropdown";
+        // line 35
         if (((isset($context["action"]) ? $context["action"] : $this->getContext($context, "action")) == "services")) {
             echo " active";
         }
@@ -79,57 +90,55 @@ class __TwigTemplate_271503868f7e0cd2042d4e570db7e9bdb7305a5b68759aded3a644759b2
                             </a>
                             <ul class=\"dropdown-menu\">
                                 <li><a href=\"";
-        // line 37
+        // line 40
         echo $this->env->getExtension('routing')->getPath("group");
         echo "\">Групповые занятия</a></li>
                                 <li><a href=\"";
-        // line 38
+        // line 41
         echo $this->env->getExtension('routing')->getPath("individually");
         echo "\">Индивидуальные занятия</a></li>
                                 <li role=\"separator\" class=\"divider\"></li>
                                 <li><a href=\"";
-        // line 40
-        echo $this->env->getExtension('routing')->getPath("tests");
-        echo "\">Международные тесты</a></li>
-                                <li><a href=\"";
-        // line 41
+        // line 43
         echo $this->env->getExtension('routing')->getPath("it");
         echo "\">Английский для ІТ</a></li>
-                                ";
-        // line 43
-        echo "                                ";
+                                <li><a href=\"";
         // line 44
+        echo $this->env->getExtension('routing')->getPath("zno");
+        echo "\">Подготовка к ВНО (ЗНО)</a></li>
+                                ";
+        // line 46
         echo "                                ";
-        // line 45
+        // line 47
         echo "                                <li role=\"separator\" class=\"divider\"></li>
                                 <li><a href=\"";
-        // line 46
+        // line 48
         echo $this->env->getExtension('routing')->getPath("speaker");
         echo "\">Speaking Club</a></li>
                             </ul>
                         </li>
                         ";
-        // line 50
-        echo "                            ";
-        // line 51
-        echo "                        ";
         // line 52
+        echo "                            ";
+        // line 53
+        echo "                        ";
+        // line 54
         echo "                        <li";
         if (((isset($context["action"]) ? $context["action"] : $this->getContext($context, "action")) == "contacts")) {
             echo " class=\"active\"";
         }
         echo ">
                             <a href=\"";
-        // line 53
+        // line 55
         echo $this->env->getExtension('routing')->getPath("contacts");
         echo "\">Контакты</a>
                         </li>
                         <li><a class=\"phone\" href=\"#\"><strong>";
-        // line 55
+        // line 57
         echo twig_escape_filter($this->env, (isset($context["phone"]) ? $context["phone"] : $this->getContext($context, "phone")), "html", null, true);
         echo "</strong></a></li>
                         ";
-        // line 57
+        // line 59
         echo "                    </ul>
                 </div>
                 <!--/.nav-collapse -->
@@ -155,7 +164,7 @@ class __TwigTemplate_271503868f7e0cd2042d4e570db7e9bdb7305a5b68759aded3a644759b2
 
     public function getDebugInfo()
     {
-        return array (  133 => 57,  129 => 55,  124 => 53,  117 => 52,  115 => 51,  113 => 50,  107 => 46,  104 => 45,  102 => 44,  100 => 43,  96 => 41,  92 => 40,  87 => 38,  83 => 37,  73 => 32,  68 => 30,  62 => 29,  57 => 27,  50 => 26,  48 => 25,  46 => 24,  38 => 18,  19 => 1,);
+        return array (  142 => 59,  138 => 57,  133 => 55,  126 => 54,  124 => 53,  122 => 52,  116 => 48,  113 => 47,  111 => 46,  107 => 44,  103 => 43,  98 => 41,  94 => 40,  84 => 35,  79 => 33,  73 => 32,  68 => 30,  62 => 29,  57 => 27,  50 => 26,  48 => 25,  46 => 24,  38 => 18,  19 => 1,);
     }
 }
 /* <div class="templatemo-top-menu stuckMenu">*/
@@ -173,7 +182,7 @@ class __TwigTemplate_271503868f7e0cd2042d4e570db7e9bdb7305a5b68759aded3a644759b2
 /*                     </button>*/
 /*                     <div class="logo">*/
 /*                         <a href="/">*/
-/*                             <img class="img-responsive" src="web/client/images/logo.png" alt="Maldena English Club">*/
+/*                             <img class="img-responsive" src="/web/client/images/logo.png" alt="Maldena English Club">*/
 /*                         </a>*/
 /*                         <div class="phone-mobile">{{ phone2 }}</div>*/
 /*                     </div>*/
@@ -189,6 +198,9 @@ class __TwigTemplate_271503868f7e0cd2042d4e570db7e9bdb7305a5b68759aded3a644759b2
 /*                         <li{% if action == 'demo' %} class="active"{% endif %}>*/
 /*                             <a href="{{ path('demo') }}">Пробный урок</a>*/
 /*                         </li>*/
+/*                         <li{% if action == 'teachers' %} class="active"{% endif %}>*/
+/*                             <a href="{{ path('teachers') }}">Преподаватели</a>*/
+/*                         </li>*/
 /*                         <li class="dropdown{% if action == 'services' %} active{% endif %}">*/
 /*                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">*/
 /*                                 Виды обучения <span class="caret"></span>*/
@@ -197,9 +209,8 @@ class __TwigTemplate_271503868f7e0cd2042d4e570db7e9bdb7305a5b68759aded3a644759b2
 /*                                 <li><a href="{{ path('group') }}">Групповые занятия</a></li>*/
 /*                                 <li><a href="{{ path('individually') }}">Индивидуальные занятия</a></li>*/
 /*                                 <li role="separator" class="divider"></li>*/
-/*                                 <li><a href="{{ path('tests') }}">Международные тесты</a></li>*/
 /*                                 <li><a href="{{ path('it') }}">Английский для ІТ</a></li>*/
-/*                                 {#<li><a href="{{ path('zno') }}">Подготовка к ЗНО</a></li>#}*/
+/*                                 <li><a href="{{ path('zno') }}">Подготовка к ВНО (ЗНО)</a></li>*/
 /*                                 {#<li role="separator" class="divider"></li>#}*/
 /*                                 {#<li><a href="{{ path('business') }}">IT и Business английский</a></li>#}*/
 /*                                 <li role="separator" class="divider"></li>*/

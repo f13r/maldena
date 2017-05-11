@@ -4,6 +4,8 @@ namespace Controllers;
 use Common\Notifier\DemoNotifier;
 use Common\Notifier\TestNotifier;
 use Common\Notify\FeedbackNotifier;
+use Domain\Entity\Contact;
+use Domain\Entity\Teacher;
 use Domain\Entity\User;
 use Domain\Entity\Feedback;
 use Silex\Application;
@@ -15,20 +17,23 @@ class IndexController extends AbstractController {
 
 	const SCHOOL_MAIN = 1;
 
-	private $schoolContactCacheKey = 'schoolContacts';
 
-	private function fetchSchoolContactsById($id) {
+	private function fetchSchoolDataById($id) {
 
+		/**
+		 * @var Contact $contact
+		 */
 		$contact = $this->em->getRepository('Domain\Entity\Contact')->find($id);
-		$schoolContacts = $contact->getSchoolContacts();
+		$schoolData = $contact->getSchoolContacts();
 
-		return $schoolContacts;
+		$schoolData['prices'] = $this->em->getRepository('Domain\Entity\Price')->getPricesByContactId($id);
 
+		return $schoolData;
 	}
 
 	protected function actionsHandler() {
 
-		$this->viewAssigns($this->fetchSchoolContactsById(self::SCHOOL_MAIN));
+		$this->viewAssigns($this->fetchSchoolDataById(self::SCHOOL_MAIN));
 
 		$this->controller->get('/', function() {
 			$this->setTemplate('templates/main.twig');
@@ -102,6 +107,35 @@ class IndexController extends AbstractController {
 				'error'         => $this->app['security.last_error']($this->app['request']),
 				'last_username' => $this->app['session']->get('_security.last_username'),
 			]);
+
+			return $this->render();
+		});
+
+		$this->controller->get('/teachers', function() {
+
+			$teachers = $this->em->getRepository('\Domain\Entity\Teacher')->findAll();
+
+			$this->viewAssigns(compact('teachers'));
+			$this->setTemplate('templates/teachers.twig');
+
+			return $this->render();
+
+		})->bind('teachers');
+
+		$this->controller->get('/teachers/{teacher}', function($teacher) {
+
+			if (empty($teacher) || $teacher == '') {
+				return $this->app->redirect('/teachers');
+			}
+
+			$teacher = $this->em->getRepository('\Domain\Entity\Teacher')->findOneByPageName($teacher);
+
+			if (!is_a($teacher, Teacher::class)) {
+				return $this->app->redirect('/teachers');
+			}
+
+			$this->viewAssigns(['teachers' => [ $teacher ]]);
+			$this->setTemplate('templates/teachers.twig');
 
 			return $this->render();
 		});

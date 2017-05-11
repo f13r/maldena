@@ -3,6 +3,7 @@
 namespace Common\Notifier;
 
 use Domain\Entity\Demo;
+use Services\Utils;
 
 /**
  * Class DemoNotifier
@@ -23,7 +24,7 @@ class DemoNotifier implements NotifyInterface {
 
 		$template = \Twig::getTwig()->render('/partials/admin/tableRow.twig', [
 			'name' => $demo->getUser()->getName(),
-			'date' => $demo->getCreatedAt()->format(self::FORMAT),
+			'date' => $demo->getCreatedAt()->format(Utils::dateTimeFormat()),
 			'type' => 'Demo',
 			'text' => ''
 		]);

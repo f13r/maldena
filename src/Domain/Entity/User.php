@@ -17,6 +17,10 @@ class User {
     CONST CONTACT_TYPE_PHONE = 'phone';
     CONST CONTACT_TYPE_EMAIL = 'email';
 
+	const ROLE_USER = 0;
+    const ROLE_TEACHER = 1;
+	const ROLE_ADMIN = 2;
+
     /**
      * @var integer
      *
@@ -29,7 +33,7 @@ class User {
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=10, nullable=true)
+     * @ORM\Column(name="phone", type="string", length=20, nullable=true)
      */
     private $phone;
 
@@ -62,15 +66,22 @@ class User {
     private $userCrmId;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="role", type="string", length=150, nullable=true)
+     * @var int
+	 *
+     * @ORM\Column(name="role", type="integer", length=150, nullable=true)
      */
     private $role;
 
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="vkPage", type="string", length=150, nullable=true)
+	 */
+	private $vkPage;
+
 
     public function __construct() {
-
+    	$this->role = self::ROLE_USER;
     }
 
     public function getId() {
@@ -160,8 +171,19 @@ class User {
         $this->role = $role;
     }
 
+	/**
+	 * @return string
+	 */
+	public function getVkPage() {
+		return $this->vkPage;
+	}
 
-
+	/**
+	 * @param string $vkPage
+	 */
+	public function setVkPage($vkPage) {
+		$this->vkPage = $vkPage;
+	}
 
 }
 

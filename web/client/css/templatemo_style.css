@@ -872,6 +872,7 @@ ul.templatemo-project-gallery  li  a img:hover {
     .navbar-nav > li > a {
         font-size: 1.2em;
     }
+
 }
 
 
@@ -980,6 +981,30 @@ ul.templatemo-project-gallery  li  a img:hover {
     padding-bottom: 15px;
 }
 
+.teacher {
+    margin-bottom: 40px;
+	font-size: 1.2em;
+}
+
+.teacher .teacher-img > img {
+    max-width: 100%;
+}
+
+.teacher .teacher-img {
+    margin-bottom: 20px;
+}
+.teacher .teacher-title {
+    margin-bottom: 17px;
+}
+
+.teacher .teacher-info {
+    margin-bottom: 17px;
+}
+
+.teacher .teacher-info > div {
+    margin-bottom: 12px;
+}
+
 @media (max-width: 768px) {
 
     .mobile-mar-top-0 {
@@ -988,6 +1013,10 @@ ul.templatemo-project-gallery  li  a img:hover {
 
     .mobile-mar-top-l {
         margin-top: 1em;
+    }
+
+    .teacher {
+        font-size: 1.6em;
     }
 }
 

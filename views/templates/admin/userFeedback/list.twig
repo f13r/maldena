@@ -1,0 +1,104 @@
+{% extends "layouts/admin.twig" %}
+
+{% set selected = 'userFeedback' %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="{{ path('/admin/user/test') }}">Клиенты</a>
+            <i class="icon-angle-right"></i>
+        </li>
+        <li>
+            События
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    {% if app.session.getFlashBag.get('demoListChangeSuccessful') %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Well done!</strong> Статус успешно изменён.
+        </div>
+    {% endif %}
+    <div class="row-fluid">
+        <div class="box span12">
+            <div class="box-header" data-original-title="">
+                <h2><i class="halflings-icon user"></i><span class="break"></span>Cписок событий</h2>
+                <div class="box-icon">
+                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <div  class="dataTables_wrapper" role="grid">
+                    {% if events %}
+                    <table class="table table-striped table-bordered bootstrap-datatable datatable dataTable"
+                           id="DataTables_Table_0">
+                        <thead>
+                        <tr>
+                            <th>
+                                Название события
+                            </th>
+                            <th>
+                                Описание
+                            </th>
+                            <th>
+                                Дата и время
+                            </th>
+                            <th>
+                                Количество участников
+                            </th>
+                            <th>
+                                Преподаватель
+                            </th>
+                            <th>
+                                Статус
+                            </th>
+                            <th>
+                                Действия
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+                        {% for event in events %}
+                            <tr class="odd">
+                                <td class="sorting_1">{{ event.title }}</td>
+                                <td class="center">{{ event.description }}</td>
+                                <td class="center">{{ event.date }}</td>
+                                <td class="center">{{ event.participantCount }}</td>
+                                <td class="center">{{ event.teacher }}</td>
+                                <td class="center ">
+                                    <span class="label{% if event.status == 1 %} label-success{% else %} label-important{% endif %}">
+                                        {% if event.status == 1 %}
+                                            Активно
+                                        {% else %}
+                                            Закончилось
+                                        {% endif %}
+                                    </span>
+                                </td>
+                                <td class="center">
+                                    <a href="">Редактировать</a> /
+                                    <a href="">Список участников</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="row-fluid">
+                    </div>
+                    {%  else %}
+                        <div class="priority high">
+                            <span>Пока без событий</span>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

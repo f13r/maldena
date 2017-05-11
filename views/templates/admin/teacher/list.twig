@@ -1,0 +1,116 @@
+{% extends "layouts/admin.twig" %}
+
+{% set selected = 'teacher' %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="{{ path('/admin/user/test') }}">Клиенты</a>
+            <i class="icon-angle-right"></i>
+        </li>
+        <li>
+            События
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    {% if app.session.getFlashBag.get('teacherChangeSuccessfully') %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Well done!</strong> Преподаватель <strong>"{% for message in app.session.getFlashBag.get('teacherName') %}{{ message }}{% endfor %}"</strong> успешно отредактирован </div>
+    {% endif %}
+    <div class="row-fluid">
+        <div class="box span12">
+            <div class="box-header" data-original-title="">
+                <h2><i class="halflings-icon user"></i><span class="break"></span>Cписок преподавателей</h2>
+                <div class="box-icon">
+                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <div  class="dataTables_wrapper" role="grid">
+                    {% if teachers %}
+                    <table class="table table-striped table-bordered bootstrap-datatable datatable dataTable"
+                           id="DataTables_Table_0">
+                        <thead>
+                        <tr>
+                            <th>
+                                Фото
+                            </th>
+                            <th>
+                                Имя
+                            </th>
+                            <th>
+                                Заглавие
+                            </th>
+                            <th>
+                                Описание
+                            </th>
+                            <th>
+                                Специализация
+                            </th>
+                            <th>
+                                E-mail
+                            </th>
+                            <th>
+                                Телефон
+                            </th>
+                            <th>
+                                Статус
+                            </th>
+                            <th>
+                                Действие
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+                        {% for teacher in teachers %}
+                            <tr class="odd">
+                                <td class="sorting_1">
+                                    <a href="{{ teacher.photo }}" target="_blank">
+                                        <img src="{{ teacher.photo }}" style="height: 100px;"/>
+                                    </a>
+                                </td>
+                                <td class="center">{{ teacher.title  }}</td>
+                                <td class="center">{{ teacher.user.name }}</td>
+                                <td class="center">{{ teacher.description }}</td>
+                                <td class="center">{{ teacher.specialization }}</td>
+                                <td class="center">{{ teacher.user.email }}</td>
+                                <td class="center">{{ teacher.user.phone }}</td>
+                                <td class="center ">
+                                    <span class="label{% if teacher.status == 1 %} label-success{% else %} label-important{% endif %}">
+                                        {% if teacher.status == 1 %}
+                                            Работает
+                                        {% else %}
+                                            Не работает
+                                        {% endif %}
+                                    </span>
+                                </td>
+                                <td class="center">
+                                    <a href="{{ path('/admin/teacher/edit', {'teacherId': teacher.id}) }}">Редактировать</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="row-fluid">
+                    </div>
+                    {%  else %}
+                        <div class="priority high">
+                            <span>Пока без преподавателей</span>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+        <div>
+            <a href="{{ path('/admin/teacher/create') }}" class="btn btn-primary">Добавить преподавателя</a>
+        </div>
+    </div>
+{% endblock %}

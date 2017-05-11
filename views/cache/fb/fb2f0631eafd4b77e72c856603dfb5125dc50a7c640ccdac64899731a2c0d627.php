@@ -38,35 +38,36 @@ class __TwigTemplate_be74455ed435b5f0d5f49e576327983697cbf92243d9f4d8b01c190d0cc
         // line 10
         echo $this->env->getExtension('routing')->getPath("individually");
         echo "\">Индивидуальное обучение</a></li>
-                        <li><a href=\"";
-        // line 11
-        echo $this->env->getExtension('routing')->getPath("tests");
-        echo "\">Подготовка к тестам</a></li>
-                        <li><a href=\"";
+                        ";
         // line 12
+        echo "                        <li><a href=\"";
         echo $this->env->getExtension('routing')->getPath("it");
         echo "\">Английский для ІТ</a></li>
+                        <li><a href=\"";
+        // line 13
+        echo $this->env->getExtension('routing')->getPath("teachers");
+        echo "\">Преподаватели</a></li>
                         ";
-        // line 14
-        echo "                        ";
         // line 15
         echo "                        ";
         // line 16
         echo "                        ";
         // line 17
+        echo "                        ";
+        // line 18
         echo "                        <li><a href=\"";
         echo $this->env->getExtension('routing')->getPath("test");
         echo "\">Online-тест</a></li>
                         <li><a href=\"";
-        // line 18
+        // line 19
         echo $this->env->getExtension('routing')->getPath("speaker");
         echo "\">Speaking Club</a></li>
                         <li><a href=\"";
-        // line 19
+        // line 20
         echo $this->env->getExtension('routing')->getPath("contacts");
         echo "\">Контакты</a></li>
                         ";
-        // line 21
+        // line 22
         echo "                        <li>&copy; 2016</li>
                     </ul>
                 </div>
@@ -90,7 +91,7 @@ class __TwigTemplate_be74455ed435b5f0d5f49e576327983697cbf92243d9f4d8b01c190d0cc
 
     public function getDebugInfo()
     {
-        return array (  70 => 21,  66 => 19,  62 => 18,  57 => 17,  55 => 16,  53 => 15,  51 => 14,  47 => 12,  43 => 11,  39 => 10,  35 => 9,  31 => 8,  27 => 7,  19 => 1,);
+        return array (  71 => 22,  67 => 20,  63 => 19,  58 => 18,  56 => 17,  54 => 16,  52 => 15,  48 => 13,  43 => 12,  39 => 10,  35 => 9,  31 => 8,  27 => 7,  19 => 1,);
     }
 }
 /* <div class="footer">*/
@@ -103,8 +104,9 @@ class __TwigTemplate_be74455ed435b5f0d5f49e576327983697cbf92243d9f4d8b01c190d0cc
 /*                         <li><a href="{{ path('demo') }}">Пробный урок</a></li>*/
 /*                         <li><a href="{{ path('group') }}">Групповые занятия</a></li>*/
 /*                         <li><a href="{{ path('individually') }}">Индивидуальное обучение</a></li>*/
-/*                         <li><a href="{{ path('tests') }}">Подготовка к тестам</a></li>*/
+/*                         {#<li><a href="{{ path('tests') }}">Подготовка к тестам</a></li>#}*/
 /*                         <li><a href="{{ path('it') }}">Английский для ІТ</a></li>*/
+/*                         <li><a href="{{ path('teachers') }}">Преподаватели</a></li>*/
 /*                         {#<li role="separator" class="divider"></li>#}*/
 /*                         {#<li role="separator" class="divider"></li>#}*/
 /*                         {#<li><a href="{{ path('business') }}">IT и Business английский</a></li>#}*/

@@ -3,12 +3,16 @@ namespace Controllers;
 
 use Domain\Entity\Activity;
 use Domain\Entity\Demo;
+use Domain\Entity\Event;
+use Domain\Entity\Teacher;
 use Domain\Entity\Test;
+use Domain\Entity\User;
 use Domain\Repository\DemoRepository;
 use Domain\Repository\FeedbackRepository;
 use Domain\Repository\TestRepository;
 use Silex\Application;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class AdminController extends AbstractController {
 
@@ -218,6 +222,130 @@ class AdminController extends AbstractController {
 			return $this->render();
 
 		})->bind('/admin/subscribers')->value('page', 1);
+
+		$this->controller->get('/events', function() {
+
+//			$event = new Event();
+//			$event->setTitle('Спикер клаб');
+//			$event->setDescription('Приходи пообщаться на английском и хорошо провести время!');
+//			$event->setPrice('50 грн');
+//			$event->setDate(new \DateTime());
+//			$event->setParticipantCount(7);
+//			$event->setTeacher('Олександра');
+//
+//			$this->em->persist($event);
+//			$this->em->flush();
+
+			$events = $this->em->getRepository('\Domain\Entity\Event')->findAll();
+
+			$this->setTemplate('templates/admin/event/list.twig');
+			$this->viewAssigns(compact('events'));
+			return $this->render();
+
+		})->bind('/admin/events');
+
+		$this->controller->get('/teachers', function() {
+
+			$teachers = $this->em->getRepository('\Domain\Entity\Teacher')->findAll();
+
+			$this->setTemplate('templates/admin/teacher/list.twig');
+			$this->viewAssigns(compact('teachers'));
+			return  $this->render();
+
+		})->bind('/admin/teachers');
+
+		$this->controller->get('/teachers/create', function() {
+
+			$this->setTemplate('templates/admin/teacher/edit.twig');
+			return  $this->render();
+
+		})->bind('/admin/teacher/create');
+
+		$this->controller->get('/teachers/{teacherId}', function($teacherId) {
+
+			$teacher = $this->em->getRepository('\Domain\Entity\Teacher')->find($teacherId);
+
+			if (!is_a($teacher, Teacher::class)) {
+				return $this->app->redirect('/admin/teacher/create');
+			}
+
+			$this->setTemplate('templates/admin/teacher/edit.twig');
+			$this->viewAssigns(compact('teacher'));
+			return  $this->render();
+
+		})->bind('/admin/teacher/edit');
+
+		$this->controller->post('/teachers/add', function() {
+
+			$relatedPath = '';
+
+			$teacherData = $this->app['request']->request->get('teacher');
+
+			if($_FILES['photo']['name']) {
+				if(!$_FILES['photo']['error']) {
+					$fileName = $teacherData['pageName'] . '.' . pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+					$relatedPath =  '/web/client/images/teachers/' . $fileName;
+					$absolutePath = realpath('./web/client/images/teachers/') . '/' . $fileName;
+					move_uploaded_file($_FILES['photo']['tmp_name'], $absolutePath);
+				}
+			}
+
+			/**
+			 * @var Teacher $teacher
+			 */
+			if (!empty($teacherData['id'])) {
+				$teacher = $this->em->getRepository('\Domain\Entity\Teacher')->find($teacherData['id']);
+
+				if (!is_a($teacher, Teacher::class)) {
+					$teacher = new Teacher();
+				}
+
+			} else {
+				$teacher = new Teacher();
+			}
+
+			if (isset($teacherData['title'])) {
+				$teacher->setTitle($teacherData['title']);
+			}
+			$teacher->setDescription(trim($teacherData['description']));
+			$teacher->setSpecialization($teacherData['specialization']);
+			$teacher->setStatus($teacherData['status']);
+			$teacher->setPageName($teacherData['pageName']);
+			$teacher->setPhoto($relatedPath);
+
+			$user = $teacher->getUser();
+
+			if (!is_a($user, User::class)) {
+				$user = new User();
+			}
+
+			$user->setName($teacherData['user']['name']);
+			$user->setEmail($teacherData['user']['email']);
+			$user->setPhone($teacherData['user']['phone']);
+			$user->setRole(User::ROLE_TEACHER);
+
+			$teacher->setUser($user);
+
+			$this->em->persist($teacher);
+			$this->em->flush();
+
+			$this->session->getFlashBag()->add('teacherChangeSuccessfully', true);
+			$this->session->getFlashBag()->add('teacherName', $user->getName());
+
+			return $this->app->redirect('/admin/teachers');
+
+
+		})->bind('/admin/teacher/add');
+
+		$this->controller->get('/feedback', function() {
+
+			$userFeedback = $this->em->getRepository('\Domain\Entity\UserFeedback')->findAll();
+
+			$this->setTemplate('templates/admin/userFeedback/list.twig');
+			$this->viewAssigns(compact('userFeedback'));
+			return  $this->render();
+
+		})->bind('/admin/feedback');
 
 		return $this->controller;
 	}
