@@ -304,9 +304,6 @@ class AdminController extends AbstractController {
 				$teacher = new Teacher();
 			}
 
-			if (isset($teacherData['title'])) {
-				$teacher->setTitle($teacherData['title']);
-			}
 			$teacher->setDescription(trim($teacherData['description']));
 			$teacher->setSpecialization($teacherData['specialization']);
 			$teacher->setStatus($teacherData['status']);

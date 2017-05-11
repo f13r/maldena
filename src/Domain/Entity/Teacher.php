@@ -22,13 +22,6 @@ class Teacher {
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=300, nullable=true)
-     */
-    private $title;
-
 	/**
 	 * @var string
 	 *
@@ -96,20 +89,6 @@ class Teacher {
      */
     public function setDescription($description) {
         $this->description = $description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle() {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title) {
-        $this->title = $title;
     }
 
     /**

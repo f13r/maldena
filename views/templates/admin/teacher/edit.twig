@@ -85,12 +85,6 @@
                         </div>
                         <hr>
                         <div class="control-group">
-                            <label class="control-label" for="teacherTitle">Заглавие статьи</label>
-                            <div class="controls">
-                                <input type="text" value="{% if teacher.title is defined %}{{ teacher.title }}{% endif %}" class="span6" id="teacherTitle" name="teacher[title]">
-                            </div>
-                        </div>
-                        <div class="control-group">
                             <label class="control-label" for="teacherSpecialization">Специализация</label>
                             <div class="controls">
                                 <input type="text" value="{% if teacher.specialization is defined %}{{ teacher.specialization }}{% endif %}" class="span6" id="teacherSpecialization" name="teacher[specialization]">
@@ -116,7 +110,7 @@
                         <div class="control-group">
                             <label class="control-label" for="teacherPageName">Имя страницы</label>
                             <div class="controls">
-                                http://maldena.com.ua/ <input type="text" value="{% if teacher.pageName is defined %}{{ teacher.pageName }}{% endif %}" class="span4" id="teacherPageName" name="teacher[pageName]">
+                                http://maldena.com.ua/teachers/ <input type="text" value="{% if teacher.pageName is defined %}{{ teacher.pageName }}{% endif %}" class="span4" id="teacherPageName" name="teacher[pageName]">
                             </div>
                         </div>
                         {#<div class="control-group">#}
