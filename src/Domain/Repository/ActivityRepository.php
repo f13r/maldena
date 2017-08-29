@@ -11,11 +11,11 @@ class ActivityRepository extends EntityRepository {
 	/**
 	 * Paginator Helper
 	 *
-	 * @param Doctrine\ORM\Query $dql   DQL Query Object
+	 * @param \Doctrine\ORM\Query $query   DQL Query Object
 	 * @return \Doctrine\ORM\Tools\Pagination\Paginator
 	 */
-	public function paginate($dql) {
-		return new Paginator($dql, false);
+	public function paginate($query) {
+		return new Paginator($query, false);
 	}
 
 
@@ -32,7 +32,7 @@ class ActivityRepository extends EntityRepository {
 			->setMaxResults(static::SHOW_ROWS_IN_LIST) // Limit
 			->getQuery();
 
-		return $this->paginate($query, $currentPage);
+		return $this->paginate($query);
 	}
 
 	public function getQuantityOfUncheckedRows() {

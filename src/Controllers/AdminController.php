@@ -277,9 +277,11 @@ class AdminController extends AbstractController {
 
 		$this->controller->post('/teachers/add', function() {
 
-			$relatedPath = '';
 
 			$teacherData = $this->app['request']->request->get('teacher');
+
+			$relatedPath = $this->handlePicture($teacherData['pageName'], Teacher::PHOTO_FOLDER_NAME);
+
 
 			if($_FILES['photo']['name']) {
 				if(!$_FILES['photo']['error']) {
@@ -289,7 +291,6 @@ class AdminController extends AbstractController {
 					move_uploaded_file($_FILES['photo']['tmp_name'], $absolutePath);
 				}
 			}
-
 			/**
 			 * @var Teacher $teacher
 			 */
@@ -306,28 +307,24 @@ class AdminController extends AbstractController {
 
 			$teacher->setDescription(trim($teacherData['description']));
 			$teacher->setSpecialization($teacherData['specialization']);
-			$teacher->setStatus($teacherData['status']);
+			$teacher->setActive($teacherData['active']);
 			$teacher->setPageName($teacherData['pageName']);
-			$teacher->setPhoto($relatedPath);
 
-			$user = $teacher->getUser();
-
-			if (!is_a($user, User::class)) {
-				$user = new User();
+			if (!empty($relatedPath)) {
+				$teacher->setPhoto($relatedPath);
 			}
 
-			$user->setName($teacherData['user']['name']);
-			$user->setEmail($teacherData['user']['email']);
-			$user->setPhone($teacherData['user']['phone']);
-			$user->setRole(User::ROLE_TEACHER);
+			$teacher->setName($teacherData['user']['name']);
+			$teacher->setEmail($teacherData['user']['email']);
+			$teacher->setPhone($teacherData['user']['phone']);
+			$teacher->setRole(User::ROLE_TEACHER);
 
-			$teacher->setUser($user);
 
 			$this->em->persist($teacher);
 			$this->em->flush();
 
 			$this->session->getFlashBag()->add('teacherChangeSuccessfully', true);
-			$this->session->getFlashBag()->add('teacherName', $user->getName());
+			$this->session->getFlashBag()->add('teacherName', $teacher->getName());
 
 			return $this->app->redirect('/admin/teachers');
 
@@ -336,15 +333,84 @@ class AdminController extends AbstractController {
 
 		$this->controller->get('/feedback', function() {
 
-			$userFeedback = $this->em->getRepository('\Domain\Entity\UserFeedback')->findAll();
+			$userFeedbacks = $this->em->getRepository('\Domain\Entity\UserFeedback')->findAll();
 
 			$this->setTemplate('templates/admin/userFeedback/list.twig');
-			$this->viewAssigns(compact('userFeedback'));
+			$this->viewAssigns(compact('userFeedbacks'));
 			return  $this->render();
 
 		})->bind('/admin/feedback');
 
+//		$this->controller->post('/teachers/add', function() {
+//
+//			$relatedPath = '';
+//
+//			$teacherData = $this->app['request']->request->get('teacher');
+//
+//			/**
+//			 * @var Teacher $teacher
+//			 */
+//			if (!empty($teacherData['id'])) {
+//				$teacher = $this->em->getRepository('\Domain\Entity\Teacher')->find($teacherData['id']);
+//
+//				if (!is_a($teacher, Teacher::class)) {
+//					$teacher = new Teacher();
+//				}
+//
+//			} else {
+//				$teacher = new Teacher();
+//			}
+//
+//			$teacher->setDescription(trim($teacherData['description']));
+//			$teacher->setSpecialization($teacherData['specialization']);
+//			$teacher->setStatus($teacherData['status']);
+//			$teacher->setPageName($teacherData['pageName']);
+//
+//			if (!empty($relatedPath)) {
+//				$teacher->setPhoto($relatedPath);
+//			}
+//
+//			$teacher->setName($teacherData['user']['name']);
+//			$teacher->setEmail($teacherData['user']['email']);
+//			$teacher->setPhone($teacherData['user']['phone']);
+//			$teacher->setRole(User::ROLE_TEACHER);
+//
+//
+//			$this->em->persist($teacher);
+//			$this->em->flush();
+//
+//			$this->session->getFlashBag()->add('teacherChangeSuccessfully', true);
+//			$this->session->getFlashBag()->add('teacherName', $teacher->getName());
+//
+//			return $this->app->redirect('/admin/teachers');
+//
+//
+//		})->bind('/admin/teacher/add');
+
+
+
 		return $this->controller;
+	}
+
+	/**
+	 * @param $fileName
+	 * @param $folder
+	 * @return string
+	 */
+	private function handlePicture($fileName, $folder) {
+
+		$relatedPath = '';
+
+		if($_FILES['photo']['name']) {
+			if(!$_FILES['photo']['error']) {
+				$fileName = $fileName . '.' . pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+				$relatedPath =  '/web/client/images/teachers/' . $fileName;
+				$absolutePath = realpath('./web/client/images/' . $folder . '/') . '/' . $fileName;
+				move_uploaded_file($_FILES['photo']['tmp_name'], $absolutePath);
+			}
+		}
+
+		return $relatedPath;
 	}
 
 }

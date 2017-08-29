@@ -113,7 +113,7 @@ class IndexController extends AbstractController {
 
 		$this->controller->get('/teachers', function() {
 
-			$teachers = $this->em->getRepository('\Domain\Entity\Teacher')->findAll();
+			$teachers = $this->em->getRepository('\Domain\Entity\Teacher')->getActiveTeachers();
 
 			$this->viewAssigns(compact('teachers'));
 			$this->setTemplate('templates/teachers.twig');

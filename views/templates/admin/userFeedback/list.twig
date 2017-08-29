@@ -33,25 +33,22 @@
             </div>
             <div class="box-content">
                 <div  class="dataTables_wrapper" role="grid">
-                    {% if events %}
+                    {% if userFeedbacks %}
                     <table class="table table-striped table-bordered bootstrap-datatable datatable dataTable"
                            id="DataTables_Table_0">
                         <thead>
                         <tr>
                             <th>
-                                Название события
+                                Имя пользователя
                             </th>
                             <th>
-                                Описание
+                                Отзыв
                             </th>
                             <th>
-                                Дата и время
+                                Фото
                             </th>
                             <th>
-                                Количество участников
-                            </th>
-                            <th>
-                                Преподаватель
+                                Дата
                             </th>
                             <th>
                                 Статус
@@ -63,19 +60,19 @@
                         </thead>
 
                         <tbody role="alert" aria-live="polite" aria-relevant="all">
-                        {% for event in events %}
+                        {% for userFeedback in userFeedbacks %}
                             <tr class="odd">
-                                <td class="sorting_1">{{ event.title }}</td>
-                                <td class="center">{{ event.description }}</td>
-                                <td class="center">{{ event.date }}</td>
-                                <td class="center">{{ event.participantCount }}</td>
-                                <td class="center">{{ event.teacher }}</td>
+                                <td class="sorting_1">{{ userFeedback.title }}</td>
+                                <td class="center">{{ userFeedback.description }}</td>
+                                <td class="center">{{ userFeedback.date }}</td>
+                                <td class="center">{{ userFeedback.participantCount }}</td>
+                                <td class="center">{{ userFeedback.teacher }}</td>
                                 <td class="center ">
-                                    <span class="label{% if event.status == 1 %} label-success{% else %} label-important{% endif %}">
-                                        {% if event.status == 1 %}
-                                            Активно
+                                    <span class="label{% if userFeedback.status == 1 %} label-success{% else %} label-important{% endif %}">
+                                        {% if userFeedback.status == 1 %}
+                                            Показывается
                                         {% else %}
-                                            Закончилось
+                                            Скрыто
                                         {% endif %}
                                     </span>
                                 </td>

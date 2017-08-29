@@ -72,14 +72,14 @@
                                         <img src="{{ teacher.photo }}" >
                                     </a>
                                 </td>
-                                <td class="center">{{ teacher.user.name }}</td>
+                                <td class="center">{{ teacher.name }}</td>
                                 <td class="center">{{ teacher.description }}</td>
                                 <td class="center">{{ teacher.specialization }}</td>
-                                <td class="center">{{ teacher.user.email }}</td>
-                                <td class="center">{{ teacher.user.phone }}</td>
+                                <td class="center">{{ teacher.email }}</td>
+                                <td class="center">{{ teacher.phone }}</td>
                                 <td class="center ">
-                                    <span class="label{% if teacher.status == 1 %} label-success{% else %} label-important{% endif %}">
-                                        {% if teacher.status == 1 %}
+                                    <span class="label{% if teacher.active == 1 %} label-success{% else %} label-important{% endif %}">
+                                        {% if teacher.active == 1 %}
                                             Работает
                                         {% else %}
                                             Не работает

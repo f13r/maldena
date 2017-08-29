@@ -24,23 +24,9 @@ class UserFeedback {
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=300, nullable=true)
-     */
-    private $title;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="description", type="string", length=1500, nullable=true)
      */
     private $description;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="photo", type="string", length=300, nullable=true)
-     */
-    private $photo;
 
     /**
      * @var integer
@@ -81,34 +67,6 @@ class UserFeedback {
      */
     public function setDescription($description) {
         $this->description = $description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle() {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title) {
-        $this->title = $title;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPhoto() {
-        return $this->photo;
-    }
-
-    /**
-     * @param string $photo
-     */
-    public function setPhoto($photo) {
-        $this->photo = $photo;
     }
 
     /**

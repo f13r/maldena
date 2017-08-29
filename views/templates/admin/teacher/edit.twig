@@ -27,7 +27,7 @@
     <div class="row-fluid sortable ui-sortable">
         <div class="box span12">
             <div class="box-header" data-original-title="">
-                <h2><i class="halflings-icon edit"></i><span class="break"></span>Редактирование страницы {% if teacher.user.name is defined %}"{{ teacher.user.name }}"{% else %}преподавателя{% endif %}</h2>
+                <h2><i class="halflings-icon edit"></i><span class="break"></span>Редактирование страницы {% if teacher.name is defined %}"{{ teacher.name }}"{% else %}преподавателя{% endif %}</h2>
                 <div class="box-icon">
                     <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -41,19 +41,19 @@
                         <div class="control-group">
                             <label class="control-label" for="teacherTitle">Имя</label>
                             <div class="controls">
-                                <input type="text" value="{% if teacher.user.name is defined %}{{ teacher.user.name }}{% endif %}" class="span6" id="teacherTitle" name="teacher[user][name]">
+                                <input type="text" value="{% if teacher.name is defined %}{{ teacher.name }}{% endif %}" class="span6" id="teacherTitle" name="teacher[user][name]">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="teacherEmail">E-mail</label>
                             <div class="controls">
-                                <input type="text" value="{% if teacher.user.email is defined %}{{ teacher.user.email }}{% endif %}" class="span6" id="teacherEmail" name="teacher[user][email]">
+                                <input type="text" value="{% if teacher.email is defined %}{{ teacher.email }}{% endif %}" class="span6" id="teacherEmail" name="teacher[user][email]">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="teacherPhone">Phone</label>
                             <div class="controls">
-                                <input type="text" value="{% if teacher.user.phone is defined %}{{ teacher.user.phone }}{% endif %}" class="span6" id="teacherPhone" name="teacher[user][phone]">
+                                <input type="text" value="{% if teacher.phone is defined %}{{ teacher.phone }}{% endif %}" class="span6" id="teacherPhone" name="teacher[user][phone]">
                             </div>
                         </div>
                         <div class="control-group">
@@ -99,11 +99,11 @@
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="teacherStatus">Статус</label>
+                            <label class="control-label" for="teacherActive">Статус</label>
                             <div class="controls">
-                                <select id="teacherStatus" name="teacher[status]">
-                                    <option value="0" {% if teacher.status is defined %}{% if teacher.status == 0 %}selected{% endif %}{% endif %} >Не работает</option>
-                                    <option value="1" {% if teacher.status is defined %}{% if teacher.status == 1 %}selected{% endif %}{% endif %} >Работает</option>
+                                <select id="teacherActive" name="teacher[active]">
+                                    <option value="0" {% if teacher.active is defined %}{% if teacher.active == 0 %}selected{% endif %}{% endif %} >Не работает</option>
+                                    <option value="1" {% if teacher.active is defined %}{% if teacher.active == 1 %}selected{% endif %}{% endif %} >Работает</option>
                                 </select>
                             </div>
                         </div>

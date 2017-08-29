@@ -7,20 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Teachers
  *
- * @ORM\Entity
  * @ORM\Table(name="teacher")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="Domain\Repository\TeacherRepository")
  */
-class Teacher {
+class Teacher extends User {
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+	CONST PHOTO_FOLDER_NAME = 'teachers';
 
 	/**
 	 * @var string
@@ -36,12 +28,6 @@ class Teacher {
      */
     private $description;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="photo", type="string", length=300, nullable=true)
-     */
-    private $photo;
 
     /**
      * @var string
@@ -53,29 +39,31 @@ class Teacher {
     /**
      * @var integer
      *
-     * @ORM\Column(name="status", type="smallint", nullable=false, options={"default": 1})
+     * @ORM\Column(name="active", type="smallint", nullable=false, options={"default": 1})
      */
-    private $status = 1;
+    private $active = 1;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="User", cascade={"persist"})
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     **/
-    private $user;
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="sort", type="smallint", nullable=false)
+	 */
+    private $sort;
 
-    /**
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
 
-    /**
-     * @param int $id
-     */
-    public function setId($id) {
-        $this->id = $id;
-    }
+	/**
+	 * @return int
+	 */
+	public function getSort() {
+		return $this->sort;
+	}
+
+	/**
+	 * @param int $sort
+	 */
+	public function setSort($sort) {
+		$this->sort = $sort;
+	}
 
     /**
      * @return string
@@ -89,34 +77,6 @@ class Teacher {
      */
     public function setDescription($description) {
         $this->description = $description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPhoto() {
-        return $this->photo;
-    }
-
-    /**
-     * @param string $photo
-     */
-    public function setPhoto($photo) {
-        $this->photo = $photo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUser() {
-        return $this->user;
-    }
-
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user) {
-        $this->user = $user;
     }
 
     /**
@@ -136,15 +96,15 @@ class Teacher {
     /**
      * @return mixed
      */
-    public function getStatus() {
-        return $this->status;
+    public function getActive() {
+        return $this->active;
     }
 
     /**
-     * @param mixed $status
+     * @param mixed $active
      */
-    public function setStatus($status) {
-        $this->status = $status;
+    public function setActive($active) {
+        $this->active = $active;
     }
 
 	/**
@@ -160,7 +120,6 @@ class Teacher {
 	public function setPageName($pageName) {
 		$this->pageName = $pageName;
 	}
-
 
 
 }

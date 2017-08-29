@@ -40,7 +40,7 @@ class FormExtensionDivLayoutTest extends AbstractDivLayoutTest
             'form_div_layout.html.twig',
             'custom_widgets.html.twig',
         ));
-        $renderer = new TwigRenderer($rendererEngine, $this->getMock('Symfony\Component\Security\Csrf\CsrfTokenManagerInterface'));
+        $renderer = new TwigRenderer($rendererEngine, $this->getMockBuilder('Symfony\Component\Security\Csrf\CsrfTokenManagerInterface')->getMock());
 
         $this->extension = new FormExtension($renderer);
 
@@ -105,7 +105,11 @@ class FormExtensionDivLayoutTest extends AbstractDivLayoutTest
 
         $renderer = $this->extension->renderer;
         $renderer->setTheme($view, array('page_dynamic_extends.html.twig'));
-        $renderer->searchAndRenderBlock($view, 'row');
+
+        $this->assertMatchesXpath(
+            $renderer->searchAndRenderBlock($view, 'row'),
+            '/div/label[text()="child"]'
+        );
     }
 
     public function isSelectedChoiceProvider()

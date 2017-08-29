@@ -10,7 +10,8 @@ use Symfony\Component\Security\Acl\Exception\Exception;
  *
  * @ORM\Entity(repositoryClass="Domain\Repository\UserRepository")
  * @ORM\Table(name="users")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
  */
 class User {
 
@@ -75,9 +76,16 @@ class User {
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="vkPage", type="string", length=150, nullable=true)
+	 * @ORM\Column(name="photo", type="string", length=300, nullable=true)
 	 */
-	private $vkPage;
+	private $photo;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="facebook", type="string", length=150, nullable=true)
+	 */
+	private $facebook;
 
 
     public function __construct() {
@@ -110,8 +118,9 @@ class User {
         return $this->createdAt;
     }
 
-    public function setCreatedAt() {
-        $this->createdAt = new \DateTime("now");
+    public function setCreatedAt($dateTime) {
+    	$dateTime = !empty($dateTime) ? $dateTime : new \DateTime("now");
+        $this->createdAt = $dateTime;
     }
 
     public function getName() {
@@ -120,20 +129,6 @@ class User {
 
     public function setName($name) {
         $this->name = $name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getActivity() {
-        return $this->activity;
-    }
-
-    /**
-     * @param mixed $activity
-     */
-    public function setActivity($activity) {
-        $this->activity = $activity;
     }
 
     /**
@@ -174,15 +169,29 @@ class User {
 	/**
 	 * @return string
 	 */
-	public function getVkPage() {
-		return $this->vkPage;
+	public function getFacebook() {
+		return $this->facebook;
 	}
 
 	/**
-	 * @param string $vkPage
+	 * @param string $facebook
 	 */
-	public function setVkPage($vkPage) {
-		$this->vkPage = $vkPage;
+	public function setFacebook($facebook) {
+		$this->facebook = $facebook;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPhoto() {
+		return $this->photo;
+	}
+
+	/**
+	 * @param string $photo
+	 */
+	public function setPhoto($photo) {
+		$this->photo = $photo;
 	}
 
 }
