@@ -147,83 +147,8 @@
         </div>
     </div>
 
-
-    <div id="templatemo-for-start">
-        <div class="container">
-            <div class="row">
-                <div class="templatemo-line-header container ">
-                    <div class="text-center row">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <hr class="hr_gray"/>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <h2>
-                                <strong>
-                                    Преподаватель
-                                </strong>
-                            </h2>
-                        </div>
-                        <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <hr class="hr_gray"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container  contacts">
-            <p>
-                В нашей школе подготовку к ВНО (ЗНО) проводит преподаватель Валентина. Пару слов от Валентины:
-            </p>
-            <blockquote class="font-style-italic text-justify">
-                <p>
-                    Я всегда стремлюсь, чтобы мои студенты достигали успеха и поставленных целей. Очень приятно наблюдать за студентами, которые начинают учить английский с начальных уровней и с каждым месяцем их знания растут и они покоряют уровень за уровнем. Я очень рада, что наши усилия не напрасны и мы каждый день помогаем Вам приблизиться к своей мечте!
-                    Люблю преподавание в легкой, непринужденной манере и постоянно улучшаю мои собственные стандарты обучения, помогая Вам!
-                </p>
-            </blockquote>
-    </div>
-
-    <div id="templatemo-for-start">
-        <div class="container">
-            <div class="row">
-                <div class="templatemo-line-header container">
-                    <div class="text-center row">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <hr class="hr_gray"/>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <h2>
-                                <strong>
-                                    Как начать
-                                </strong>
-                            </h2>
-                        </div>
-                        <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <hr class="hr_gray"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container contacts" style="margin-bottom: 35px;">
-        <div class="row">
-            <p class="text-justify">
-                Запишитесь на <a href="{{ path('demo') }}">бесплатный пробный урок</a> и проверьте или все вышесказанное правда :)
-                <br> или свяжитесь с нами по телефонах: <strong>{{phone}}</strong>, <strong>{{phone2}}</strong>
-            </p>
-        </div>
-
-        <div class="try-it-out">
-            <div class="try-it-out-button">
-                <a href="{{ path('demo') }}">
-                    <button type="button" class="btn btn-lg btn-orange">
-                        <span class="glyphicon glyphicon-education"></span> Записаться
-                    </button>
-                </a>
-            </div>
-        </div>
+    <div class="pc-view">
+        {% include "./partials/tryitout.twig" %}
     </div>
     {% include "./partials/contacts.twig" %}
 

@@ -263,47 +263,8 @@
     <div class="clearfix"></div>
 
 
-    <div id="templatemo-for-start">
-        <div class="container">
-            <div class="row">
-                <div class="templatemo-line-header container">
-                    <div class="text-center row">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <hr class="hr_gray"/>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <h2>
-                                <strong>
-                                    Как начать
-                                </strong>
-                            </h2>
-                        </div>
-                        <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <hr class="hr_gray"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container contacts" style="margin-bottom: 35px;">
-        <div class="row">
-            <p class="text-justify">
-                Запишитесь на <a href="{{ path('demo') }}">бесплатный пробный урок</a> и проверьте или все вышесказанное правда :)
-                <br> или свяжитесь с нами по телефонах: <strong>{{phone}}</strong>, <strong>{{phone2}}</strong>
-            </p>
-        </div>
-
-        <div class="try-it-out">
-            <div class="try-it-out-button">
-                <a href="{{ path('demo') }}">
-                    <button type="button" class="btn btn-lg btn-orange">
-                        <span class="glyphicon glyphicon-education"></span> Записаться
-                    </button>
-                </a>
-            </div>
-        </div>
+    <div class="pc-view">
+        {% include "./partials/tryitout.twig" %}
     </div>
     {% include "./partials/contacts.twig" %}
 

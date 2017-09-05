@@ -220,6 +220,43 @@ class IndexController extends AbstractController {
 
 		})->bind('demo');
 
+		$this->controller->post('/freelesson', function() {
+
+			$userResponse = $this->app['request']->request->get('user');
+			$constraint = [
+				'name' => new Assert\NotBlank(),
+				'phone' => [new Assert\Length(10), new Assert\NotBlank()]
+			];
+
+			/**
+			 * @var ConstraintViolationList $errors
+			 */
+			$errors = $this->validator->validate($userResponse, new Assert\Collection($constraint));
+
+			if ($errors->count() > 0) {
+				return $this->app->json(['error' => 1], 200);
+			}
+
+			/**
+			 * @var User $user
+			 */
+			$user = $this->em->getRepository('Domain\Entity\User')->findOneByPhone($userResponse['phone']);
+			if (is_null($user)) {
+				$user = $this->app['userServices']->createUser($userResponse);
+			}
+
+			$demo = $this->app['userServices']->createDemo($user);
+
+			$this->em->persist($demo);
+			$this->em->flush();
+
+			$manager = $this->app['notifierManager'];
+			$manager->addTask(DemoNotifier::class, $demo);
+
+			return $this->app->json(['error' => 0], 200);
+
+		})->bind('freelesson');
+
 		$this->controller->post('/thanks', function() {
 
 			$userResponse = $this->app['request']->request->get('user');

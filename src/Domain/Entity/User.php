@@ -50,7 +50,7 @@ class User {
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
-    private $createdAt = NULL;
+    private $createdAt = '';
 
     /**
      * @var string
@@ -90,6 +90,7 @@ class User {
 
     public function __construct() {
     	$this->role = self::ROLE_USER;
+    	$this->createdAt = new \DateTime();
     }
 
     public function getId() {

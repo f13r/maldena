@@ -21,23 +21,41 @@
         </div>
     </div>
 </div>
-<div class="container try-it-out">
+<div class="container try-it-out contacts">
     <div class="row">
-        <div class="col-md-8 col-sm-12 col-xs-12 column">
+        <div class="col-md-12 col-sm-12 col-xs-12 column">
             <div class="try-it-out-text">
-                Попробуйте наш бесплатный <a href="{{ path('demo') }}?button=1" class="underline">пробный урок</a>, а после этого решайте хотите ли вы продолжить обучение!
+                Попробуйте наш бесплатный пробный урок, а после этого решайте хотите ли вы продолжить обучение!
             </div>
-            <div class="try-it-out-button">
-                <a href="{{ path('demo') }}?button=1">
-                    <button type="button" class="btn btn-lg btn-orange">
-                        <span class="glyphicon glyphicon-education"></span> Записаться
-                    </button>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-0 col-xs-0 column">
-            <div class="img text-center pc-view">
-                <img src="https://media.licdn.com/mpr/mpr/p/8/005/085/15e/050995c.jpg">
+            <div class="questions">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="description">
+                            Оставьте нам свой номер телефона, мы вам перезвоним и договоримся об уроке на то время когда будет удобно вам:
+                        </div>
+                        <div style="margin-top: 25px;">
+                            <div style="display: none;" class="red-color js-app-demo-message-error">Пожалуйста, заполните поля отмеченые звездочками (имя и телефон)</div>
+                            <div style="display: none;" class="help-block js-app-demo-message-success alert alert-success"> Cпасибо! Вы оставили заявку на пробный урок мы с Вами свяжемся в самое ближайшее время</div>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="list-answer">
+                                    Имя:&nbsp; <input type="text" id="name" name="user[name]" class="js-app-demo-name" value=""/>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="list-answer">
+                                   Телефон:&nbsp; <input type="tel" id="phone" name="user[phone]" class="js-app-demo-phone" value=""/>
+                                </div>
+                            </li>
+                            <li style="text-align: center;">
+                                <button type="button" class="btn btn-lg btn-orange js-app-demo-button">
+                                    <span class="glyphicon glyphicon-education"></span> Записаться
+                                </button>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

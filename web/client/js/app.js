@@ -34,11 +34,67 @@ var app = (function(){
 				},
 				prefix: '_rule',
 				phoneMask: '(XXX) XXX-XX-XX'
+			},
+			demo: {
+				phone: '.js-app-demo-phone',
+				name: '.js-app-demo-name',
+				messages: {
+					success: '.js-app-demo-message-success',
+					error: '.js-app-demo-message-error'
+				},
+				button: '.js-app-demo-button'
 			}
 		},
 
 		init: function () {
 			this.initFeedbackForm();
+			this.initDemoForm();
+		},
+
+		initDemoForm: function () {
+			var self = this;
+			var options = {
+				translation: {
+					'0': {
+						pattern: /[0-9]/
+					}
+				},
+				placeholder: " +38 (   )    -  -  "
+
+			};
+			$(this.settings.demo.name).add($(this.settings.demo.phone)).off().on('keyup', function (evt) {
+				$(self.settings.demo.messages.success).hide();
+				$(self.settings.demo.messages.error).hide();
+			});
+
+			$(this.settings.demo.phone).mask('+38 (000) 000-00-00', options);
+			$(this.settings.demo.button).off().on('click', function(evt) {
+				var phone = $(self.settings.demo.phone).val();
+				var name = $(self.settings.demo.name).val();
+				if (phone.length > 0 && name.length >0) {
+					$.ajax({
+						method: 'post',
+						url: "/freelesson",
+						data: {
+							user: {
+								phone: $(self.settings.demo.phone).cleanVal(),
+								name: name
+							}
+						},
+						dataType: 'json'
+					}).done(function(response) {
+						if (typeof(response.error) !== 'undefined') {
+							if (response.error === 1) {
+								$(self.settings.demo.messages.error).show();
+							} else {
+								$(self.settings.demo.messages.success).show();
+							}
+						}
+					});
+				} else {
+					$(self.settings.demo.messages.error).show();
+				}
+			});
 		},
 
 		initFeedbackForm: function () {
@@ -166,7 +222,7 @@ var app = (function(){
 			} else {
 				parent.removeClass('has-error');
 			}
-		},
+		}
 
 	}
 })();
