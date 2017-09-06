@@ -782,6 +782,7 @@ ul.templatemo-project-gallery  li  a img:hover {
 
 .questions .list-answer input {
     width: 80%;
+    border: 1px gray solid;
 }
 
 .questions .description {
