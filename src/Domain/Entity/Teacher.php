@@ -48,7 +48,7 @@ class Teacher extends User {
 	 *
 	 * @ORM\Column(name="sort", type="smallint", nullable=false)
 	 */
-    private $sort;
+    private $sort = 0;
 
 
 	/**
